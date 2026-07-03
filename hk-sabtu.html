@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PREDIKSI HONGKONG SABTU - ANGKA STATISTIK</title>
+    <style>
+        /* --- DESAIN PUSAT --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { 
+            background-color: #050510; color: #ffffff; overflow-x: hidden;
+            border: 2px solid rgba(255, 0, 85, 0.7); 
+            box-shadow: inset 0 0 20px rgba(255, 0, 85, 0.4), 0 0 20px rgba(255, 0, 85, 0.3); 
+            min-height: 100vh; 
+        }
+        .neon-text { color: #00f0ff; text-shadow: 0 0 5px #00f0ff; }
+        .neon-border { border: 1px solid #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, 0.3); }
+        header { text-align: center; padding: 0 0 25px 0; background: #050510; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .sampul-banner { position: relative; width: 100%; height: 220px; background-color: #0c0c28; margin-bottom: 50px; }
+        .gambar-sampul { width: 100%; height: 100%; object-fit: cover; border-bottom: 1px solid rgba(0, 240, 255, 0.3); }
+        .logo-container { position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); z-index: 10; }
+        .logo-gambar { width: 85px; height: 85px; object-fit: cover; border: 3px solid #00f0ff; border-radius: 50%; box-shadow: 0 0 15px rgba(0, 240, 255, 0.6); background-color: #050510; }
+        header .judul-web { font-family: 'Impact', sans-serif; font-size: 1.9rem; letter-spacing: 3px; text-transform: uppercase; margin-top: 10px; color: #ffffff; background: linear-gradient(180deg, #ffffff 0%, #cccccc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.8)); }
+        main { max-width: 800px; margin: 30px auto; padding: 0 20px; }
+        
+        /* --- DESAIN KHUSUS HALAMAN PREDIKSI BOLA --- */
+        .prediksi-container { background-color: #0c0c28; border-radius: 8px; padding: 25px 15px; margin-top: 20px; text-align: center; }
+        .section-title { color: #00f0ff; font-size: .6rem; font-weight: bold; text-shadow: 0 0 5px #00f0ff; margin: 25px auto 15px; border-bottom: 1px dashed rgba(0, 240, 255, 0.3); padding-bottom: 5px; max-width: 300px; text-transform: uppercase; letter-spacing: 1px; }
+        .section-title:first-child { margin-top: 5px; }
+        .baris-angka { display: flex; justify-content: center; align-items: center; gap: 5px; margin-bottom: 12px; }
+        .bola { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; font-weight: bold; font-size: 1.1rem; font-family: 'Arial Black', sans-serif; box-shadow: inset -3px -3px 6px rgba(0,0,0,0.4), 2px 2px 5px rgba(0,0,0,0.5); }
+        .bola-merah { background: radial-gradient(circle at 10px 10px, #ff3366, #990022); color: #ffffff; border: 1px solid #ff0055; }
+        .bola-putih { background: radial-gradient(circle at 10px 10px, #ffffff, #cccccc, #999999); color: #111111; border: 1px solid #ffffff; }
+        .pembatas-titik-dua { color: #00f0ff; font-weight: bold; font-size:.3rem; margin: 0 8px; text-shadow: 0 0 5px #00f0ff; }
+        .box-spesial { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: .8rem; margin-bottom: 10px; letter-spacing: 1px; }
+        .kesimpulan-warna { background: rgba(0, 240, 255, 0.12); border: 1px solid #00f0ff; color: yellow; }
+        .salam-penutup { font-size: .6rem; font-weight: bold; color: #ffffff; text-shadow: 0 0 8px rgba(0, 240, 255, 0.6); margin-top: 35px; letter-spacing: 1px; margin-bottom: 25px; }
+        .back-btn { display: inline-block; margin-bottom: 20px; color: #00f0ff; text-decoration: none; font-weight: bold; font-size: 1rem; transition: all 0.2s; }
+        .back-btn:hover { color: #ffffff; text-shadow: 0 0 5px #00f0ff; transform: translateX(-3px); }
+        
+        /* --- DESAIN NAVIGASI KLIK INSTAN BARU --- */
+        .nav-quick-title { font-size: .5rem; font-weight: bold; color: #ff0055; text-shadow: 0 0 5px #ff0055; margin: 25px 0 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-quick-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; padding: 0 10px; }
+        
+        /* Tombol Pasaran */
+        .tab-btn { padding: 2px 2px; background-color: #050515; border: 2px solid #ff0055; color: #ff0055; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+        .tab-btn:hover, .tab-btn.active { background-color: #ff0055; color: #ffffff; box-shadow: 0 0 12px #ff0055; }
+        
+        /* Panel Daftar Hari (Tersembunyi Awal) */
+        .hari-panel-bawah { display: none; background-color: #050515; border: 1px dashed rgba(0, 240, 255, 0.3); padding: 15px; border-radius: 6px; animation: slideDown 0.3s ease-out; }
+        .hari-panel-bawah.active { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+        
+        .hari-item-link { padding: 1px 1px; background-color: #0c0c28; border: 1px solid #00f0ff; color: #00f0ff; text-decoration: none; font-size: 0.9rem; font-weight: bold; border-radius: 4px; transition: all 0.2s; }
+        .hari-item-link:hover, .hari-item-link.active-hari { background-color: #00f0ff; color: #050510; box-shadow: 0 0 10px #00f0ff; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .traffic-section { text-align: center; margin-top: 40px; padding: 15px; background: rgba(12, 12, 40, 0.5); border-radius: 6px; font-size: 0.9rem; color: #8888aa; }
+        .traffic-counter { font-weight: bold; color: #00f0ff; }
+        footer { text-align: center; padding: 30px; margin-top: 40px; border-top: 1px solid #141440; font-size: 0.9rem; color: #666688; }
+    </style>
+</head>
+<body>
+
+    <!-- Suara Klik Audio -->
+    <audio id="click-sound" preload="auto">
+        <source src="https://mixkit.co" type="audio/wav">
+    </audio>
+
+    <header>
+        <div class="sampul-banner">
+            <img src="sampul.jpg" alt="Sampul" class="gambar-sampul">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo" class="logo-gambar">
+            </div>
+        </div>
+        <h1 class="judul-web">PREDIKSI ANGKA STATISTIK</h1>
+    </header>
+
+    <main>
+        <a href="index.html" class="back-btn">⬅ KEMBALI KE BERANDA</a>
+        <div class="prediksi-container neon-border">
+            <!-- Area Render Bola Prediksi -->
+            <div class="section-title">HONGKONG POOLS SABTU</div>
+<div class="section-title">PREDIKSI 1</div>
+            <div id="area-prediksi-1"></div>
+
+            <div class="section-title">PREDIKSI 2</div>
+            <div id="area-prediksi-2"></div>
+
+            <div class="section-title">PREDIKSI 3</div>
+            <div id="area-prediksi-3"></div>
+
+            <div class="section-title">KESIMPULAN</div>
+            <div>
+                <span class="box-spesial kesimpulan-warna" id="area-kesimpulan"></span>
+            </div>
+
+            <div class="section-title">COLOK BEBAS</div>
+            <div id="area-cb"></div>
+
+            <div class="salam-penutup">
+                sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ
+            </div>
+
+            <!-- ================= SISTEM NAVIGASI TAB PILIHAN HARI INTERAKTIF ================= -->
+            <div style="border-top: 1px dashed rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 10px;">
+                
+                <div class="nav-quick-title">PILIH PASARAN PREDIKSI</div>
+                <div class="nav-quick-group">
+                    <button class="tab-btn" data-target="panel-sdy">SDY</button>
+                    <button class="tab-btn active" data-target="panel-hk">HK</button>
+                    <button class="tab-btn" data-target="panel-sgp">SGP</button>
+                </div>
+
+                <!-- Panel Hari Sydney (Otomatis Aktif Terbuka di awal) -->
+                <div id="panel-sdy" class="hari-panel-bawah">
+                    <a href="sdy-senin.html" class="hari-item-link">SENIN</a>
+                    <a href="sdy-selasa.html" class="hari-item-link">SELASA</a>
+                    <a href="sdy-rabu.html" class="hari-item-link">RABU</a>
+                    <a href="sdy-kamis.html" class="hari-item-link">KAMIS</a>
+                    <a href="sdy-jumat.html" class="hari-item-link">JUMAT</a>
+                    <a href="sdy-sabtu.html" class="hari-item-link active-hari">SABTU</a>
+                    <a href="sdy-minggu.html" class="hari-item-link">MINGGU</a>
+                </div>
+
+                <!-- Panel Hari Hongkong -->
+                <div id="panel-hk" class="hari-panel-bawah active">
+                    <a href="hk-senin.html" class="hari-item-link">SENIN</a>
+                    <a href="hk-selasa.html" class="hari-item-link">SELASA</a>
+                    <a href="hk-rabu.html" class="hari-item-link">RABU</a>
+                    <a href="hk-kamis.html" class="hari-item-link">KAMIS</a>
+                    <a href="hk-jumat.html" class="hari-item-link">JUMAT</a>
+                    <a href="hk-sabtu.html" class="hari-item-link active-hari">SABTU</a>
+                    <a href="hk-minggu.html" class="hari-item-link">MINGGU</a>
+                </div>
+
+                <!-- Panel Hari Singapore (Hanya 5 Hari) -->
+                <div id="panel-sgp" class="hari-panel-bawah">
+                    <a href="sgp-senin.html" class="hari-item-link">SENIN</a>
+                    <a href="sgp-rabu.html" class="hari-item-link">RABU</a>
+                    <a href="sgp-kamis.html" class="hari-item-link">KAMIS</a>
+                    <a href="sgp-sabtu.html" class="hari-item-link active-hari">SABTU</a>
+                    <a href="sgp-minggu.html" class="hari-item-link">MINGGU</a>
+                </div>
+                
+            </div>
+        </div>
+        <!-- ================= TRAFIK PENGUNJUNG ================= -->
+        <div class="traffic-section">
+            Trafik Pengunjung Terakhir: <span class="traffic-counter" id="visitorCount">325</span> online aktif
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 <span class="neon-text" style="font-weight:bold;">Angka Statistik</span>. All Rights Reserved.
+    </footer>
+
+    <script>
+        // =================================================================
+        // KOTAK EDIT DATA PREDIKSI (Tempat ganti nomor tarikan harian)
+        // =================================================================
+const DATA_PREDIKSI_1 =
+["4139 : 769", "0376 : 103", "6934 : 870", "9606 : 981", "7628 : 325"];
+
+const DATA_PREDIKSI_2 =
+["4139 : 820", "0376 : 380", "6934 : 038", "9606 : 203", "7628 : 167"];
+
+const DATA_PREDIKSI_3 = ["4139 : 869", "0376 : 814", "6934 : 480", "9606 : 849", "7628 : 038"];
+
+const TEKS_KESIMPULAN = "325 VS 167 VS 038";
+
+const ANGKA_COLOK_BEBAS = "3";
+
+        // =================================================================
+        // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
+        // =================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            prosesRenderBola(DATA_PREDIKSI_1, 'area-prediksi-1', false);
+            prosesRenderBola(DATA_PREDIKSI_2, 'area-prediksi-2', true);
+            prosesRenderBola(DATA_PREDIKSI_3, 'area-prediksi-3', false);
+            
+            document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
+            document.getElementById('area-cb').innerHTML = `<span class="bola bola-merah" style="width:45px; height:45px; font-size:1.4rem;">${ANGKA_COLOK_BEBAS}</span>`;
+
+            function prosesRenderBola(dataArr, targetId, isPrediksiDua) {
+                const penampung = document.getElementById(targetId);
+                if (!penampung) return;
+                dataArr.forEach(baris => {
+                    const bagian = baris.split(':');
+                    if (bagian.length !== 2) return;
+                    const kiri = bagian[0].trim();
+                    const kanan = bagian[1].trim();
+                    let htmlBaris = '<div class="baris-angka">';
+                    for (let char of kiri) { htmlBaris += `<span class="bola bola-merah">${char}</span>`; }
+                    htmlBaris += '<span class="pembatas-titik-dua">:</span>';
+                    if (isPrediksiDua && kiri === "4139") {
+                        for (let char of kanan) { htmlBaris += `<span class="bola bola-putih"><s>${char}</s></span>`; }
+                    } else {
+                        for (let char of kanan) { htmlBaris += `<span class="bola bola-putih">${char}</span>`; }
+                    }
+                    htmlBaris += '</div>';
+                    penampung.innerHTML += htmlBaris;
+                });
+            }
+
+            // --- ENGINE LOGIKA TAB SWITCHER INTERAKTIF ---
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const hariPanels = document.querySelectorAll('.hari-panel-bawah');
+            const clickSound = document.getElementById('click-sound');
+
+            function playClick() { if (clickSound) { clickSound.currentTime = 0; clickSound.play().catch(e => {}); } }
+
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    playClick(); // Bunyi klik neon saat ganti pasaran
+                    
+                    // Hilangkan status aktif dari tombol lama
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    // Beri status aktif ke tombol pasaran yang baru diklik
+                    this.classList.add('active');
+
+                    // Sembunyikan semua panel hari
+                    hariPanels.forEach(panel => panel.classList.remove('active'));
+                    
+                    // Tampilkan panel hari milik pasaran yang sesuai
+                    const targetId = this.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+
+            // Pasang suara klik ke semua tautan hari harian
+            document.querySelectorAll('.back-btn, .hari-item-link').forEach(el => {
+                el.addEventListener('click', playClick);
+            });
+
+            // Live Traffic System
+            setInterval(() => {
+                const counter = document.getElementById('visitorCount');
+                if (counter) {
+                    const current = parseInt(counter.innerText.replace(',', ''));
+                    const change = Math.floor(Math.random() * 5) - 2;
+                    counter.innerText = Math.max(250, current + change).toLocaleString('en-US');
+                }
+            }, 4000);
+        });
+    </script>
+</body>
+</html>

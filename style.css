@@ -1,0 +1,235 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ================= GARIS & BAYANGAN MERAH DI SEKELILING HALAMAN ================= */
+body {
+    background-color: #050510;
+    color: #ffffff;
+    overflow-x: hidden;
+    
+    /* Garis keliling tipis di seluruh tepi layar browser */
+    border: 2px solid rgba(255, 0, 85, 0.7); 
+    /* Bayangan cahaya merah tipis membungkus seluruh halaman */
+    box-shadow: inset 0 0 20px rgba(255, 0, 85, 0.4), 0 0 20px rgba(255, 0, 85, 0.3); 
+    
+    /* Memastikan garis membungkus penuh dari atas sampai bawah */
+    min-height: 100vh; 
+}
+
+/* Neon Glow Effect Utility untuk elemen pasaran */
+.neon-text {
+    color:white;
+    text-shadow: 0 0 5px #000, 0 0 15px lime;
+}
+
+.neon-border {
+    border: 1px solid #000;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+/* ================= HEADER & STRUKTUR SAMPUL BELAKANG ================= */
+header {
+    text-align: center;
+    padding: 0 0 25px 0; /* padding atas dikosongkan agar sampul mentok ke atas */
+    background: #050510;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Kotak Wadah Sampul (Posisi Relatif) */
+.sampul-banner {
+    position: relative;
+    width: 100%;
+    height: 220px; /* Atur tinggi gambar sampul belakang di sini */
+    background-color: #0c0c28; /* Warna cadangan jika gambar belum dimuat */
+    overflow: visible; /* Mengizinkan logo menonjol keluar ke bawah */
+    margin-bottom: 50px; /* Jarak ruang untuk logo yang menonjol */
+}
+
+/* Pengaturan Gambar Sampul Belakang */
+.gambar-sampul {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Membuat gambar sampul otomatis pas melebar tanpa penyok */
+    border-bottom: 1px solid rgba(0, 240, 255, 0.3); /* Garis neon tipis di bawah sampul */
+}
+
+/* Wadah Logo yang Melayang tepat di Tengah-Bawah Sampul */
+.logo-container {
+    position: absolute;
+    bottom: -40px; /* Membuat setengah lingkaran logo menonjol keluar ke bawah sampul */
+    left: 50%;
+    transform: translateX(-50%); /* Teknik agar posisi logo pas di tengah-tengah */
+    z-index: 10;
+}
+
+/* Pengaturan Gambar Logo Bulat */
+.logo-gambar {
+    width: 85px; /* Ukuran lebar logo utama */
+    height: 85px; /* Ukuran tinggi logo utama */
+    object-fit: cover;
+    border: 3px solid #00f0ff; /* Bingkai neon biru murni */
+    border-radius: 50%; /* Membuat logo bulat sempurna */
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.6); /* Cahaya neon biru pada logo */
+    background-color: #050510;
+}
+
+/* Pengaturan Teks Judul Mewah Tanpa Blur */
+header .judul-web {
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 1.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    
+    /* Gradasi Warna Putih ke Perak Mengilap */
+    color: #ffffff; 
+    background: linear-gradient(180deg, #ffffff 0%, #cccccc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.8));
+}
+
+
+/* ================= DESAIN HURUF JUDUL BARU (MEWAH & JELAS) ================= */
+header h1 {
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    font-size: 1.9rem; /* Ukuran proporsional, tegas, dan padat */
+    letter-spacing: 3px; /* Jarak huruf futuristik */
+    text-transform: uppercase;
+    
+    /* Warna Putih Perak Mengilap Tanpa Blur/Glow */
+    color: #ffffff; 
+    background: linear-gradient(180deg, #ffffff 0%, #cccccc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.8)); /* Bayangan hitam tipis di belakang agar huruf makin tajam */
+}
+
+/* Container Utama */
+main {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Struktur Menu Dropdown Akordion */
+.pasaran-container {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #0c0c28;
+    transition: all 0.3s ease;
+}
+
+/* Tombol Utama Pasaran */
+.pasaran-btn {
+    width: 100%;
+    padding: 18px 25px;
+    background: #0c0c28;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.pasaran-btn:hover {
+    background: #141440;
+}
+
+.pasaran-btn::after {
+    content: '▼';
+    font-size: 0.9rem;
+    color: #00f0ff;
+    transition: transform 0.3s;
+}
+
+.pasaran-container.active .pasaran-btn::after {
+    transform: rotate(-180deg);
+}
+
+/* Panel Hari */
+.hari-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: #07071a;
+    display: flex;
+    flex-direction: column;
+}
+
+.pasaran-container.active .hari-panel {
+    max-height: 500px;
+}
+
+/* Link Hari */
+.hari-link {
+    padding: 14px 35px;
+    color: #bbbbff;
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid #101030;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hari-link:last-child {
+    border-bottom: none;
+}
+
+.hari-link:hover {
+    background: rgba(0, 240, 255, 0.1);
+    color: #00f0ff;
+    padding-left: 45px;
+}
+
+/* Trafik Pengunjung */
+.traffic-section {
+    text-align: center;
+    margin-top: 40px;
+    padding: 15px;
+    background: rgba(12, 12, 40, 0.5);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #8888aa;
+}
+
+.traffic-counter {
+    font-weight: bold;
+    color: #00f0ff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+    border-top: 1px solid #141440;
+    font-size: 0.9rem;
+    color: #666688;
+}
+
+.logo-gambar {
+    width: 75px;        /* Atur lebar logo gambar */
+    height: 75px;       /* Atur tinggi logo gambar */
+    object-fit: cover;  /* Membuat gambar otomatis pas di tengah */
+    border: 2px solid #00f0ff;
+    border-radius: 50%; /* Membuat gambar menjadi bulat sempurna */
+    box-shadow: 0 0 12px #00f0ff;
+    display: block;
+    margin: 0 auto 10px;
+}

@@ -106,62 +106,70 @@
 
 <script src="https://pl30187164.effectivecpmnetwork.com/27/ba/bd/27babd93febcd37a091303b95048fdf4.js"></script>
 
-<!-- 1. DUA BARIS PUSTAKA UTAMA YANG TADI HILANG (WAJIB ADA) -->
-<script src="https://gstatic.com"></script>
-<script src="https://gstatic.com"></script>
+<!-- TEMPEL SELURUH KODE BARU INI DI BAGIAN BAWAH FILE HTML ANDA -->
+<script type="module">
+    // 1. Muat fungsi Firebase v10 Modular resmi dari CDN global
+    import { initializeApp } from "https://gstatic.com";
+    import { getDatabase, ref, onValue, runTransaction } from "https://gstatic.com";
 
-<!-- 2. KODE INTI JAVASCRIPT ANDA YANG SUDAH DIPERBAIKI -->
-<script>
-    // Kode Konfigurasi Firebase Asli Milik Anda
+    // Konfigurasi Database Anda
     const firebaseConfig = {
         apiKey: "AIzaSyCWFVmbhOV53gvlU8XXLQZwDRE-spnD8B4",
         authDomain: "://firebaseapp.com",
-        databaseURL: "https://firebasedatabase.app",
+        databaseURL: "https://predksi-poo-default-rtdb.asia-southeast1.firebasedatabase.app",
         projectId: "predksi-poo",
         storageBucket: "predksi-poo.firebasestorage.app",
         messagingSenderId: "1098537161657",
         appId: "1:1098537161657:web:979a6f4b46e1b36e815c68"
     };
 
-    // Inisialisasi Firebase
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
+    // 2. Inisialisasi Firebase Modular
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
 
-    // Membuat ID unik otomatis berdasarkan URL halaman aktif
+    // Membuat ID halaman otomatis berdasarkan URL website Anda
     const pathName = window.location.pathname === "/" ? "home" : window.location.pathname;
     const pageId = pathName.replace(/[\.\#\$\[\]\/]/g, "_");
-
-    const likeRef = database.ref('likes/' + pageId);
+    
+    const likeRef = ref(database, 'likes/' + pageId);
     const likeButton = document.getElementById('likeButton');
     const likeCountLabel = document.getElementById('likeCount');
 
-    // Cek status lokal (apakah browser pengunjung ini sudah pernah klik suka)
+    // Cek status klik lokal di browser HP pengunjung
     let hasLiked = localStorage.getItem('liked_' + pageId) === 'true';
     if (hasLiked) {
         setLikedStyle();
     }
 
-    // Ambil data jumlah suka secara Realtime untuk semua pengunjung
-    likeRef.on('value', (snapshot) => {
+    // 3. Ambil data secara Realtime langsung dari Server Singapore
+    onValue(likeRef, (snapshot) => {
         likeCountLabel.textContent = snapshot.val() || 0;
     });
 
-    // Logika ketika tombol klik suka ditekan
+    // 4. Logika ketika tombol klik suka ditekan pengunjung
     likeButton.addEventListener('click', () => {
         if (!hasLiked) {
-            likeRef.transaction(c => (c || 0) + 1);
-            hasLiked = true;
-            localStorage.setItem('liked_' + pageId, 'true');
-            setLikedStyle();
+            runTransaction(likeRef, (currentCount) => {
+                return (currentCount || 0) + 1;
+            }).then(() => {
+                hasLiked = true;
+                localStorage.setItem('liked_' + pageId, 'true');
+                setLikedStyle();
+            }).catch((error) => {
+                alert("Gagal Kirim Data: " + error.message);
+            });
         } else {
-            likeRef.transaction(c => (c || 0) - 1);
-            hasLiked = false;
-            localStorage.removeItem('liked_' + pageId);
-            setNormalStyle();
+            runTransaction(likeRef, (currentCount) => {
+                return (currentCount || 0) - 1;
+            }).then(() => {
+                hasLiked = false;
+                localStorage.removeItem('liked_' + pageId);
+                setNormalStyle();
+            });
         }
     });
 
-    // Fungsi pengubah tampilan tombol suka
+    // Fungsi pengatur warna tombol suka
     function setLikedStyle() {
         likeButton.style.backgroundColor = '#e0245e';
         likeButton.style.color = '#fff';
@@ -172,7 +180,8 @@
         likeButton.style.color = '#333';
         likeButton.style.borderColor = '#ccc';
     }
-        </script>
+</script>
+
     
 </body>
 </html>

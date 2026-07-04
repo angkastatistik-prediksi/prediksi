@@ -106,21 +106,22 @@
 
 <script src="https://pl30187164.effectivecpmnetwork.com/27/ba/bd/27babd93febcd37a091303b95048fdf4.js"></script>
 
-    <!-- Muat Firebase SDK Core & Realtime Database -->
+<!-- 1. DUA BARIS PUSTAKA UTAMA YANG TADI HILANG (WAJIB ADA) -->
 <script src="https://gstatic.com"></script>
 <script src="https://gstatic.com"></script>
 
+<!-- 2. KODE INTI JAVASCRIPT ANDA YANG SUDAH DIPERBAIKI -->
 <script>
-    // KODE KONFIGURASI FIREBASE ANDA (Salin dari Project Settings Firebase Anda)
+    // Kode Konfigurasi Firebase Asli Milik Anda
     const firebaseConfig = {
-  apiKey: "AIzaSyCWFVmbhOV53gvlU8XXLQZwDRE-spnD8B4",
-  authDomain: "predksi-poo.firebaseapp.com",
-  databaseURL: "https://predksi-poo-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "predksi-poo",
-  storageBucket: "predksi-poo.firebasestorage.app",
-  messagingSenderId: "1098537161657",
-  appId: "1:1098537161657:web:979a6f4b46e1b36e815c68"
-};
+        apiKey: "AIzaSyCWFVmbhOV53gvlU8XXLQZwDRE-spnD8B4",
+        authDomain: "://firebaseapp.com",
+        databaseURL: "https://firebasedatabase.app",
+        projectId: "predksi-poo",
+        storageBucket: "predksi-poo.firebasestorage.app",
+        messagingSenderId: "1098537161657",
+        appId: "1:1098537161657:web:979a6f4b46e1b36e815c68"
+    };
 
     // Inisialisasi Firebase
     firebase.initializeApp(firebaseConfig);
@@ -160,17 +161,18 @@
         }
     });
 
-function setLikedStyle() {
-    likeButton.style.backgroundColor = '#e0245e';
-    likeButton.style.color = '#fff';
-    likeButton.style.borderColor = '#e0245e';
-}
-function setNormalStyle() {
-    likeButton.style.backgroundColor = '#fff';
-    likeButton.style.color = '#333';
-    likeButton.style.borderColor = '#ccc';
+    // Fungsi pengubah tampilan tombol suka
+    function setLikedStyle() {
+        likeButton.style.backgroundColor = '#e0245e';
+        likeButton.style.color = '#fff';
+        likeButton.style.borderColor = '#e0245e';
     }
-</script>
+    function setNormalStyle() {
+        likeButton.style.backgroundColor = '#fff';
+        likeButton.style.color = '#333';
+        likeButton.style.borderColor = '#ccc';
+    }
+        </script>
     
 </body>
 </html>

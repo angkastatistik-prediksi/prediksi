@@ -85,18 +85,26 @@
             </a>
         </div>
         
-<div style="text-align: center; margin: 10px 0; font-family: sans-serif;">
-    <button id="likeButton" style="padding: 5px 12px; font-size: 13px; background-color: #fff; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 4px;">
-        <span style="font-size: 12px;">❤️</span> <span id="likeCount">0</span>
-    </button>
-</div>
-        
-        <!-- ================= TRAFIK PENGUNJUNG ================= -->
-        <div class="traffic-section">
-            Trafik Pengunjung Terakhir: <span class="traffic-counter" id="visitorCount">302</span> online aktif
-        </div>
-
     </main>
+
+<!-- ================= TRAFIK PENGUNJUNG ================= -->
+<!-- Histats.com  (div with counter) -->
+<div id="histats_counter"></div>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.startgif', '1,5037448,4,10036,"div#histatsC {position: absolute;top:0px;left:0px;}body>div#histatsC {position: fixed;}"']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_giftop_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+
+<noscript><style type="text/css">div#histatsC {position: absolute;top:0px;left:0px;}body>div#histatsC {position: fixed;}</style>
+<a href="/" alt="" target="_blank" ><div id="histatsC"><img border="0" src="//s4is.histats.com/stats/i/5037448.gif?5037448&103"></div></a>
+</noscript>
+        <!-- Histats.com  END  -->
 
     <footer>
         <span class="neon-text" style="">© Angka Statistik All Rights Reserved.</span>
@@ -105,83 +113,6 @@
     <script src="script.js"></script>
 
 <script src="https://pl30187164.effectivecpmnetwork.com/27/ba/bd/27babd93febcd37a091303b95048fdf4.js"></script>
-
-<!-- TEMPEL SELURUH KODE BARU INI DI BAGIAN BAWAH FILE HTML ANDA -->
-<script type="module">
-    // 1. Muat fungsi Firebase v10 Modular resmi dari CDN global
-    import { initializeApp } from "https://gstatic.com";
-    import { getDatabase, ref, onValue, runTransaction } from "https://gstatic.com";
-
-    // Konfigurasi Database Anda
-    const firebaseConfig = {
-        apiKey: "AIzaSyCWFVmbhOV53gvlU8XXLQZwDRE-spnD8B4",
-        authDomain: "://firebaseapp.com",
-        databaseURL: "https://predksi-poo-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "predksi-poo",
-        storageBucket: "predksi-poo.firebasestorage.app",
-        messagingSenderId: "1098537161657",
-        appId: "1:1098537161657:web:979a6f4b46e1b36e815c68"
-    };
-
-    // 2. Inisialisasi Firebase Modular
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-
-    // Membuat ID halaman otomatis berdasarkan URL website Anda
-    const pathName = window.location.pathname === "/" ? "home" : window.location.pathname;
-    const pageId = pathName.replace(/[\.\#\$\[\]\/]/g, "_");
-    
-    const likeRef = ref(database, 'likes/' + pageId);
-    const likeButton = document.getElementById('likeButton');
-    const likeCountLabel = document.getElementById('likeCount');
-
-    // Cek status klik lokal di browser HP pengunjung
-    let hasLiked = localStorage.getItem('liked_' + pageId) === 'true';
-    if (hasLiked) {
-        setLikedStyle();
-    }
-
-    // 3. Ambil data secara Realtime langsung dari Server Singapore
-    onValue(likeRef, (snapshot) => {
-        likeCountLabel.textContent = snapshot.val() || 0;
-    });
-
-    // 4. Logika ketika tombol klik suka ditekan pengunjung
-    likeButton.addEventListener('click', () => {
-        if (!hasLiked) {
-            runTransaction(likeRef, (currentCount) => {
-                return (currentCount || 0) + 1;
-            }).then(() => {
-                hasLiked = true;
-                localStorage.setItem('liked_' + pageId, 'true');
-                setLikedStyle();
-            }).catch((error) => {
-                alert("Gagal Kirim Data: " + error.message);
-            });
-        } else {
-            runTransaction(likeRef, (currentCount) => {
-                return (currentCount || 0) - 1;
-            }).then(() => {
-                hasLiked = false;
-                localStorage.removeItem('liked_' + pageId);
-                setNormalStyle();
-            });
-        }
-    });
-
-    // Fungsi pengatur warna tombol suka
-    function setLikedStyle() {
-        likeButton.style.backgroundColor = '#e0245e';
-        likeButton.style.color = '#fff';
-        likeButton.style.borderColor = '#e0245e';
-    }
-    function setNormalStyle() {
-        likeButton.style.backgroundColor = '#fff';
-        likeButton.style.color = '#333';
-        likeButton.style.borderColor = '#ccc';
-    }
-</script>
-
-    
+  
 </body>
 </html>

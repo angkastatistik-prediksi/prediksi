@@ -191,27 +191,41 @@ const ANGKA_COLOK_BEBAS = "TES";
             document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
             document.getElementById('area-cb').innerHTML = `<span class="bola bola-merah" style="width:45px; height:45px; font-size:1.4rem;">${ANGKA_COLOK_BEBAS}</span>`;
 
-            function prosesRenderBola(dataArr, targetId, isPrediksiDua) {
-                const penampung = document.getElementById(targetId);
-                if (!penampung) return;
-                dataArr.forEach(baris => {
-                    const bagian = baris.split(':');
-                    if (bagian.length !== 2) return;
-                    const kiri = bagian[0].trim();
-                    const kanan = bagian[1].trim();
-                    let htmlBaris = '<div class="baris-angka">';
-                    for (let char of kiri) { htmlBaris += `<span class="bola bola-merah">${char}</span>`; }
-                    htmlBaris += '<span class="pembatas-titik-dua">:</span>';
-                    if (isPrediksiDua && kiri === "4139") {
-                        for (let char of kanan) { htmlBaris += `<span class="bola bola-putih"><s>${char}</s></span>`; }
-                    } else {
-                        for (let char of kanan) { htmlBaris += `<span class="bola bola-putih">${char}</span>`; }
-                    }
-                    htmlBaris += '</div>';
-                    penampung.innerHTML += htmlBaris;
-                });
-            }
+            function prosesRenderBola(dataArr, targetId) {
+    const penampung = document.getElementById(targetId);
+    if (!penampung) return;
 
+    dataArr.forEach(baris => {
+        const bagian = baris.split(':');
+        if (bagian.length !== 2) return;
+
+        const kiri = bagian[0].trim();
+        const kanan = bagian[1].trim();
+
+        let htmlBaris = '<div class="baris-angka">';
+
+        // Bola merah
+        for (let char of kiri) {
+            htmlBaris += `<span class="bola bola-merah">${char}</span>`;
+        }
+
+        htmlBaris += '<span class="pembatas-titik-dua">:</span>';
+
+        // Cek apakah angka diberi tanda "-"
+        const dicoret = kanan.startsWith("-");
+        const angka = dicoret ? kanan.substring(1) : kanan;
+
+        // Bola putih
+        for (let char of angka) {
+            htmlBaris += `<span class="bola bola-putih">${
+                dicoret ? `<s>${char}</s>` : char
+            }</span>`;
+        }
+
+        htmlBaris += '</div>';
+        penampung.innerHTML += htmlBaris;
+    });
+        }
             // --- ENGINE LOGIKA TAB SWITCHER INTERAKTIF ---
             const tabButtons = document.querySelectorAll('.tab-btn');
             const hariPanels = document.querySelectorAll('.hari-panel-bawah');

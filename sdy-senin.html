@@ -85,7 +85,8 @@
     <div id="container-285abe3dfa3645b0c5001d78494f7ebb"></div>
 </div>
     
-    <main>
+<main>
+<div id="wrapper-prediksi-angka">
         <a href="index.html" class="back-btn">⬅ KEMBALI KE BERANDA</a>
         <div class="prediksi-container neon-border">
             <!-- Area Render Bola Prediksi -->
@@ -157,6 +158,7 @@
                 
             </div>
         </div>
+</div>
     </main>
 <!-- AREA KOLOM KOMENTAR DISQUS (Sudah Terhubung dengan Tombol Komentar) -->
 <div id="comments-section" style="padding: 20px; max-width: 800px; margin: 0 auto;">
@@ -329,6 +331,39 @@ hs.src = ('//s10.histats.com/js15_giftop_as.js');
         }
     };
 </script>
+
+<!-- ================= TEMPEL DI ATAS </body> ================= -->
+<div id="notif-sabar" style="display:none; text-align:center; border:2px dashed #ff0055; background:rgba(255,0,85,0.05); padding:20px; border-radius:6px; color:#ff0055; font-weight:bold; font-size:1.1rem; margin:20px auto; max-width:450px; text-shadow:0 0 8px rgba(255,0,85,0.5);">
+    ⚠️ PREDIKSI BELUM UPDATE MOHON BERSABAR
+</div>
+<div style="text-align:center; margin-top:20px; font-size:0.8rem; color:#88aa; letter-spacing:1px; text-transform:uppercase;">
+    TERAKHIR DI-UPDATE: <span id="waktu-lalu" style="color:#00ff66; font-weight:bold;">Memuat...</span>
+</div>
+
+<script>
+    setInterval(() => {
+        // Otomatis mengambil waktu asli kapan file ini terakhir di-update di server
+        const waktuUpdate = new Date(document.lastModified).getTime(); 
+        const sekarang = new Date().getTime();
+        const selisih = Math.floor((sekarang - waktuUpdate) / 1000);
+        const wAngka = document.getElementById('wrapper-prediksi-angka'); 
+        
+        if (selisih >= 86400) { // JIKA SUDAH LEWATI 24 JAM (86.400 detik) dari waktu edit terakhir
+            if(wAngka) wAngka.style.display = 'none';
+            document.getElementById('notif-sabar').style.display = 'block';
+            document.getElementById('waktu-lalu').innerHTML = "Lebih dari 24 jam yang lalu";
+        } else { // JIKA BELUM LEWAT 24 JAM
+            if(wAngka) wAngka.style.display = 'block';
+            document.getElementById('notif-sabar').style.display = 'none';
+            
+            const j = Math.floor(selisih / 3600);
+            const m = Math.floor((selisih % 3600) / 60);
+            const d = selisih % 60;
+            document.getElementById('waktu-lalu').innerHTML = `${j > 0 ? j+' Jam ' : ''}${m > 0 || j > 0 ? m+' Menit ' : ''}${d} Detik Yang Lalu`;
+        }
+    }, 1000);
+</script>
+<!-- ================= SELESAI TEMPEL ================= -->
 
 </body>
 </html>

@@ -104,8 +104,11 @@
                 <span class="box-spesial kesimpulan-warna" id="area-kesimpulan"></span>
             </div>
 
-            <div class="section-title">COLOK BEBAS</div>
-            <div id="area-cb"></div>
+<div class="section-title">BBFS</div>
+<div id="area-bbfs"></div>
+
+<div class="section-title">COLOK BEBAS</div>
+<div id="area-cb"></div>
 
             <div class="salam-penutup">
                 sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ
@@ -122,7 +125,7 @@
                 </div>
 
                 <!-- Panel Hari Sydney (Otomatis Aktif Terbuka di awal) -->
-                <div id="panel-sdy" class="hari-panel-bawah">
+                <div id="panel-sdy" class="hari-panel-bawah active">
                     <a href="sdy-senin.html" class="hari-item-link active-hari">SENIN</a>
                     <a href="sdy-selasa.html" class="hari-item-link">SELASA</a>
                     <a href="sdy-rabu.html" class="hari-item-link">RABU</a>
@@ -133,7 +136,7 @@
                 </div>
 
                 <!-- Panel Hari Hongkong -->
-                <div id="panel-hk" class="hari-panel-bawah active">
+                <div id="panel-hk" class="hari-panel-bawah">
                     <a href="hk-senin.html" class="hari-item-link active-hari">SENIN</a>
                     <a href="hk-selasa.html" class="hari-item-link">SELASA</a>
                     <a href="hk-rabu.html" class="hari-item-link">RABU</a>
@@ -154,11 +157,31 @@
                 
             </div>
         </div>
-        <!-- ================= TRAFIK PENGUNJUNG ================= -->
-        <div class="traffic-section">
-            Trafik Pengunjung Terakhir: <span class="traffic-counter" id="visitorCount">325</span> online aktif
-        </div>
     </main>
+<!-- AREA KOLOM KOMENTAR DISQUS (Sudah Terhubung dengan Tombol Komentar) -->
+<div id="comments-section" style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    
+    <!-- Tempat Kotak Komentar Disqus Muncul -->
+    <div id="disqus_thread"></div>
+    
+    <script>
+        var disqus_config = function () {
+            // Mengaktifkan konfigurasi otomatis menggunakan JavaScript
+            this.page.url = window.location.href;  
+            this.page.identifier = window.location.pathname; 
+        };
+
+        (function() { // JANGAN MENGUBAH KODE DI BAWAH INI
+            var d = document, s = d.createElement('script');
+            // Sudah menggunakan shortname resmi akun Anda: angkastatistik
+            s.src = 'https://angkastatistik.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
 
     <footer>
         &copy; 2026 <span class="neon-text" style="font-weight:bold;">Angka Statistik</span>. All Rights Reserved.
@@ -172,11 +195,13 @@ const DATA_PREDIKSI_1 =
 ["4139 : 769", "0376 : 103", "6934 : 870", "9606 : 981", "7628 : 325"];
 
 const DATA_PREDIKSI_2 =
-["4139 : 820", "0376 : 380", "6934 : 038", "9606 : 203", "7628 : 167"];
+["4139 : 820", "0376 : 380", "6934 : 038", "9606 : 203", "7628 : -167"];
 
 const DATA_PREDIKSI_3 = ["4139 : 869", "0376 : 814", "6934 : 480", "9606 : 849", "7628 : 038"];
 
-const TEKS_KESIMPULAN = "TOP 2D = 31 • 36 • 37 BB";
+const TEKS_KESIMPULAN = "325 VS 167 VS 038";
+
+const ANGKA_BBFS = "325167";
 
 const ANGKA_COLOK_BEBAS = "3";
 
@@ -189,7 +214,17 @@ const ANGKA_COLOK_BEBAS = "3";
             prosesRenderBola(DATA_PREDIKSI_3, 'area-prediksi-3', false);
             
             document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
-            document.getElementById('area-cb').innerHTML = `<span class="bola bola-merah" style="width:45px; height:45px; font-size:1.4rem;">${ANGKA_COLOK_BEBAS}</span>`;
+
+// BBFS (6 bola)
+let htmlBBFS = "";
+for (let angka of ANGKA_BBFS) {
+    htmlBBFS += `<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;margin:3px;">${angka}</span>`;
+}
+document.getElementById('area-bbfs').innerHTML = htmlBBFS;
+
+// Colok Bebas (1 bola)
+document.getElementById('area-cb').innerHTML =
+`<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${ANGKA_COLOK_BEBAS}</span>`;
 
             function prosesRenderBola(dataArr, targetId) {
     const penampung = document.getElementById(targetId);
@@ -256,18 +291,44 @@ const ANGKA_COLOK_BEBAS = "3";
             document.querySelectorAll('.back-btn, .hari-item-link').forEach(el => {
                 el.addEventListener('click', playClick);
             });
-
-            // Live Traffic System
-            setInterval(() => {
-                const counter = document.getElementById('visitorCount');
-                if (counter) {
-                    const current = parseInt(counter.innerText.replace(',', ''));
-                    const change = Math.floor(Math.random() * 5) - 2;
-                    counter.innerText = Math.max(250, current + change).toLocaleString('en-US');
-                }
-            }, 4000);
         });
     </script>
+    
+<!-- Histats.com  (div with counter) -->
+<div id="histats_counter"></div>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.startgif', '1,5037448,4,10036,"div#histatsC {position: absolute;top:0px;left:0px;}body>div#histatsC {position: fixed;}"']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_giftop_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+
+<noscript><style type="text/css">div#histatsC {position: absolute;top:0px;left:0px;}body>div#histatsC {position: fixed;}</style>
+<a href="/" alt="" target="_blank" ><div id="histatsC"><img border="0" src="//s4is.histats.com/stats/i/5037448.gif?5037448&103"></div></a>
+</noscript>
+        <!-- Histats.com  END  -->
+
 <script src="https://pl30187164.effectivecpmnetwork.com/27/ba/bd/27babd93febcd37a091303b95048fdf4.js"></script>
+
+<script>
+    window.onload = function() {
+        var disqusFrame = document.querySelector('iframe');
+        if (disqusFrame) {
+            // Tunggu iframe Disqus dimuat sempurna
+            setTimeout(function() {
+                var iframeDoc = disqusFrame.contentDocument || disqusFrame.contentWindow.document;
+                var placeholder = iframeDoc.querySelector('textarea');
+                if (placeholder) {
+                    placeholder.placeholder = "Tulis komentar Anda di sini..."; // Ganti teks
+                }
+            }, 2000); // Waktu jeda dalam milidetik
+        }
+    };
+</script>
+
 </body>
 </html>

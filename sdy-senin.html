@@ -341,7 +341,9 @@ hs.src = ('//s10.histats.com/js15_giftop_as.js');
     TERAKHIR DI-UPDATE: <span id="waktu-lalu" style="color:#00ff66; font-weight:bold;">Memuat...</span>
 </div>
 
-<!-- Tambahan Gaya Animasi Berkedip -->
+<!-- BARIS KHUSUS MENCATAT WAKTU UPDATE (GANTI BAGIAN TANGGAL/JAM DI BAWAH INI SETIAP KALI UPDATE CODES) -->
+<div id="waktu-database-manual" data-waktu="2026-07-05T04:00:00"></div>
+
 <style>
     @keyframes kedipNeon {
         0% { opacity: 0.3; text-shadow: 0 0 2px rgba(255,0,85,0.2); box-shadow: 0 0 5px rgba(255,0,85,0.1); }
@@ -351,10 +353,16 @@ hs.src = ('//s10.histats.com/js15_giftop_as.js');
 
 <script>
     setInterval(() => {
-        // Mengambil tanggal asli file ini diubah di server GitHub Pages / Netlify
-        const waktuUpdate = new Date(document.lastModified).getTime(); 
+        // Membaca waktu dari baris HTML manual di atas
+        const targetElemen = document.getElementById('waktu-database-manual');
+        if (!targetElemen) return;
+        
+        const waktuUpdate = new Date(targetElemen.getAttribute('data-waktu')).getTime(); 
         const sekarang = new Date().getTime();
-        const selisih = Math.floor((sekarang - waktuUpdate) / 1000);+90000;
+        
+        // --- JALANKAN TES JIKA + 90000 DICANTUMKAN DI SINI ---
+        const selisih = Math.floor((sekarang - waktuUpdate) / 1000); + 90000;
+        
         const wAngka = document.getElementById('wrapper-prediksi-angka'); 
         
         if (selisih >= 86400) { // JIKA LEBIH DARI 24 JAM (86.400 detik)

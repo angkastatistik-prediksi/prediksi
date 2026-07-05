@@ -85,13 +85,13 @@
     <div id="container-285abe3dfa3645b0c5001d78494f7ebb"></div>
 </div>
     
-<main>
-<div id="wrapper-prediksi-angka">
+    <main>
         <a href="index.html" class="back-btn">⬅ KEMBALI KE BERANDA</a>
         <div class="prediksi-container neon-border">
+    <div id="wrapper-prediksi-angka">
             <!-- Area Render Bola Prediksi -->
             <div class="section-title">SYDNEY POOLS SENIN</div>
-<div class="section-title">PREDIKSI 1</div>
+            <div class="section-title">PREDIKSI 1</div>
             <div id="area-prediksi-1"></div>
 
             <div class="section-title">PREDIKSI 2</div>
@@ -114,7 +114,7 @@
             <div class="salam-penutup">
                 sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ
             </div>
-
+      </div>
             <!-- ================= SISTEM NAVIGASI TAB PILIHAN HARI INTERAKTIF ================= -->
             <div style="border-top: 1px dashed rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 10px;">
                 
@@ -158,7 +158,6 @@
                 
             </div>
         </div>
-</div>
     </main>
 <!-- AREA KOLOM KOMENTAR DISQUS (Sudah Terhubung dengan Tombol Komentar) -->
 <div id="comments-section" style="padding: 20px; max-width: 800px; margin: 0 auto;">
@@ -333,26 +332,36 @@ hs.src = ('//s10.histats.com/js15_giftop_as.js');
 </script>
 
 <!-- ================= TEMPEL DI ATAS </body> ================= -->
-<div id="notif-sabar" style="display:none; text-align:center; border:2px dashed #ff0055; background:rgba(255,0,85,0.05); padding:20px; border-radius:6px; color:#ff0055; font-weight:bold; font-size:1.1rem; margin:20px auto; max-width:450px; text-shadow:0 0 8px rgba(255,0,85,0.5);">
-    ⚠️ PREDIKSI BELUM UPDATE MOHON BERSABAR
+<!-- KOTAK NOTIFIKASI DENGAN EFEK BERKEDIP NEON RED -->
+<div id="notif-sabar" style="display:none; text-align:center; border:2px dashed #ff0055; background:rgba(255,0,85,0.05); padding:20px; border-radius:6px; color:#ff0055; font-weight:bold; font-size:1.1rem; margin:20px auto; max-width:450px; text-shadow:0 0 8px rgba(255,0,85,0.5); box-shadow:0 0 15px rgba(255,0,85,0.2); animation: kedipNeon 1.5s infinite alternate;">
+  PREDIKSI BELUM UPDATE MOHON BERSABAR
 </div>
+
 <div style="text-align:center; margin-top:20px; font-size:0.8rem; color:#88aa; letter-spacing:1px; text-transform:uppercase;">
     TERAKHIR DI-UPDATE: <span id="waktu-lalu" style="color:#00ff66; font-weight:bold;">Memuat...</span>
 </div>
 
+<!-- Tambahan Gaya Animasi Berkedip -->
+<style>
+    @keyframes kedipNeon {
+        0% { opacity: 0.3; text-shadow: 0 0 2px rgba(255,0,85,0.2); box-shadow: 0 0 5px rgba(255,0,85,0.1); }
+        100% { opacity: 1; text-shadow: 0 0 12px #ff0055, 0 0 20px #ff0055; box-shadow: 0 0 20px rgba(255,0,85,0.4); }
+    }
+</style>
+
 <script>
     setInterval(() => {
-        // Otomatis mengambil waktu asli kapan file ini terakhir di-update di server
+        // Mengambil tanggal asli file ini diubah di server GitHub Pages / Netlify
         const waktuUpdate = new Date(document.lastModified).getTime(); 
         const sekarang = new Date().getTime();
-        const selisih = Math.floor((sekarang - waktuUpdate) / 1000);
+        const selisih = Math.floor((sekarang - waktuUpdate) / 1000);+90000;
         const wAngka = document.getElementById('wrapper-prediksi-angka'); 
         
-        if (selisih >= 86400) { // JIKA SUDAH LEWATI 24 JAM (86.400 detik) dari waktu edit terakhir
+        if (selisih >= 86400) { // JIKA LEBIH DARI 24 JAM (86.400 detik)
             if(wAngka) wAngka.style.display = 'none';
             document.getElementById('notif-sabar').style.display = 'block';
             document.getElementById('waktu-lalu').innerHTML = "Lebih dari 24 jam yang lalu";
-        } else { // JIKA BELUM LEWAT 24 JAM
+        } else { // JIKA MASIH DI BAWAH 24 JAM
             if(wAngka) wAngka.style.display = 'block';
             document.getElementById('notif-sabar').style.display = 'none';
             

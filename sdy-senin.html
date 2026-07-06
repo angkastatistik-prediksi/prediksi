@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="rating" content="general" />
+    <meta name="geo.country" content="id" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Prediksi Akurat Hari Ini - 100% Angka Statistik" />
+    <meta property="og:description" content="Cek bocoran angka jitu hari ini langsung dari tarikan paito statistik tercepat dan akurat." />
+    <meta property="og:url" content="https://angkastatistik.my.id" />
+    <script src='https://crypotential.com/aau2deh1y8?key=28127d0dedbc5859c5a05ec19fed2ae4'></script>
     <title>PREDIKSI SYDNEY SENIN - ANGKA STATISTIK</title>
     <style>
         /* --- DESAIN PUSAT --- */
@@ -191,49 +200,52 @@
         // =================================================================
         // KOTAK EDIT DATA PREDIKSI (Tempat ganti nomor tarikan harian)
         // =================================================================
-const DATA_PREDIKSI_1 =
-["9177 :  36", 
-"2013 :  14", 
-"1484 :  98", 
-"9890 :  09", 
-"4139 :  87", 
-"0376 :  03", 
-"6934 :  09", 
-"9606 :  78", 
-"7628 :  25", 
-"3782 :  92", 
-"9893 :  -47",
-"7683 : 01"];
+const DATA_PREDIKSI_1 = `
+9177 :  36
+2013 :  14
+1484 :  98
+9890 :  09
+4139 :  87
+0376 :  03
+6934 :  09
+9606 :  78
+7628 :  25
+3782 :  92
+9893 :  -47
+7683 : 01
+`;
 
-const DATA_PREDIKSI_2 =
-["1484 :  975", 
-"9890 :  869", 
-"4139 :  869", 
-"0376 :  814", 
-"6934 :  480", 
-"9606 :  849", 
-"7628 :  038", 
-"3782 :  869", 
-"9893 :  -107",
-"7683 :  264"];
+const DATA_PREDIKSI_2 = `
+1484 :  975
+9890 :  869
+4139 :  869
+0376 :  814
+6934 :  480
+9606 :  849
+7628 :  038
+3782 :  869
+9893 :  -107
+7683 :  264
+`;
 
-const DATA_PREDIKSI_3 =
-["8445 : 436", 
-"4113 : 103", 
-"9453 : 658", 
-"6860 : 870", 
-"9177 : 436", 
-"2013 : 214", 
-"1484 : 769", 
-"9890 : -870", 
-"4139 : 769", 
-"0376 : 103", 
-"6934 : 870", 
-"9606 : 981", 
-"7628 : 325", 
-"3782 : 092", 
-"9893 : -547",
-"7683 : 214"];
+const DATA_PREDIKSI_3 = `
+8445 : 436
+4113 : 103
+9453 : 658
+6860 : 870
+9177 : 436
+2013 : 214
+1484 : 769
+9890 : -870
+4139 : 769
+0376 : 103
+6934 : 870
+9606 : 981
+7628 : 325
+3782 : 092
+9893 : -547
+7683 : 214
+`;
 
 const TEKS_KESIMPULAN = "01 VS 264 VS 214";
 
@@ -262,12 +274,20 @@ document.getElementById('area-bbfs').innerHTML = htmlBBFS;
 document.getElementById('area-cb').innerHTML =
 `<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${ANGKA_COLOK_BEBAS}</span>`;
 
-            function prosesRenderBola(dataArr, targetId) {
+function prosesRenderBola(data, targetId) {
+
+    if (typeof data === "string") {
+        data = data.trim().split(/\r?\n/);
+    }
+
     const penampung = document.getElementById(targetId);
     if (!penampung) return;
 
-    dataArr.forEach(baris => {
-        const bagian = baris.split(':');
+    penampung.innerHTML = "";
+
+    data.forEach(baris => {
+
+        const bagian = baris.split(":");
         if (bagian.length !== 2) return;
 
         const kiri = bagian[0].trim();
@@ -275,29 +295,22 @@ document.getElementById('area-cb').innerHTML =
 
         let htmlBaris = '<div class="baris-angka">';
 
-        // Bola merah
-        for (let char of kiri) {
-            htmlBaris += `<span class="bola bola-merah">${char}</span>`;
-        }
+        for (let c of kiri)
+            htmlBaris += `<span class="bola bola-merah">${c}</span>`;
 
         htmlBaris += '<span class="pembatas-titik-dua">:</span>';
 
-        // Cek apakah angka diberi tanda "-"
         const dicoret = kanan.startsWith("-");
         const angka = dicoret ? kanan.substring(1) : kanan;
 
-        // Bola putih
-        for (let char of angka) {
-            htmlBaris += `<span class="bola bola-putih">${
-                dicoret ? `<s>${char}</s>` : char
-            }</span>`;
-        }
+        for (let c of angka)
+            htmlBaris += `<span class="bola bola-putih">${dicoret ? `<s>${c}</s>` : c}</span>`;
 
-        htmlBaris += '</div>';
+        htmlBaris += "</div>";
+
         penampung.innerHTML += htmlBaris;
     });
         }
-
             // --- ENGINE LOGIKA TAB SWITCHER INTERAKTIF ---
             const tabButtons = document.querySelectorAll('.tab-btn');
             const hariPanels = document.querySelectorAll('.hari-panel-bawah');

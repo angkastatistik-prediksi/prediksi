@@ -116,31 +116,34 @@
     <p style="margin: 3px 0 0 0; padding: 0; font-weight: bold;" id="waktu-otomatis">Menghubungkan ke GitHub...</p>
 </div>
 
+<!-- Indikator Waktu Otomatis (2 Baris, Teks Kecil & Warna Putih) -->
+<div style="font-size: 11px; color: #ffffff; font-family: sans-serif; text-align: center; margin-bottom: 15px; opacity: 0.8; line-height: 1.5;">
+    <p style="margin: 0; padding: 0;">Angka Prediksi Diperbarui:</p>
+    <p style="margin: 3px 0 0 0; padding: 0; font-weight: bold;" id="waktu-otomatis-sukses">Memuat waktu...</p>
+</div>
+
 <script>
-    async function ambilWaktuUpdateOtomatis() {
-        // Mengunci riwayat pembaruan dari repositori angkastatistik-prediksi/prediksi
-        const urlAPI = "https://github.com";
-        const opsiFormat = { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
-        
+    function dapatkanWaktuUpdateOtomatis() {
         try {
-            const respon = await fetch(urlAPI);
-            if (!respon.ok) throw new Error("Gagal mengambil data");
-            const data = await respon.json();
+            // Membaca tanggal modifikasi file index.html langsung dari header server dokumen
+            const tanggalModifikasi = document.lastModified;
             
-            // Mengambil tanggal asli commit terakhir dari GitHub
-            const tanggalCommit = data.commit.committer.date; 
-            const waktuLokal = new Date(tanggalCommit).toLocaleString('id-ID', opsiFormat);
-            
-            // Menampilkan waktu update riil ke pengunjung situs my.id Anda
-            document.getElementById('waktu-otomatis').innerText = waktuLokal.replace('.', ':') + " WIB";
+            if (tanggalModifikasi && tanggalModifikasi !== "01/01/1970 00:00:00") {
+                const opsiFormat = { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+                const waktuLokal = new Date(tanggalModifikasi).toLocaleString('id-ID', opsiFormat);
+                
+                // Menampilkan waktu update asli ke pengunjung situs
+                document.getElementById('waktu-otomatis-sukses').innerText = waktuLokal.replace('.', ':') + " WIB";
+            } else {
+                throw new Error();
+            }
         } catch (error) {
-            // Cadangan jika koneksi API GitHub sibuk, mengunci waktu prapasang (statis)
-            const waktuStatis = new Date("2026-07-06T19:18:00").toLocaleString('id-ID', opsiFormat);
-            document.getElementById('waktu-otomatis').innerText = waktuStatis.replace('.', ':') + " WIB";
+            // Tampilan cadangan jika server menyembunyikan header tanggal
+            document.getElementById('waktu-otomatis-sukses').innerText = "6 Jul 2026 19:18 WIB";
         }
     }
-    // Jalankan sistem pencatat waktu otomatis saat pengunjung membuka website
-    ambilWaktuUpdateOtomatis();
+    // Jalankan fungsi instan saat halaman selesai dimuat
+    dapatkanWaktuUpdateOtomatis();
 </script>
 
             <!-- Area Render Bola Prediksi -->

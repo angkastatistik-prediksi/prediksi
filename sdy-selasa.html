@@ -111,16 +111,6 @@
     <main>
         <a href="index.html" class="back-btn">⬅ KEMBALI KE BERANDA</a>
         <div class="prediksi-container neon-border">
-
-<!-- Indikator Waktu Otomatis Terkunci (2 Baris, Teks Kecil & Warna Putih) -->
-<div style="font-size: 11px; color: #ffffff; font-family: sans-serif; text-align: center; margin-bottom: 15px; opacity: 0.8; line-height: 1.5;">
-    <p style="margin: 0; padding: 0;">Angka Prediksi Diperbarui:</p>
-    <!-- GitHub akan otomatis mengisi teks di bawah ini saat Anda melakukan push -->
-    <p style="margin: 3px 0 0 0; padding: 0; font-weight: bold; color: #ffffff;">
-        {{ site.time | date: "%d %b %Y - %H:%M" }} WIB
-    </p>
-</div>
-
             <!-- Area Render Bola Prediksi -->
             <div class="section-title">SYDNEY POOLS SELASA</div>
 <div class="section-title">PREDIKSI 1</div>
@@ -338,8 +328,7 @@ function prosesRenderBola(data, targetId) {
 
         penampung.innerHTML += htmlBaris;
     });
-    }
-
+        }
             // --- ENGINE LOGIKA TAB SWITCHER INTERAKTIF ---
             const tabButtons = document.querySelectorAll('.tab-btn');
             const hariPanels = document.querySelectorAll('.hari-panel-bawah');

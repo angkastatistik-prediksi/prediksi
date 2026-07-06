@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src='https://crypotential.com/aau2deh1y8?key=28127d0dedbc5859c5a05ec19fed2ae4'></script>
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="rating" content="general" />
+    <meta name="geo.country" content="id" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Prediksi Akurat Hari Ini - 100% Angka Statistik" />
+    <meta property="og:description" content="Cek bocoran angka jitu hari ini langsung dari tarikan paito statistik tercepat dan akurat." />
+    <meta property="og:url" content="https://angkastatistik.my.id" />
+    <script src='https://crypotential.com/aau2deh1y8?key=28127d0dedbc5859c5a05ec19fed2ae4'></script>
     <title>PREDIKSI HONGKONG MINGGU - ANGKA STATISTIK</title>
     <style>
         /* --- DESAIN PUSAT --- */
@@ -189,43 +198,38 @@
     </footer>
 
     <script>
-const DATA_PREDIKSI_1 =
-["2066 : 7649", 
-"8172 : 4956", 
-"4679 : 5987", 
-"0188 : 8790", 
-"6358 : 8109", 
-"2079 : 8109", 
-"3951 : 7642", 
-"3924 : 0976"];
+const DATA_PREDIKSI_1 = `
+6789 : 90
+5950 : 05
+4990 : 65
+5286 : 64
+1563 : 48
+3428 : 86
+6428 : 62
+8372 : -25
+4230 : 63
+`;
 
-const DATA_PREDIKSI_2 =
-["4679 : 9678", 
-"0188 : 6759", 
-"6358 : 6817", 
-"2079 : 7901", 
-"3951 : 4679", 
-"3924 : 5820"];
+const DATA_PREDIKSI_2 = `
+5286 : 654
+1563 : 210
+3428 : 210
+6428 : 987
+8372 : 109
+4230 : 210
+`;
 
-const DATA_PREDIKSI_3 =
-["2560 : 6471", 
-"7644 : 2508", 
-"4029 : 0798", 
-"6768 : 1593", 
-"6959 : 6709", 
-"9467 : 6840", 
-"5790 : 2976", 
-"9978 : 6915", 
-"0109 : 7890", 
-"7895 : 7960", 
-"2066 : 7598", 
-"8172 : 0695", 
-"4679 : 5278", 
-"0188 : 1795", 
-"6358 : 1795", 
-"2079 : 0152", 
-"3951 : 7209", 
-"3924 : 6702"];
+const DATA_PREDIKSI_3 = `
+6789 : 210
+5950 : 987
+4990 : 987
+5286 : 432
+1563 : 210
+3428 : 432
+6428 : 432
+8372 : 109
+4230 : 210
+`;
 
 const TEKS_KESIMPULAN = "0976 VS 6702 VS 5820";
 
@@ -254,12 +258,20 @@ document.getElementById('area-bbfs').innerHTML = htmlBBFS;
 document.getElementById('area-cb').innerHTML =
 `<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${ANGKA_COLOK_BEBAS}</span>`;
 
-            function prosesRenderBola(dataArr, targetId) {
+function prosesRenderBola(data, targetId) {
+
+    if (typeof data === "string") {
+        data = data.trim().split(/\r?\n/);
+    }
+
     const penampung = document.getElementById(targetId);
     if (!penampung) return;
 
-    dataArr.forEach(baris => {
-        const bagian = baris.split(':');
+    penampung.innerHTML = "";
+
+    data.forEach(baris => {
+
+        const bagian = baris.split(":");
         if (bagian.length !== 2) return;
 
         const kiri = bagian[0].trim();
@@ -267,25 +279,19 @@ document.getElementById('area-cb').innerHTML =
 
         let htmlBaris = '<div class="baris-angka">';
 
-        // Bola merah
-        for (let char of kiri) {
-            htmlBaris += `<span class="bola bola-merah">${char}</span>`;
-        }
+        for (let c of kiri)
+            htmlBaris += `<span class="bola bola-merah">${c}</span>`;
 
         htmlBaris += '<span class="pembatas-titik-dua">:</span>';
 
-        // Cek apakah angka diberi tanda "-"
         const dicoret = kanan.startsWith("-");
         const angka = dicoret ? kanan.substring(1) : kanan;
 
-        // Bola putih
-        for (let char of angka) {
-            htmlBaris += `<span class="bola bola-putih">${
-                dicoret ? `<s>${char}</s>` : char
-            }</span>`;
-        }
+        for (let c of angka)
+            htmlBaris += `<span class="bola bola-putih">${dicoret ? `<s>${c}</s>` : c}</span>`;
 
-        htmlBaris += '</div>';
+        htmlBaris += "</div>";
+
         penampung.innerHTML += htmlBaris;
     });
         }

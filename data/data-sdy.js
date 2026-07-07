@@ -1,5 +1,27 @@
 const DATA_SDY = {
 
+senin: {
+
+prediksi1: `
+ISI
+`,
+
+prediksi2: `
+ISI
+`,
+
+prediksi3: `
+ISI
+`,
+
+kesimpulan: "ISI",
+
+bbfs: "ISI",
+
+cb: "ISI"
+
+}, 
+
 selasa: {
 
 prediksi1: `
@@ -59,6 +81,116 @@ bbfs: "097628",
 
 cb: "0"
 
-}
+}, 
+
+rabu: {
+
+prediksi1: `
+ISI
+`,
+
+prediksi2: `
+ISI
+`,
+
+prediksi3: `
+ISI
+`,
+
+kesimpulan: "ISI",
+
+bbfs: "ISI",
+
+cb: "ISI"
+
+}, 
+
+kamis: {
+
+prediksi1: `
+ISI
+`,
+
+prediksi2: `
+ISI
+`,
+
+prediksi3: `
+ISI
+`,
+
+kesimpulan: "ISI",
+
+bbfs: "ISI",
+
+cb: "ISI"
+
+}, 
+
+jumat: {
+
+prediksi1: `
+ISI
+`,
+
+prediksi2: `
+ISI
+`,
+
+prediksi3: `
+ISI
+`,
+
+kesimpulan: "ISI",
+
+bbfs: "ISI",
+
+cb: "ISI"
+
+}, 
+
+sabtu: {
+
+prediksi1: `
+ISI
+`,
+
+prediksi2: `
+ISI
+`,
+
+prediksi3: `
+ISI
+`,
+
+kesimpulan: "ISI",
+
+bbfs: "ISI",
+
+cb: "ISI"
+
+}, 
+
+minggu: {
+
+prediksi1: `
+ISI
+`,
+
+prediksi2: `
+ISI
+`,
+
+prediksi3: `
+ISI
+`,
+
+kesimpulan: "ISI",
+
+bbfs: "ISI",
+
+cb: "ISI"
+
+}, 
 
 };

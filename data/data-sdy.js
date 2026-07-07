@@ -20,7 +20,7 @@ bbfs: "ISI",
 
 cb: "ISI"
 
-}, 
+},
 
 selasa: {
 
@@ -81,7 +81,7 @@ bbfs: "097628",
 
 cb: "0"
 
-}, 
+},
 
 rabu: {
 
@@ -103,7 +103,7 @@ bbfs: "ISI",
 
 cb: "ISI"
 
-}, 
+},
 
 kamis: {
 
@@ -125,7 +125,7 @@ bbfs: "ISI",
 
 cb: "ISI"
 
-}, 
+},
 
 jumat: {
 
@@ -147,7 +147,7 @@ bbfs: "ISI",
 
 cb: "ISI"
 
-}, 
+},
 
 sabtu: {
 
@@ -169,7 +169,7 @@ bbfs: "ISI",
 
 cb: "ISI"
 
-}, 
+},
 
 minggu: {
 
@@ -191,6 +191,6 @@ bbfs: "ISI",
 
 cb: "ISI"
 
-}, 
+},
 
 };

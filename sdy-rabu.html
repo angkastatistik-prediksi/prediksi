@@ -93,6 +93,9 @@
     <main>
         <a href="index.html" class="back-btn">⬅ KEMBALI KE BERANDA</a>
         <div class="prediksi-container neon-border">
+
+            <div id="lastUpdate"></div>
+            
             <!-- Area Render Bola Prediksi -->
             <div class="section-title">SYDNEY POOLS RABU</div>
 <div class="section-title">PREDIKSI 1</div>
@@ -335,6 +338,11 @@ hs.src = ('//s10.histats.com/js15_giftop_as.js');
         }
     };
 </script>
+
+<script>
+document.getElementById("lastUpdate").innerHTML =
+"Terakhir diperbarui Admin:<br>" + DATA_SDY.rabu.update;
+    </script>
 
 </body>
 </html>

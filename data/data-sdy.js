@@ -22,7 +22,7 @@ cb: "ISI"
 
 },
 
-selasa: {
+selasa: {last_update: "7 Juli 2026 pukul 14.35 WIB",
 
 prediksi1: `
 9177 : 36

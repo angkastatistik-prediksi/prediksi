@@ -13,6 +13,7 @@
     <meta property="og:url" content="https://angkastatistik.my.id" />
     <script src='https://crypotential.com/aau2deh1y8?key=28127d0dedbc5859c5a05ec19fed2ae4'></script>
     <title>PREDIKSI SYDNEY SENIN - ANGKA STATISTIK</title>
+    <meta name="google-site-verification" content="TBch3WXsQjoerDhwkErD9cCOa33heuOX0rSanOYC3BY" />
     <style>
         /* --- DESAIN PUSAT --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
@@ -73,11 +74,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Suara Klik Audio -->
-    <audio id="click-sound" preload="auto">
-        <source src="https://mixkit.co" type="audio/wav">
-    </audio>
 
     <header>
         <div class="sampul-banner">
@@ -196,62 +192,22 @@
         &copy; 2026 <span class="neon-text" style="font-weight:bold;">Angka Statistik</span>. All Rights Reserved.
     </footer>
 
+    <script src="data/data-sdy.js"></script>
+
     <script>
-        // =================================================================
-        // KOTAK EDIT DATA PREDIKSI (Tempat ganti nomor tarikan harian)
-        // =================================================================
-const DATA_PREDIKSI_1 = `
-9177 :  36
-2013 :  14
-1484 :  98
-9890 :  09
-4139 :  87
-0376 :  03
-6934 :  09
-9606 :  78
-7628 :  25
-3782 :  92
-9893 :  -47
-7683 : 01
-`;
+const DATA = DATA_SDY.senin;
 
-const DATA_PREDIKSI_2 = `
-1484 :  975
-9890 :  869
-4139 :  869
-0376 :  814
-6934 :  480
-9606 :  849
-7628 :  038
-3782 :  869
-9893 :  -107
-7683 :  264
-`;
+const DATA_PREDIKSI_1 = DATA.prediksi1;
 
-const DATA_PREDIKSI_3 = `
-8445 : 436
-4113 : 103
-9453 : 658
-6860 : 870
-9177 : 436
-2013 : 214
-1484 : 769
-9890 : -870
-4139 : 769
-0376 : 103
-6934 : 870
-9606 : 981
-7628 : 325
-3782 : 092
-9893 : -547
-7683 : 214
-`;
+const DATA_PREDIKSI_2 = DATA.prediksi2;
 
-const TEKS_KESIMPULAN = "01 VS 264 VS 214";
+const DATA_PREDIKSI_3 = DATA.prediksi3;
 
-const ANGKA_BBFS = "014239";
+const TEKS_KESIMPULAN = DATA.kesimpulan;
 
-const ANGKA_COLOK_BEBAS = "0";
+const ANGKA_BBFS = DATA.bbfs;
+
+const ANGKA_COLOK_BEBAS = DATA.cb;
 
         // =================================================================
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA

@@ -1,6 +1,6 @@
 const DATA_SDY = {
 
-senin: {last_update: "5 Juli 2026 pukul 14.35 WIB",
+senin: {update: "05 Juli 2026 14:35 WIB",
 
 prediksi1: `
 ISI
@@ -22,7 +22,7 @@ cb: "ISI"
 
 },
 
-selasa: {last_update: "7 Juli 2026 pukul 14.35 WIB",
+selasa: {
 
 prediksi1: `
 9177 : 36

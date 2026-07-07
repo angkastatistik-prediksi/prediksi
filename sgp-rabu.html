@@ -75,11 +75,6 @@
 </head>
 <body>
 
-    <!-- Suara Klik Audio -->
-    <audio id="click-sound" preload="auto">
-        <source src="https://mixkit.co" type="audio/wav">
-    </audio>
-
     <header>
         <div class="sampul-banner">
             <img src="sampul.jpg" alt="Sampul" class="gambar-sampul">
@@ -197,55 +192,23 @@
         &copy; 2026 <span class="neon-text" style="font-weight:bold;">Angka Statistik</span>. All Rights Reserved.
     </footer>
 
+    <script src="data/data-sgp.js"></script>
+
     <script>
-        // =================================================================
-        // KOTAK EDIT DATA PREDIKSI (Tempat ganti nomor tarikan harian)
-        // =================================================================
-const DATA_PREDIKSI_1 = `
-6789 :  90
-5950 :  05
-4990 :  65
-5286 :  64
-1563 :  48
-3428 :  86
-6428 :  62
-8372 :  -25
-4230 :  -63
-0629 :  96
-9668 :  82
-`;
+const DATA = DATA_SGP.rabu;
 
-const DATA_PREDIKSI_2 = `
-5286 : 64
-1563 : 20
-3428 : 20
-6428 : 97
-8372 : -19
-4230 : 20
-0629 : -42
-9668 : 08
-`;
+const DATA_PREDIKSI_1 = DATA.prediksi1;
 
-const DATA_PREDIKSI_3 = `
-6789 : 210
-5950 : 987
-4990 : 987
-5286 : 432
-1563 : 210
-3428 : 432
-6428 : 432
-8372 : 109
-4230 : 210
-0629 : -321
-9668 : 210
-`;
+const DATA_PREDIKSI_2 = DATA.prediksi2;
 
-const TEKS_KESIMPULAN = "08 VS 3724";
+const DATA_PREDIKSI_3 = DATA.prediksi3;
 
-const ANGKA_BBFS = "028374";
+const TEKS_KESIMPULAN = DATA.kesimpulan;
 
-const ANGKA_COLOK_BEBAS = "2";
+const ANGKA_BBFS = DATA.bbfs;
 
+const ANGKA_COLOK_BEBAS = DATA.cb;
+      
         // =================================================================
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
         // =================================================================

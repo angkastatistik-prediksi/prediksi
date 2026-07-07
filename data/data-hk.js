@@ -112,7 +112,7 @@ cb: "ISI"
 jumat: {
 
 prediksi1: `
-ISI
+0000 : 00
 `,
 
 prediksi2: `

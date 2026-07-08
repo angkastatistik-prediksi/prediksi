@@ -1,22 +1,26 @@
-const DATA_CHINA = {
+const DATA_CHINA = {"𝟶𝟾 𝙹𝚞𝚕𝚒 𝟸𝟶𝟸𝟼 𝟷𝟺:𝟸𝟻 𝚆𝙸𝙱", 
 
-    data: {
+data: {
+prediksi1: "
+𝟻𝟸𝟺𝟸 : 𝟿𝟸𝟽
+𝟶𝟽𝟸𝟿 : 𝟾𝟼𝟻
+𝟸𝟸𝟶𝟼 : 𝟹𝟾𝟻
+𝟷𝟶𝟹𝟸 : 𝟿𝟸𝟽
+𝟿𝟺𝟶𝟽 : 𝟶𝟸𝟺
+𝟻𝟻𝟽𝟺 : 𝟿𝟸𝟹
+",
+prediksi2: "
+𝟻𝟶𝟺𝟾 𝟺𝟽𝟸𝟼
+",
+prediksi3: "
+𝟶𝟹𝟽𝟿
+",
 
-        prediksi1: "
-          
-          ",
-        prediksi2: "
-          
-          ",
-        prediksi3: "
-          
-          ",
+kesimpulan: "𝟺𝟹 𝟺𝟿 𝟸𝟶 𝙱𝙱",
 
-        kesimpulan: "",
+        bbfs: "𝟸𝟺𝟹𝟿𝟶",
 
-        bbfs: "",
-
-        cb: ""
+        cb: "𝟸"
 
     }
 

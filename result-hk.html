@@ -120,15 +120,18 @@ color:#ddd;
 .minggu{
     display:grid;
     grid-template-columns:repeat(7,minmax(70px,1fr));
-    gap:6px;
-    margin-bottom:18px;
-}
-
+    gap:0;
+    margin-bottom:0;
+    border-bottom:1px solid rgba(0,240,255,.2);
+    }
+    
 .hari{
     text-align:center;
     font-size:11px;
     font-weight:bold;
     color:#00f0ff;
+    padding:8px 4px;
+    border-right:1px solid rgba(0,240,255,.3);
 }
 
 .hasil{
@@ -138,6 +141,8 @@ color:#ddd;
     flex-wrap:nowrap;
     gap:2px;
     min-height:24px;
+    padding:8px 4px;
+    border-right:1px solid rgba(0,240,255,.3);
 }
 
 .bola-kecil{
@@ -154,6 +159,11 @@ color:#ddd;
     font-weight:bold;
     box-shadow:0 0 4px rgba(255,0,85,.7);
     }
+
+    .hari:last-child,
+.hasil:last-child{
+    border-right:none;
+}
 
 /* RESPONSIVE */
 

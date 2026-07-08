@@ -103,16 +103,9 @@
             
             <!-- Area Render Bola Prediksi -->
             <div class="section-title"><h1>TAIWAN</h1></div>
-<div class="section-title">PREDIKSI 1</div>
-            <div id="area-prediksi-1"></div>
-
-            <div class="section-title">PREDIKSI 2</div>
-            <div id="area-prediksi-2"></div>
-
-            <div class="section-title">PREDIKSI 3</div>
-            <div id="area-prediksi-3"></div>
-
-            <div class="section-title">KESIMPULAN</div>
+<div class="section-title">PREDIKSI</div>
+            <div id="area-prediksi"></div>
+            <div class="section-title">2D</div>
             <div>
                 <span class="box-spesial kesimpulan-warna" id="area-kesimpulan"></span>
             </div>
@@ -218,29 +211,18 @@
     <script src="data/data-taiwan.js"></script>
 
     <script>
-const DATA = DATA_TAIWAN;
-
-const DATA_PREDIKSI_1 = DATA.prediksi1;
-
-const DATA_PREDIKSI_2 = DATA.prediksi2;
-
-const DATA_PREDIKSI_3 = DATA.prediksi3;
-
-const TEKS_KESIMPULAN = DATA.kesimpulan;
-
-const ANGKA_BBFS = DATA.bbfs;
-
-const ANGKA_COLOK_BEBAS = DATA.cb;
-
+const DATA_PREDIKSI = DATA_TAIWAN.data.prediksi;
+const TEKS_2D = DATA_TAIWAN.data.result2d;
+const ANGKA_BBFS = DATA_TAIWAN.data.bbfs;
+const ANGKA_COLOK_BEBAS = DATA_TAIWAN.data.cb;
+        
         // =================================================================
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
         // =================================================================
         document.addEventListener('DOMContentLoaded', () => {
-            prosesRenderBola(DATA_PREDIKSI_1, 'area-prediksi-1', false);
-            prosesRenderBola(DATA_PREDIKSI_2, 'area-prediksi-2', true);
-            prosesRenderBola(DATA_PREDIKSI_3, 'area-prediksi-3', false);
+            prosesRenderBola(DATA_PREDIKSI, 'area-prediksi');
             
-            document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
+            document.getElementById("area-kesimpulan").innerText = TEKS_2D;
 
 // BBFS (6 bola)
 let htmlBBFS = "";

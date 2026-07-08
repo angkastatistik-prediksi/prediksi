@@ -216,41 +216,26 @@
     <script src="data/data-macau.js"></script>
 
     <script>
-const DATA = DATA_MACAU;
+const DATA = DATA_MACAU.data;
 
 const DATA_PREDIKSI_1 = DATA.prediksi1;
-
 const DATA_PREDIKSI_2 = DATA.prediksi2;
-
 const DATA_PREDIKSI_3 = DATA.prediksi3;
-
-const TEKS_KESIMPULAN = DATA.kesimpulan;
-
-const ANGKA_BBFS = DATA.bbfs;
-
-const ANGKA_COLOK_BEBAS = DATA.cb;
+const DATA_PREDIKSI_4 = DATA.prediksi4;
+const DATA_PREDIKSI_5 = DATA.prediksi5;
+const DATA_PREDIKSI_6 = DATA.prediksi6;
 
         // =================================================================
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
         // =================================================================
         document.addEventListener('DOMContentLoaded', () => {
-            prosesRenderBola(DATA_PREDIKSI_1, 'area-prediksi-1', false);
-            prosesRenderBola(DATA_PREDIKSI_2, 'area-prediksi-2', true);
-            prosesRenderBola(DATA_PREDIKSI_3, 'area-prediksi-3', false);
+            prosesRenderBola(DATA_PREDIKSI_1,'area-prediksi-1');
+prosesRenderBola(DATA_PREDIKSI_2,'area-prediksi-2');
+prosesRenderBola(DATA_PREDIKSI_3,'area-prediksi-3');
+prosesRenderBola(DATA_PREDIKSI_4,'area-prediksi-4');
+prosesRenderBola(DATA_PREDIKSI_5,'area-prediksi-5');
+prosesRenderBola(DATA_PREDIKSI_6,'area-prediksi-6');
             
-            document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
-
-// BBFS (6 bola)
-let htmlBBFS = "";
-for (let angka of ANGKA_BBFS) {
-    htmlBBFS += `<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;margin:3px;">${angka}</span>`;
-}
-document.getElementById('area-bbfs').innerHTML = htmlBBFS;
-
-// Colok Bebas (1 bola)
-document.getElementById('area-cb').innerHTML =
-`<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${ANGKA_COLOK_BEBAS}</span>`;
-
 function prosesRenderBola(data, targetId) {
 
     if (typeof data === "string") {
@@ -288,6 +273,8 @@ function prosesRenderBola(data, targetId) {
         penampung.innerHTML += htmlBaris;
     });
 }
+});
+</script>
 
 <!-- Histats.com  (div with counter) -->
 <div id="histats_counter"></div>

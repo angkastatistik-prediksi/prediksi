@@ -118,56 +118,65 @@ color:#ddd;
 /* ===== TABEL RESULT ===== */
 
 .minggu{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:5px;
-margin-bottom:18px;
+    display:grid;
+    grid-template-columns:repeat(7,minmax(70px,1fr));
+    gap:6px;
+    margin-bottom:18px;
 }
 
 .hari{
-text-align:center;
-font-size:11px;
-font-weight:bold;
-color:#00f0ff;
+    text-align:center;
+    font-size:11px;
+    font-weight:bold;
+    color:#00f0ff;
 }
 
 .hasil{
-display:flex;
-justify-content:center;
-gap:2px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:nowrap;
+    gap:2px;
+    min-height:24px;
 }
 
 .bola-kecil{
-width:18px;
-height:18px;
-border-radius:50%;
-display:flex;
-justify-content:center;
-align-items:center;
-background:radial-gradient(circle,#ff5577,#990022);
-color:#fff;
-font-size:9px;
-font-weight:bold;
-box-shadow:0 0 4px rgba(255,0,85,.7);
-}
+    width:18px;
+    height:18px;
+    flex:0 0 18px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:radial-gradient(circle,#ff5577,#990022);
+    color:#fff;
+    font-size:9px;
+    font-weight:bold;
+    box-shadow:0 0 4px rgba(255,0,85,.7);
+    }
 
 /* RESPONSIVE */
 
 @media(max-width:900px){
 
 .minggu{
-grid-template-columns:repeat(7,minmax(40px,1fr));
-gap:2px;
+    grid-template-columns:repeat(7,minmax(55px,1fr));
+    gap:3px;
 }
 
 .hari{
-font-size:8px;
+    font-size:8px;
+}
+
+.hasil{
+    gap:1px;
 }
 
 .bola-kecil{
-width:15px;
-height:15px;
-font-size:7px;
+    width:13px;
+    height:13px;
+    flex:0 0 13px;
+    font-size:6px;
 }
 
 }
@@ -175,26 +184,31 @@ font-size:7px;
 @media(max-width:480px){
 
 main{
-padding:8px;
+    padding:8px;
 }
 
 .container{
-padding:10px;
+    padding:10px;
 }
 
 .minggu{
-grid-template-columns:repeat(7,1fr);
-gap:1px;
+    grid-template-columns:repeat(7,minmax(45px,1fr));
+    gap:2px;
 }
 
 .hari{
-font-size:7px;
+    font-size:7px;
+}
+
+.hasil{
+    gap:1px;
 }
 
 .bola-kecil{
-width:13px;
-height:13px;
-font-size:6px;
+    width:10px;
+    height:10px;
+    flex:0 0 10px;
+    font-size:5px;
 }
 
 }

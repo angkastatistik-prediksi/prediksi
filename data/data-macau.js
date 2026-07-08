@@ -2,7 +2,7 @@ const DATA_MACAU = {
 
     data: {
 
-prediksi1: "
+prediksi1: '
 1970 : 89
 1194 : 83
 6689 : 64
@@ -12,23 +12,23 @@ prediksi1: "
 6147 : 71
 ",
     
-prediksi2: "
+prediksi2: '
             
 ",
     
-prediksi3: "
+prediksi3: '
             
 ",
 
-prediksi4: "
+prediksi4: '
             
 ",
 
-prediksi5: "
+prediksi5: '
             
 ",
 
-prediksi6: "
+prediksi6: '
             
 ",
 

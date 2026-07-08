@@ -104,7 +104,7 @@
             <!-- Area Render Bola Prediksi -->
             <div class="section-title"><h1>CHINA</h1></div>
 <div class="section-title">PREDIKSI</div>
-            <div id="area-prediksi-1"></div>
+            <div id="area-prediksi"></div>
             <div class="section-title">KESIMPULAN</div>
             <div>
                 <span class="box-spesial kesimpulan-warna" id="area-kesimpulan"></span>
@@ -220,7 +220,7 @@ const ANGKA_COLOK_BEBAS = DATA_CHINA.data.cb;
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
         // =================================================================
         document.addEventListener('DOMContentLoaded', () => {
-            prosesRenderBola(DATA_PREDIKSI_1, 'area-prediksi-1');
+            prosesRenderBola(DATA_PREDIKSI, 'area-prediksi');
             
             document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
 

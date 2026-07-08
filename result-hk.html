@@ -344,56 +344,56 @@ Angka Statistik
 
 const DATA_HK = RESULT_HK.data.trim().split("\n");
 
-const hari=[
-"SENIN",
-"SELASA",
-"RABU",
-"KAMIS",
-"JUMAT",
-"SABTU",
-"MINGGU"
+const hari = [
+    "SENIN",
+    "SELASA",
+    "RABU",
+    "KAMIS",
+    "JUMAT",
+    "SABTU",
+    "MINGGU"
 ];
 
-document.getElementById("lastUpdate").innerHTML=
-"<b>TERAKHIR DIPERBARUI :</b><br>"+RESULT_HK.update;
+document.getElementById("lastUpdate").innerHTML =
+    "<b>TERAKHIR DIPERBARUI :</b><br>" + RESULT_HK.update;
 
-let html="";
+let html = "";
 
-DATA_HK.forEach(function(baris){
+// Header hari hanya sekali
+html += '<div class="minggu">';
+
+html += '</div>';
+
+// Data hasil
+DATA_HK.forEach(function(baris) {
 
     const minggu = baris.trim().split(/\s+/);
 
-    html+='<div class="minggu">';
+    html += '<div class="minggu">';
 
-    hari.forEach(function(h){
-        html+='<div class="hari">'+h+'</div>';
-    });
+    minggu.forEach(function(hasil) {
 
-    minggu.forEach(function(hasil){
-
-        html+='<div class="hasil">';
+        html += '<div class="hasil">';
 
         hasil = hasil.toString().trim();
 
-if (hasil === "" || hasil === "-") {
-    hasil = "XXXX";
-    }
-
-        for(let i=0;i<hasil.length;i++){
-
-            html+='<span class="bola-kecil">'+hasil[i]+'</span>';
-
+        if (hasil === "" || hasil === "-") {
+            hasil = "XXXX";
         }
 
-        html+='</div>';
+        for (let i = 0; i < hasil.length; i++) {
+            html += '<span class="bola-kecil">' + hasil[i] + '</span>';
+        }
+
+        html += '</div>';
 
     });
 
-    html+='</div>';
+    html += '</div>';
 
 });
 
-document.getElementById("data-hasil").innerHTML=html;
+document.getElementById("data-hasil").innerHTML = html;
 
 </script>
 

@@ -19,5 +19,5 @@ const DATA_CAMBODIA = {
         cb: ""
 
     }
-
+    update: "08 Juli 2026 07:35 WIB",
 };

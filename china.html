@@ -211,21 +211,16 @@
     <script src="data/data-china.js"></script>
 
     <script>
-const DATA = DATA_CHINA;
-
-const DATA_PREDIKSI_1 = DATA.prediksi;
-
-const TEKS_KESIMPULAN = DATA.kesimpulan;
-
-const ANGKA_BBFS = DATA.bbfs;
-
-const ANGKA_COLOK_BEBAS = DATA.cb;
-
+const DATA_PREDIKSI_1 = DATA_CHINA.data.prediksi;
+const TEKS_KESIMPULAN = DATA_CHINA.data.kesimpulan;
+const ANGKA_BBFS = DATA_CHINA.data.bbfs;
+const ANGKA_COLOK_BEBAS = DATA_CHINA.data.cb;
+        
         // =================================================================
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
         // =================================================================
         document.addEventListener('DOMContentLoaded', () => {
-            prosesRenderBola(DATA_PREDIKSI_1, 'area-prediksi', false);
+            prosesRenderBola(DATA_PREDIKSI_1, 'area-prediksi-1');
             
             document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
 

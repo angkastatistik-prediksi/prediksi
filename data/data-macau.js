@@ -1,4 +1,4 @@
-const DATA_MACAU = {update: "08 Juli 2026 22:47 WIB",
+const DATA_MACAU = {update: "08 Juli 2026 23:11 WIB",
     data: {
 prediksi1: `
 1970 : 89
@@ -45,6 +45,7 @@ prediksi5: `
 1182 : 02
 5228 : 76
 2507 : 32
+8933 : 76
 `,
 prediksi6: `
 1822 : 10

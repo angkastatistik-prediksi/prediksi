@@ -328,6 +328,8 @@ Angka Statistik
 
 <script>
 
+const DATA_HK = RESULT_HK.data.trim().split("\n");
+
 const hari=[
 "SENIN",
 "SELASA",
@@ -343,7 +345,9 @@ document.getElementById("lastUpdate").innerHTML=
 
 let html="";
 
-RESULT_HK.data.forEach(function(minggu){
+DATA_HK.forEach(function(baris){
+
+    const minggu = baris.trim().split(/\s+/);
 
     html+='<div class="minggu">';
 

@@ -30,6 +30,7 @@ prediksi5: `
 
 prediksi6: `
 
+"
 },
 
 };

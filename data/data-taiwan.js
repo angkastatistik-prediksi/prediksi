@@ -1,5 +1,5 @@
 const DATA_TAIWAN = {
-        update: "08 Juli 2026 17:47 WIB",
+        update: "08 Juli 2026 21:28 WIB",
 data: {
 prediksi: `
 9820 : 83
@@ -9,10 +9,11 @@ prediksi: `
 4090 : 05
 8956 : 38
 8385 : 27
+1712 : 50
 `,
-    result2d: "52*92*70*78",
-    bbfs: "529708",
-    cb: "7"
+    result2d: "51*53*05*08",
+    bbfs: "51308",
+    cb: "0"
 }
 
 };

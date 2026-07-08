@@ -10,10 +10,10 @@ prediksi1: "
 5574 : 923
 ",
 prediksi2: "
-5048
+5574 : 5048
 ",
 prediksi3: "
-4726
+5574 : 4726
 ",
 
 kesimpulan: "43 49 20 BB",

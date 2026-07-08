@@ -1,4 +1,4 @@
-const DATA_CAMBODIA = {
+const DATA_CAMBODIA = {update: "08 Juli 2026 06:32 WIB",
 
     data: {
 

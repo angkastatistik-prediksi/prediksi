@@ -1,5 +1,5 @@
-const DATA_CHINA = {"𝟶𝟾 𝙹𝚞𝚕𝚒 𝟸𝟶𝟸𝟼 𝟷𝟺:𝟸𝟻 𝚆𝙸𝙱", 
-
+const DATA_CHINA = {
+        update: "08 Juli 2026 14:15 WIB",, 
 data: {
 prediksi1: "
 5242 : 927

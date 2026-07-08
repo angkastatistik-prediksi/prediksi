@@ -1,7 +1,7 @@
 const DATA_JAPAN = {
         update: "08 Juli 2026 17:47 WIB",
 data: {
-    prediksi: `
+prediksi: `
 9489 : 
 2475 : 
 9582 : 
@@ -36,7 +36,9 @@ data: {
 `,
     result2d: "94*91*64*63*34*38",
     bbfs: "941638",
-    cb: "9/6"
+    cb: "9*6"
 }
 
 };
+
+E +

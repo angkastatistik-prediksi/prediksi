@@ -1,7 +1,7 @@
 const DATA_SDY = {
 
 senin: {
-  update: "05 Juli 2026 14:35 WIB",
+  update: "08 Juli 2026 14:02 WIB",
 
 prediksi1: `
 ISI
@@ -124,22 +124,39 @@ cb: "5"
 kamis: {
 
 prediksi1: `
-ISI
+6934 :  76
+9606 :  87
+7628 :  21
+3782 :  09
+9893 :  43
+7683 :  10
+5206 :  54
+8652 :  65
+5164 :  09
 `,
 
 prediksi2: `
-ISI
+9893 : 8374
+7683 : 4930
+5206 : 7263
+8652 : 5041
+5164 : 6152 
 `,
 
 prediksi3: `
-ISI
+3782 : 43
+9893 : 48
+7683 : -54
+5206 : 52
+8652 : 76
+5164 : 64
 `,
 
-kesimpulan: "ISI",
+kesimpulan: "09 vs 64",
 
-bbfs: "ISI",
+bbfs: "614580",
 
-cb: "ISI"
+cb: "6"
 
 },
 

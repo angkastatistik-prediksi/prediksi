@@ -1,5 +1,5 @@
 const DATA_MACAU = {
-    data: {
+    data: {update: "08 Juli 2026 11:35 WIB",
 
         prediksi1: `
 1970 : 89

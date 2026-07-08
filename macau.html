@@ -229,50 +229,52 @@ const DATA_PREDIKSI_6 = DATA.prediksi6;
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
         // =================================================================
         document.addEventListener('DOMContentLoaded', () => {
-            prosesRenderBola(DATA_PREDIKSI_1,'area-prediksi-1');
-prosesRenderBola(DATA_PREDIKSI_2,'area-prediksi-2');
-prosesRenderBola(DATA_PREDIKSI_3,'area-prediksi-3');
-prosesRenderBola(DATA_PREDIKSI_4,'area-prediksi-4');
-prosesRenderBola(DATA_PREDIKSI_5,'area-prediksi-5');
-prosesRenderBola(DATA_PREDIKSI_6,'area-prediksi-6');}
-            
-function prosesRenderBola(data, targetId) {
 
-    if (typeof data === "string") {
-        data = data.trim().split(/\r?\n/);
+    prosesRenderBola(DATA_PREDIKSI_1,'area-prediksi-1');
+    prosesRenderBola(DATA_PREDIKSI_2,'area-prediksi-2');
+    prosesRenderBola(DATA_PREDIKSI_3,'area-prediksi-3');
+    prosesRenderBola(DATA_PREDIKSI_4,'area-prediksi-4');
+    prosesRenderBola(DATA_PREDIKSI_5,'area-prediksi-5');
+    prosesRenderBola(DATA_PREDIKSI_6,'area-prediksi-6');
+
+    function prosesRenderBola(data, targetId) {
+
+        if (typeof data === "string") {
+            data = data.trim().split(/\r?\n/);
+        }
+
+        const penampung = document.getElementById(targetId);
+        if (!penampung) return;
+
+        penampung.innerHTML = "";
+
+        data.forEach(baris => {
+
+            const bagian = baris.split(":");
+            if (bagian.length !== 2) return;
+
+            const kiri = bagian[0].trim();
+            const kanan = bagian[1].trim();
+
+            let htmlBaris = '<div class="baris-angka">';
+
+            for (let c of kiri)
+                htmlBaris += `<span class="bola bola-merah">${c}</span>`;
+
+            htmlBaris += '<span class="pembatas-titik-dua">:</span>';
+
+            const dicoret = kanan.startsWith("-");
+            const angka = dicoret ? kanan.substring(1) : kanan;
+
+            for (let c of angka)
+                htmlBaris += `<span class="bola bola-putih">${dicoret ? `<s>${c}</s>` : c}</span>`;
+
+            htmlBaris += "</div>";
+
+            penampung.innerHTML += htmlBaris;
+        });
     }
 
-    const penampung = document.getElementById(targetId);
-    if (!penampung) return;
-
-    penampung.innerHTML = "";
-
-    data.forEach(baris => {
-
-        const bagian = baris.split(":");
-        if (bagian.length !== 2) return;
-
-        const kiri = bagian[0].trim();
-        const kanan = bagian[1].trim();
-
-        let htmlBaris = '<div class="baris-angka">';
-
-        for (let c of kiri)
-            htmlBaris += `<span class="bola bola-merah">${c}</span>`;
-
-        htmlBaris += '<span class="pembatas-titik-dua">:</span>';
-
-        const dicoret = kanan.startsWith("-");
-        const angka = dicoret ? kanan.substring(1) : kanan;
-
-        for (let c of angka)
-            htmlBaris += `<span class="bola bola-putih">${dicoret ? `<s>${c}</s>` : c}</span>`;
-
-        htmlBaris += "</div>";
-
-        penampung.innerHTML += htmlBaris;
-    });
-}
 });
 </script>
     

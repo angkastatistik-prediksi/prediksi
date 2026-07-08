@@ -2,21 +2,35 @@ const DATA_MACAU = {
 
     data: {
 
-        prediksi1: "
-            
-            ",
-        prediksi2: "
-            
-            ",
-        prediksi3: "
-            
-            ",
+prediksi1: "
+1970 : 89
+1194 : 83
+6689 : 64
+6164 : 36
+4196 : 16
+1771 : 14
+6147 : 71
+",rumus ekor kepala naik nilai 1 kolom
 
-        kesimpulan: "",
+prediksi2: "
+            
+",
 
-        bbfs: "",
+prediksi3: "
+            
+",
 
-        cb: ""
+prediksi4: "
+            
+",
+
+prediksi5: "
+            
+",
+
+prediksi6: "
+            
+",
 
     }
 

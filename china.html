@@ -105,7 +105,7 @@
             <div class="section-title"><h1>CHINA</h1></div>
 <div class="section-title">PREDIKSI</div>
             <div id="area-prediksi"></div>
-            <div class="section-title">KESIMPULAN</div>
+            <div class="section-title">2D</div>
             <div>
                 <span class="box-spesial kesimpulan-warna" id="area-kesimpulan"></span>
             </div>
@@ -212,7 +212,7 @@
 
     <script>
 const DATA_PREDIKSI = DATA_CHINA.data.prediksi;
-const TEKS_KESIMPULAN = DATA_CHINA.data.kesimpulan;
+const TEKS_2D = DATA_CHINA.data.result2d;
 const ANGKA_BBFS = DATA_CHINA.data.bbfs;
 const ANGKA_COLOK_BEBAS = DATA_CHINA.data.cb;
         
@@ -222,7 +222,7 @@ const ANGKA_COLOK_BEBAS = DATA_CHINA.data.cb;
         document.addEventListener('DOMContentLoaded', () => {
             prosesRenderBola(DATA_PREDIKSI, 'area-prediksi');
             
-            document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
+            document.getElementById("area-kesimpulan").innerText = TEKS_2D;
 
 // BBFS (6 bola)
 let htmlBBFS = "";

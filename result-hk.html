@@ -373,7 +373,11 @@ DATA_HK.forEach(function(baris){
 
         html+='<div class="hasil">';
 
-        hasil=hasil.toString();
+        hasil = hasil.toString().trim();
+
+if (hasil === "" || hasil === "-") {
+    hasil = "XXXX";
+    }
 
         for(let i=0;i<hasil.length;i++){
 

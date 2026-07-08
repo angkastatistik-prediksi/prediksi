@@ -10,12 +10,12 @@ prediksi1: "
 4196 : 16
 1771 : 14
 6147 : 71
-",rumus ekor kepala naik nilai 1 kolom
-
+",
+    
 prediksi2: "
             
 ",
-
+    
 prediksi3: "
             
 ",

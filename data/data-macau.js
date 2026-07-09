@@ -9,8 +9,10 @@ prediksi1: `
 1771 : 07
 6147 : 81
 1928 : 59
-5755 : 37 //Rumus kepala 2 naik, cop
+5755 : 37
 `,
+        //Rumus kepala 2 naik, cop
+        
 prediksi2: `
 3790 : 15
 0085 : 60
@@ -19,8 +21,10 @@ prediksi2: `
 1424 : 59
 2455 : 60
 9186 : 71
-9516 : 71 //Rumus ekor naik 1, ekor indx
+9516 : 71
 `,
+        //Rumus ekor naik 1, ekor indx
+        
 prediksi3: `
 0370 : 21
 8227 : 18

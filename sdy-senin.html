@@ -8,8 +8,8 @@
     <meta name="geo.country" content="id" />
     <meta property="og:locale" content="id_ID" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Prediksi Akurat Hari Ini - 100% Angka Statistik" />
-    <meta property="og:description" content="Cek bocoran angka jitu hari ini langsung dari tarikan paito statistik tercepat dan akurat." />
+    <meta property="og:title" content="Prediksi Akurat SYDNEY Hari Ini - 100% Angka Jitu sdy senin selasa rabu kamis jumat sabtu dan minggu" />
+    <meta property="og:description" content="Cek bocoran angka jitu sdy hari ini langsung dari tarikan paito hasil sydney tercepat dan akurat." />
     <meta property="og:url" content="https://angkastatistik.my.id" />
     <script src='https://crypotential.com/aau2deh1y8?key=28127d0dedbc5859c5a05ec19fed2ae4'></script>
     <title>PREDIKSI SYDNEY SENIN - ANGKA STATISTIK</title>
@@ -94,23 +94,17 @@
         <a href="index.html" class="back-btn">⬅ KEMBALI KE BERANDA</a>
         <div class="prediksi-container neon-border">
             
-            <div id="lastUpdate"></div> 
-
+            <div id="lastUpdate"></div>
+            
             <!-- Area Render Bola Prediksi -->
             <div class="section-title">SYDNEY POOLS SENIN</div>
-<div class="section-title">PREDIKSI 1</div>
-            <div id="area-prediksi-1"></div>
+<div class="section-title">PREDIKSI</div>
+<div id="area-prediksi"></div>
 
-            <div class="section-title">PREDIKSI 2</div>
-            <div id="area-prediksi-2"></div>
-
-            <div class="section-title">PREDIKSI 3</div>
-            <div id="area-prediksi-3"></div>
-
-            <div class="section-title">KESIMPULAN</div>
-            <div>
-                <span class="box-spesial kesimpulan-warna" id="area-kesimpulan"></span>
-            </div>
+<div class="section-title">2D</div>
+<div>
+    <span class="box-spesial kesimpulan-warna" id="area-2d"></span>
+</div>
 
 <div class="section-title">BBFS</div>
 <div id="area-bbfs"></div>
@@ -132,7 +126,7 @@
                     <button class="tab-btn" data-target="panel-sgp">SGP</button>
                 </div>
 
-                <!-- Panel Hari Sydney (Otomatis Aktif Terbuka di awal) -->
+                <!-- Panel Hari Singapore (Otomatis Aktif Terbuka di awal) -->
                 <div id="panel-sdy" class="hari-panel-bawah active">
                     <a href="sdy-senin.html" class="hari-item-link active-hari">SENIN</a>
                     <a href="sdy-selasa.html" class="hari-item-link">SELASA</a>
@@ -195,23 +189,14 @@
         &copy; 2026 <span class="neon-text" style="font-weight:bold;">Angka Statistik</span>. All Rights Reserved.
     </footer>
 
-    <script>
-document.getElementById("lastUpdate").innerHTML =
-"Terakhir diperbarui Admin:<br>" + DATA_SDY.senin.update;
-    </script>
-
     <script src="data/data-sdy.js"></script>
 
     <script>
 const DATA = DATA_SDY.senin;
 
-const DATA_PREDIKSI_1 = DATA.prediksi1;
+const DATA_PREDIKSI = DATA.prediksi;
 
-const DATA_PREDIKSI_2 = DATA.prediksi2;
-
-const DATA_PREDIKSI_3 = DATA.prediksi3;
-
-const TEKS_KESIMPULAN = DATA.kesimpulan;
+const HASIL_2D = DATA.result2d;
 
 const ANGKA_BBFS = DATA.bbfs;
 
@@ -221,11 +206,9 @@ const ANGKA_COLOK_BEBAS = DATA.cb;
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
         // =================================================================
         document.addEventListener('DOMContentLoaded', () => {
-            prosesRenderBola(DATA_PREDIKSI_1, 'area-prediksi-1', false);
-            prosesRenderBola(DATA_PREDIKSI_2, 'area-prediksi-2', true);
-            prosesRenderBola(DATA_PREDIKSI_3, 'area-prediksi-3', false);
-            
-            document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
+            prosesRenderBola(DATA_PREDIKSI, 'area-prediksi');
+
+document.getElementById('area-2d').innerText = HASIL_2D;
 
 // BBFS (6 bola)
 let htmlBBFS = "";
@@ -274,7 +257,8 @@ function prosesRenderBola(data, targetId) {
 
         penampung.innerHTML += htmlBaris;
     });
-        }
+    }
+
             // --- ENGINE LOGIKA TAB SWITCHER INTERAKTIF ---
             const tabButtons = document.querySelectorAll('.tab-btn');
             const hariPanels = document.querySelectorAll('.hari-panel-bawah');
@@ -341,6 +325,11 @@ hs.src = ('//s10.histats.com/js15_giftop_as.js');
             }, 2000); // Waktu jeda dalam milidetik
         }
     };
+</script>
+
+<script>
+document.getElementById("lastUpdate").innerHTML =
+"𝚃𝚎𝚛𝚊𝚔𝚑𝚒𝚛 𝙳𝚒𝚙𝚎𝚛𝚋𝚊𝚛𝚞𝚒 𝙰𝙳𝙼𝙸𝙽 :<br>" + DATA.update;
 </script>
 
 </body>

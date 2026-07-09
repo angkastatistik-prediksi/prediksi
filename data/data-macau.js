@@ -1,4 +1,4 @@
-const DATA_MACAU = {update: "09 Juli 2026 13:29 WIB",
+const DATA_MACAU = {update: "09 Juli 2026 19:25 WIB",
     data: {
 prediksi1: `
 1970 : 89
@@ -26,15 +26,18 @@ prediksi2: `
         //Rumus ekor naik 1, ekor indx
         
 prediksi3: `
-0370 : 21
-8227 : 18
-7216 : 16
-1351 : 37
-5953 : -70
-0448 : 51
-7751 : -37
-7695 : 20
+0370 : 26
+8227 : 13
+7216 : 12
+1351 : 23
+5953 : 80
+0448 : 31
+7751 : 69
+7695 : 51
+7515 : 49
 `,
+        //Rumus cop turun1, ai1+aiAtas1
+        
 prediksi4: `
 3807 : 16
 9119 : 83

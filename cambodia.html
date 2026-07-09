@@ -8,8 +8,8 @@
     <meta name="geo.country" content="id" />
     <meta property="og:locale" content="id_ID" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Prediksi Akurat Hari Ini - 100% Angka Statistik" />
-    <meta property="og:description" content="Cek bocoran angka jitu hari ini langsung dari tarikan paito statistik tercepat dan akurat." />
+    <meta property="og:title" content="Prediksi Akurat kamboja Hari Ini - 100% Angka Top Jitu" />
+    <meta property="og:description" content="bocoran angka jitu cambodia hari ini langsung dari tarikan paito statistik tercepat dan akurat." />
     <meta property="og:url" content="https://angkastatistik.my.id" />
     <script src='https://crypotential.com/aau2deh1y8?key=28127d0dedbc5859c5a05ec19fed2ae4'></script>
     <title>PREDIKSI CAMBODIA - ANGKA STATISTIK</title>
@@ -73,13 +73,8 @@
         footer { text-align: center; padding: 30px; margin-top: 40px; border-top: 1px solid #141440; font-size: 0.9rem; color: #666688; }
     </style>
 </head>
+  
 <body>
-
-    <!-- Suara Klik Audio -->
-    <audio id="click-sound" preload="auto">
-        <source src="https://mixkit.co" type="audio/wav">
-    </audio>
-
     <header>
         <div class="sampul-banner">
             <img src="sampul.jpg" alt="Sampul" class="gambar-sampul">
@@ -103,16 +98,9 @@
             
             <!-- Area Render Bola Prediksi -->
             <div class="section-title"><h1>CAMBODIA</h1></div>
-<div class="section-title">PREDIKSI 1</div>
-            <div id="area-prediksi-1"></div>
-
-            <div class="section-title">PREDIKSI 2</div>
-            <div id="area-prediksi-2"></div>
-
-            <div class="section-title">PREDIKSI 3</div>
-            <div id="area-prediksi-3"></div>
-
-            <div class="section-title">KESIMPULAN</div>
+<div class="section-title">PREDIKSI</div>
+            <div id="area-prediksi"></div>
+            <div class="section-title">2D</div>
             <div>
                 <span class="box-spesial kesimpulan-warna" id="area-kesimpulan"></span>
             </div>
@@ -218,29 +206,18 @@
     <script src="data/data-cambodia.js"></script>
 
     <script>
-const DATA = DATA_CAMBODIA;
-
-const DATA_PREDIKSI_1 = DATA.prediksi1;
-
-const DATA_PREDIKSI_2 = DATA.prediksi2;
-
-const DATA_PREDIKSI_3 = DATA.prediksi3;
-
-const TEKS_KESIMPULAN = DATA.kesimpulan;
-
-const ANGKA_BBFS = DATA.bbfs;
-
-const ANGKA_COLOK_BEBAS = DATA.cb;
-
+const DATA_PREDIKSI = DATA_CAMBODIA.data.prediksi;
+const TEKS_2D = DATA_CAMBODIA.data.result2d;
+const ANGKA_BBFS = DATA_CAMBODIA.data.bbfs;
+const ANGKA_COLOK_BEBAS = DATA_CAMBODIA.data.cb;
+        
         // =================================================================
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
         // =================================================================
         document.addEventListener('DOMContentLoaded', () => {
-            prosesRenderBola(DATA_PREDIKSI_1, 'area-prediksi-1', false);
-            prosesRenderBola(DATA_PREDIKSI_2, 'area-prediksi-2', true);
-            prosesRenderBola(DATA_PREDIKSI_3, 'area-prediksi-3', false);
+            prosesRenderBola(DATA_PREDIKSI, 'area-prediksi');
             
-            document.getElementById('area-kesimpulan').innerText = TEKS_KESIMPULAN;
+            document.getElementById("area-kesimpulan").innerText = TEKS_2D;
 
 // BBFS (6 bola)
 let htmlBBFS = "";

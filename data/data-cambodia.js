@@ -1,23 +1,20 @@
-const DATA_CAMBODIA = {update: "08 Juli 2026 06:32 WIB",
+const DATA_CAMBODIA = {
+        update: "09 Juli 2026 09:33 WIB",
+data: {
+    prediksi: `
+0902 : 891 
+6358 : 574 
+4753 : 567 
+5674 : 346 
+6468 : 456 
+7356 : 459 
+6290 : 234 
+2528 : 459 
+2065 : 564
+`,
+    result2d: "52*59*63*68*45*47",
+    bbfs: "5294387",
+    cb: "5"
+}
 
-    data: {
-
-        prediksi1: "
-          
-          ",
-        prediksi2: "
-          
-          ",
-        prediksi3: "
-          
-          ",
-
-        kesimpulan: "",
-
-        bbfs: "",
-
-        cb: ""
-
-    }
-    update: "08 Juli 2026 07:35 WIB",
 };

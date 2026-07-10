@@ -1,4 +1,4 @@
-const DATA_MACAU = {update: "Jumat 10 Juli 2026 16:52 WIB",
+const DATA_MACAU = {update: "Jumat 10 Juli 2026 19:25 WIB",
     data: {
 prediksi1: `
 1970 : 89
@@ -36,9 +36,10 @@ prediksi3: `
 0448 : 31
 7751 : 69
 7695 : 51
-7515 : 49
+7515 : -49
+3078 : 51
 `,
-        //Rumus cop turun1, ai1+aiAtas1
+        //Rumus kepala twin
         
 prediksi4: `
 3807 : 16

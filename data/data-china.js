@@ -1,5 +1,5 @@
 const DATA_CHINA = {
-        update: "09 Juli 2026 14:09 WIB",
+        update: "Kamis 09 Juli 2026 16:09 WIB",
 data: {
     prediksi: `
 5242 : 98

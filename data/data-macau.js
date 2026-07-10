@@ -1,4 +1,4 @@
-const DATA_MACAU = {update: "09 Juli 2026 22:18 WIB",
+const DATA_MACAU = {update: "Jumat 10 Juli 2026 07:56 WIB",
     data: {
 prediksi1: `
 1970 : 89
@@ -87,6 +87,8 @@ prediksi6: `
 0065 : 90
 5770 : -23
 5649 : 87
+1073 : 61
 `
+        //Rumus sama ekor waras
 }
 };

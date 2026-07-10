@@ -151,6 +151,9 @@ Cambodia Pools
 
 function proses(){
 
+document.getElementById("judul").innerText =
+document.getElementById("pasaran").value;
+
 let text=document.getElementById("data").value.trim();
 
 let baris=text.split("\n");
@@ -164,12 +167,12 @@ item=item.trim();
 if(item=="") return;
 
 // format: 0902 : 89
-let bagian=item.split(":");
+let bagian = item.split(/\s+/);
 
 if(bagian.length<2) return;
 
 let angka4d=bagian[0].trim();
-let putih=bagian[1].trim();
+let putih=bagian[1].trim().replace(/\s/g,'');
 
 hasil+='<div class="rowhasil">';
 
@@ -181,16 +184,15 @@ hasil+='<div style="width:20px"></div>';
 
 if(putih.startsWith("-")){
 
-// contoh -42
-let p=putih.substring(1);
+let p = putih.substring(1);
 
-hasil+='<div class="ball-white"><span style="text-decoration:line-through;">'+p[0]+'</span></div>';
-hasil+='<div class="ball-white"><span style="text-decoration:line-through;">'+p[1]+'</span></div>';
+hasil += '<div class="ball-white"><span style="text-decoration:line-through;">'+p[0]+'</span></div>';
+hasil += '<div class="ball-white"><span style="text-decoration:line-through;">'+p[1]+'</span></div>';
 
 }else{
 
-hasil+='<div class="ball-white">'+putih[0]+'</div>';
-hasil+='<div class="ball-white">'+putih[1]+'</div>';
+hasil += '<div class="ball-white">'+putih[0]+'</div>';
+hasil += '<div class="ball-white">'+putih[1]+'</div>';
 
 }
 

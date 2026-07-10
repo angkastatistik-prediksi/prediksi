@@ -234,73 +234,149 @@ KEMBALI MENU UTAMA
 
 <script>
 
-
 function proses(){
 
-
-document.getElementById("judul").innerText =
-document.getElementById("pasaran").value;
-
-
-let text=document.getElementById("data").value.trim();
+    document.getElementById("judul").innerText =
+    document.getElementById("pasaran").value;
 
 
-let baris=text.split("\n");
+    let text=document.getElementById("data").value.trim();
 
 
-let hasil="";
+    if(text==""){
+        document.getElementById("hasil").innerHTML="";
+        return;
+    }
 
 
-baris.forEach(function(item){
+    let baris=text.split("\n");
+
+    let hasil="";
 
 
-let bagian=item.trim().split(/\s+/);
+    baris.forEach(function(item){
+
+        item=item.trim();
+
+        if(item=="") return;
 
 
-if(bagian.length<2)return;
+        let bagian=item.split(/\s+/);
 
 
-let angka=bagian[0];
-
-let putih=bagian[1];
+        if(bagian.length<2) return;
 
 
-hasil+=`<div class="rowhasil">`;
+        let angka4d=bagian[0].trim();
+
+        let putih=bagian[1].trim();
 
 
-for(let i=0;i<4;i++){
+        hasil+='<div class="rowhasil">';
 
-hasil+=`
-<div class="ball-red">
-${angka[i]}
-</div>`;
+
+        for(let i=0;i<4;i++){
+
+            hasil+='<div class="ball-red">'+(angka4d[i] || "")+'</div>';
+
+        }
+
+
+        hasil+='<div style="width:20px"></div>';
+
+
+
+        if(putih.startsWith("-")){
+
+            let p=putih.substring(1);
+
+
+            hasil += 
+            '<div class="ball-white"><span style="text-decoration:line-through;">'+(p[0] || "")+'</span></div>';
+
+            hasil += 
+            '<div class="ball-white"><span style="text-decoration:line-through;">'+(p[1] || "")+'</span></div>';
+
+
+        }else{
+
+
+            hasil += 
+            '<div class="ball-white">'+(putih[0] || "")+'</div>';
+
+            hasil += 
+            '<div class="ball-white">'+(putih[1] || "")+'</div>';
+
+
+        }
+
+
+        hasil+='</div>';
+
+
+    });
+
+
+    document.getElementById("hasil").innerHTML=hasil;
+
+
+    updateWaktu();
 
 }
 
 
 
-hasil+=`<div style="width:20px"></div>`;
+
+function updateWaktu(){
+
+    const now = new Date();
 
 
-hasil+=`
-<div class="ball-white">
-${putih[0]}
-</div>
-
-<div class="ball-white">
-${putih[1]}
-</div>`;
-
-
-hasil+="</div>";
+    const hari = [
+        "Minggu",
+        "Senin",
+        "Selasa",
+        "Rabu",
+        "Kamis",
+        "Jumat",
+        "Sabtu"
+    ];
 
 
+    const bulan = [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember"
+    ];
 
-});
 
 
-document.getElementById("hasil").innerHTML=hasil;
+    const tanggal =
+    hari[now.getDay()] + ", " +
+    now.getDate() + " " +
+    bulan[now.getMonth()] + " " +
+    now.getFullYear();
 
+
+
+    const jam =
+    String(now.getHours()).padStart(2,"0") + ":" +
+    String(now.getMinutes()).padStart(2,"0") + ":" +
+    String(now.getSeconds()).padStart(2,"0");
+
+
+
+    document.getElementById("waktu").innerHTML =
+    tanggal + "<br>" + jam + " WIB";
 
 }
 
@@ -309,25 +385,32 @@ document.getElementById("hasil").innerHTML=hasil;
 
 function download(){
 
-
-html2canvas(document.querySelector("#capture"))
-
-.then(canvas=>{
+    updateWaktu();
 
 
-let link=document.createElement("a");
+    setTimeout(function(){
 
 
-link.download="angka-statistik.png";
+        html2canvas(document.querySelector("#capture"))
+        .then(canvas=>{
 
 
-link.href=canvas.toDataURL();
+            let link=document.createElement("a");
 
 
-link.click();
+            link.download="angkastatistik.png";
 
 
-});
+            link.href=canvas.toDataURL();
+
+
+            link.click();
+
+
+        });
+
+
+    },200);
 
 
 }
@@ -337,13 +420,13 @@ link.click();
 
 function hapus(){
 
-document.getElementById("data").value="";
+    document.getElementById("data").value="";
 
-document.getElementById("hasil").innerHTML="";
+    document.getElementById("hasil").innerHTML="";
+
+    document.getElementById("waktu").innerHTML="";
 
 }
-
-
 
 </script>
 

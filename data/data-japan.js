@@ -1,5 +1,5 @@
 const DATA_JAPAN = {
-        update: "08 Juli 2026 07:00 WIB",
+        update: "10 Juli 2026 07:00 WIB",
 data: {
 prediksi: `
 9489 : 

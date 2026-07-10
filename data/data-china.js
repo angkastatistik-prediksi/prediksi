@@ -1,5 +1,5 @@
 const DATA_CHINA = {
-        update: "Kamis 09 Juli 2026 16:09 WIB",
+        update: "Jumat 10 Juli 2026 15:44 WIB",
 data: {
     prediksi: `
 5242 : 98
@@ -10,6 +10,7 @@ data: {
 5574 : 23
 8682 : 56
 7756 : 30
+4708 : 39
 `,
         //Rumas A C -2/+2
         //5242 : 1298 pangkas sudah result 2d ke atas
@@ -20,9 +21,10 @@ data: {
         //5574 : 2309 239 23
         //8682 : 5632 563 56
         //7756 : 2309 309 30
-    result2d: "02*72*30*32",
-    bbfs: "027315",
-    cb: "0"
+        //4708 : 2309 239 39
+    result2d: "37*32*92*79",
+    bbfs: "372956",
+    tunggal: "3"
 }
 
 };

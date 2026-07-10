@@ -109,7 +109,7 @@
 <div id="area-bbfs"></div>
 
 <div class="section-title">TUNGGAL</div>
-<div id="area-tunggal"></div>
+<div id="area-cb"></div>
 
             <div class="salam-penutup">
                 sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ
@@ -185,7 +185,7 @@
 const DATA_PREDIKSI = DATA_CHINA.data.prediksi;
 const TEKS_2D = DATA_CHINA.data.result2d;
 const ANGKA_BBFS = DATA_CHINA.data.bbfs;
-const ANGKA_TUNGGAL = DATA_CHINA.data.cb;
+const ANGKA_COLOK_BEBAS = DATA_CHINA.data.cb;
         
         // =================================================================
         // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
@@ -202,9 +202,9 @@ for (let angka of ANGKA_BBFS) {
 }
 document.getElementById('area-bbfs').innerHTML = htmlBBFS;
 
-// Colok Tunggal (1 bola)
-document.getElementById('area-tunggal').innerHTML =
-`<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${ANGKA_TUNGGAL}</span>`;
+// Colok Bebas (1 bola)
+document.getElementById('area-cb').innerHTML =
+`<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${ANGKA_COLOK_BEBAS}</span>`;
 
 function prosesRenderBola(data, targetId) {
 

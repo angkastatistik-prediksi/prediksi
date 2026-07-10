@@ -1,5 +1,5 @@
 const DATA_JAPAN = {
-        update: "10 Juli 2026 07:00 WIB",
+        update: "Jumat 10 Juli 2026 18:16 WIB",
 data: {
 prediksi: `
 9489 : 
@@ -20,26 +20,27 @@ prediksi: `
 9639 : 
 1477 : 
 9530 : 
-3881 : 
-1534 : 
-2994 : 
-9727 : 
-6971 : 
-1396 : 
-0565 : 342
-8443 : 960
-9346 : 971
-6639 : 346
-7667 : 953
-3438 : 396
-9390 : 963
-5493 : 960 
+3881 : 23
+1534 : -72
+2994 : 72
+9727 : 51
+6971 : -53
+1396 : -12
+0565 : 34
+8443 : 96
+9346 : 97
+6639 : 60
+7667 : -51
+3438 : 39
+9390 : 93
+5493 : 42
+2827 : 51
 `,
-        //Rumus sama ekor maju 3,jangan ada angka apapun yg twin dan janggal
+        //Rumus ekor maju wajar - tunggal banding 3
         
-    result2d: "62*92*61*65*91*95",
-    bbfs: "621590",
-    cb: "6"
+    result2d: "21*81*52*58",
+    bbfs: "51287",
+    cb: "5"
 }
 
 };

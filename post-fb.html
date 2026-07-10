@@ -245,6 +245,7 @@ function proses(){
 
     if(text==""){
         document.getElementById("hasil").innerHTML="";
+        updateWaktu();
         return;
     }
 
@@ -261,6 +262,13 @@ function proses(){
         if(item=="") return;
 
 
+        // Membaca format:
+        // 6689 06
+        // 6689 : 06
+        // 6689 : -06
+
+        item=item.replace(":"," ");
+
         let bagian=item.split(/\s+/);
 
 
@@ -272,14 +280,19 @@ function proses(){
         let putih=bagian[1].trim();
 
 
+
         hasil+='<div class="rowhasil">';
+
 
 
         for(let i=0;i<4;i++){
 
-            hasil+='<div class="ball-red">'+(angka4d[i] || "")+'</div>';
+            hasil+='<div class="ball-red">'+
+            (angka4d[i] || "")+
+            '</div>';
 
         }
+
 
 
         hasil+='<div style="width:20px"></div>';
@@ -288,24 +301,39 @@ function proses(){
 
         if(putih.startsWith("-")){
 
+
             let p=putih.substring(1);
 
 
-            hasil += 
-            '<div class="ball-white"><span style="text-decoration:line-through;">'+(p[0] || "")+'</span></div>';
 
             hasil += 
-            '<div class="ball-white"><span style="text-decoration:line-through;">'+(p[1] || "")+'</span></div>';
+            '<div class="ball-white"><span style="text-decoration:line-through;">'
+            +(p[0] || "")+
+            '</span></div>';
+
+
+
+            hasil += 
+            '<div class="ball-white"><span style="text-decoration:line-through;">'
+            +(p[1] || "")+
+            '</span></div>';
+
 
 
         }else{
 
 
             hasil += 
-            '<div class="ball-white">'+(putih[0] || "")+'</div>';
+            '<div class="ball-white">'+
+            (putih[0] || "")+
+            '</div>';
+
+
 
             hasil += 
-            '<div class="ball-white">'+(putih[1] || "")+'</div>';
+            '<div class="ball-white">'+
+            (putih[1] || "")+
+            '</div>';
 
 
         }
@@ -314,7 +342,9 @@ function proses(){
         hasil+='</div>';
 
 
+
     });
+
 
 
     document.getElementById("hasil").innerHTML=hasil;
@@ -329,108 +359,120 @@ function proses(){
 
 function updateWaktu(){
 
-    const now = new Date();
+const now = new Date();
 
 
-    const hari = [
-        "Minggu",
-        "Senin",
-        "Selasa",
-        "Rabu",
-        "Kamis",
-        "Jumat",
-        "Sabtu"
-    ];
+const hari=[
+"Minggu",
+"Senin",
+"Selasa",
+"Rabu",
+"Kamis",
+"Jumat",
+"Sabtu"
+];
 
 
-    const bulan = [
-        "Januari",
-        "Februari",
-        "Maret",
-        "April",
-        "Mei",
-        "Juni",
-        "Juli",
-        "Agustus",
-        "September",
-        "Oktober",
-        "November",
-        "Desember"
-    ];
-
-
-
-    const tanggal =
-    hari[now.getDay()] + ", " +
-    now.getDate() + " " +
-    bulan[now.getMonth()] + " " +
-    now.getFullYear();
+const bulan=[
+"Januari",
+"Februari",
+"Maret",
+"April",
+"Mei",
+"Juni",
+"Juli",
+"Agustus",
+"September",
+"Oktober",
+"November",
+"Desember"
+];
 
 
 
-    const jam =
-    String(now.getHours()).padStart(2,"0") + ":" +
-    String(now.getMinutes()).padStart(2,"0") + ":" +
-    String(now.getSeconds()).padStart(2,"0");
+let tanggal =
+hari[now.getDay()] + ", " +
+now.getDate()+" "+
+bulan[now.getMonth()]+" "+
+now.getFullYear();
 
 
 
-    document.getElementById("waktu").innerHTML =
-    tanggal + "<br>" + jam + " WIB";
+let jam =
+String(now.getHours()).padStart(2,"0")+":"+
+String(now.getMinutes()).padStart(2,"0")+":"+
+String(now.getSeconds()).padStart(2,"0");
+
+
+
+document.getElementById("waktu").innerHTML =
+tanggal+"<br>"+jam+" WIB";
 
 }
+
 
 
 
 
 function download(){
 
-    updateWaktu();
+
+updateWaktu();
 
 
-    setTimeout(function(){
+
+let area=document.getElementById("capture");
 
 
-        html2canvas(document.querySelector("#capture"))
-        .then(canvas=>{
+
+html2canvas(area,{
+    backgroundColor:"#18182f",
+    scale:2
+})
+.then(function(canvas){
 
 
-            let link=document.createElement("a");
+    let link=document.createElement("a");
 
 
-            link.download="angkastatistik.png";
+    link.href=canvas.toDataURL("image/png");
 
 
-            link.href=canvas.toDataURL();
+    link.download="angkastatistik.png";
 
 
-            link.click();
+    document.body.appendChild(link);
 
 
-        });
+    link.click();
 
 
-    },200);
+    document.body.removeChild(link);
+
+
+});
 
 
 }
+
 
 
 
 
 function hapus(){
 
-    document.getElementById("data").value="";
+document.getElementById("data").value="";
 
-    document.getElementById("hasil").innerHTML="";
+document.getElementById("hasil").innerHTML="";
 
-    document.getElementById("waktu").innerHTML="";
+document.getElementById("waktu").innerHTML="";
 
 }
 
+
+updateWaktu();
+
 </script>
-
-
 
 </body>
 </html>

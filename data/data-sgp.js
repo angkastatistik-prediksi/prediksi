@@ -2,7 +2,7 @@ const DATA_SGP = {
 update: "Jumat 10 Juli 2026 07:15 WIB",
 data: {
 prediksi: `
-3428 : 
+3428 : 78
 6428 : 23
 8372 : 90
 4230 : 02

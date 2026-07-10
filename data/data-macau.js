@@ -1,4 +1,4 @@
-const DATA_MACAU = {update: "Jumat 10 Juli 2026 19:25 WIB",
+const DATA_MACAU = {update: "Jumat 10 Juli 2026 22:30 WIB",
     data: {
 prediksi1: `
 1970 : 89
@@ -49,7 +49,8 @@ prediksi4: `
 8442 : 89
 5393 : 70
 7675 : 68
-3161 : 56
+3161 : -56
+4621 : 12
 `,
         //Rumus 3807 : 1678 16
 //9119 : 8345 83
@@ -59,6 +60,7 @@ prediksi4: `
 //5393 : 0567 70 C E
 //7675 : 1678 68
 //3161 : 0567 56
+        //4621 : 5012 12
 
 prediksi5: `
 2231 : 12

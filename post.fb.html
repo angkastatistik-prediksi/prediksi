@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angka Statistik</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<style>
+
+body{
+background:#111;
+font-family:Arial,Helvetica,sans-serif;
+padding:20px;
+color:white;
+}
+
+.card{
+background:#18182f;
+border:2px solid #00d9ff;
+border-radius:15px;
+}
+
+.title{
+color:#00e5ff;
+font-weight:bold;
+font-size:35px;
+text-align:center;
+text-shadow:0 0 15px cyan;
+}
+
+.subtitle{
+text-align:center;
+font-size:18px;
+margin-bottom:20px;
+}
+
+.ball-red{
+width:45px;
+height:45px;
+border-radius:50%;
+background:linear-gradient(#ff4d7d,#b50034);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;
+color:white;
+box-shadow:0 0 8px #ff004c inset;
+}
+
+.ball-white{
+width:45px;
+height:45px;
+border-radius:50%;
+background:linear-gradient(#fff,#c9c9c9);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;
+color:#111;
+}
+
+.rowhasil{
+display:flex;
+justify-content:center;
+gap:8px;
+margin:10px;
+}
+
+.footer{
+text-align:center;
+margin-top:20px;
+font-size:14px;
+color:#aaa;
+}
+
+button{
+margin:3px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="mb-3">
+
+<select class="form-select" id="pasaran">
+<option>Cambodia Pools</option>
+<option>Sydney Pools</option>
+<option>China Pools</option>
+<option>Japan Pools</option>
+<option>SGP Pools</option>
+<option>Taiwan Pools</option>
+<option>Hongkong Pools</option>
+</select>
+
+</div>
+
+<label class="mt-3">Masukkan Data</label>
+
+<textarea id="data" class="form-control" rows="12"
+placeholder="1970 89
+1194 81
+6689 06
+6164 91
+4196 71"></textarea>
+
+<button class="btn btn-success mt-2 w-100" onclick="proses()">
+Proses Data
+</button>
+
+<br>
+
+<div class="card p-4" id="capture">
+
+<div class="subtitle">
+Terakhir Diperbarui<br>
+<span id="waktu"></span>
+</div>
+
+<div class="title" id="judul">
+Cambodia Pools
+</div>
+
+<hr>
+
+<div id="hasil"></div>
+
+<div class="footer">
+© angkastatistik.my.id
+</div>
+
+</div>
+
+<br>
+
+<button class="btn btn-primary" onclick="download()">Download Gambar</button>
+
+<button class="btn btn-danger" onclick="hapus()">Hapus Semua</button>
+
+</div>
+
+<script>
+
+function proses(){
+
+let text=document.getElementById("data").value.trim();
+
+let baris=text.split("\n");
+
+let hasil="";
+
+baris.forEach(function(item){
+
+item=item.trim();
+
+if(item=="") return;
+
+// format: 0902 : 89
+let bagian=item.split(":");
+
+if(bagian.length<2) return;
+
+let angka4d=bagian[0].trim();
+let putih=bagian[1].trim();
+
+hasil+='<div class="rowhasil">';
+
+for(let i=0;i<4;i++){
+hasil+='<div class="ball-red">'+angka4d[i]+'</div>';
+}
+
+hasil+='<div style="width:20px"></div>';
+
+if(putih.startsWith("-")){
+
+// contoh -42
+let p=putih.substring(1);
+
+hasil+='<div class="ball-white"><span style="text-decoration:line-through;">'+p[0]+'</span></div>';
+hasil+='<div class="ball-white"><span style="text-decoration:line-through;">'+p[1]+'</span></div>';
+
+}else{
+
+hasil+='<div class="ball-white">'+putih[0]+'</div>';
+hasil+='<div class="ball-white">'+putih[1]+'</div>';
+
+}
+
+hasil+='</div>';
+
+});
+
+document.getElementById("hasil").innerHTML=hasil;
+
+}
+
+function updateWaktu(){
+
+    const now = new Date();
+
+    const hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+    const bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+
+    const tanggal =
+        hari[now.getDay()] + ", " +
+        now.getDate() + " " +
+        bulan[now.getMonth()] + " " +
+        now.getFullYear();
+
+    const jam =
+        String(now.getHours()).padStart(2,"0") + ":" +
+        String(now.getMinutes()).padStart(2,"0") + ":" +
+        String(now.getSeconds()).padStart(2,"0");
+
+    document.getElementById("waktu").innerHTML =
+        tanggal + "<br>" + jam + " WIB";
+}
+
+
+function download(){
+
+    updateWaktu(); // isi tanggal & jam terbaru
+
+    setTimeout(function(){
+
+        html2canvas(document.querySelector("#capture")).then(canvas=>{
+
+            let link=document.createElement("a");
+
+            link.download="angkastatistik.png";
+
+            link.href=canvas.toDataURL();
+
+            link.click();
+
+        });
+
+    },100);
+
+}
+
+
+</script>
+
+</body>
+</html>

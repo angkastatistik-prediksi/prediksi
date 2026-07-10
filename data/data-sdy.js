@@ -1,5 +1,5 @@
 const DATA_SDY = {
-update: "09 Juli 2026 21:20 WIB",
+update: "Jumat 10 Juli 2026 14:03 WIB",
 data: {
 prediksi: `
 0376 : 32
@@ -12,11 +12,12 @@ prediksi: `
 5206 : 54
 8652 : 65
 5164 : 09
-8502 : 10
+8502 : -10
+7985 : 32
 `,
   //Rumus JUMLAH 2D TURUN 2 vs 
-result2d: "16*15*08*03",
-bbfs: "016583",
-cb: "1"
+result2d: "03*93*83*62*82*52",
+bbfs: "039862",
+cb: "0"
 }
 };

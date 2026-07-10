@@ -1,4 +1,4 @@
-const DATA_MACAU = {update: "Jumat 10 Juli 2026 22:30 WIB",
+const DATA_MACAU = {update: "Jumat 10 Juli 2026 23:17 WIB",
     data: {
 prediksi1: `
 1970 : 89
@@ -71,6 +71,7 @@ prediksi5: `
 2507 : 32
 8933 : -76
 7259 : 48
+8024 : 78
 `,
         //Rumus C E   bawah mundur
         //2231 : 1205 
@@ -81,6 +82,7 @@ prediksi5: `
         //2507 : 2358 32
         //8933 : 6794 76
         //7259 : 7843 48
+        //8024 : 4873 78
 
         
 prediksi6: `

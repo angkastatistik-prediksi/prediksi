@@ -1,5 +1,5 @@
 const DATA_JAPAN = {
-        update: "08 Juli 2026 17:47 WIB",
+        update: "08 Juli 2026 07:00 WIB",
 data: {
 prediksi: `
 9489 : 
@@ -33,9 +33,12 @@ prediksi: `
 7667 : 953
 3438 : 396
 9390 : 963
+5493 : 960 
 `,
-    result2d: "94*91*64*63*34*38",
-    bbfs: "941638",
+        //Rumus sama ekor maju 3,jangan ada angka apapun yg twin dan janggal
+        
+    result2d: "62*92*61*65*91*95",
+    bbfs: "621590",
     cb: "6"
 }
 

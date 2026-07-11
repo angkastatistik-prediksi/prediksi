@@ -956,31 +956,37 @@ opacity:.75;
 
 position:fixed;
 
-right:18px;
+right:20px;
 
 bottom:20px;
 
-width:48px;
+width:54px;
 
-height:48px;
+height:54px;
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
 
 border:none;
 
 border-radius:50%;
 
-background:#1d4ed8;
+background:linear-gradient(135deg,#2563eb,#38bdf8);
 
 color:#fff;
 
-font-size:20px;
-
 cursor:pointer;
-
-display:none;
 
 z-index:999;
 
+box-shadow:0 10px 25px rgba(37,99,235,.35);
+
 transition:.25s;
+
+}
 
 box-shadow:
 
@@ -990,9 +996,17 @@ box-shadow:
 
 .back-top:hover{
 
-transform:translateY(-3px);
+transform:translateY(-4px) scale(1.05);
 
-background:#2563eb;
+box-shadow:0 15px 30px rgba(37,99,235,.45);
+
+}
+
+.back-top svg{
+
+width:22px;
+
+height:22px;
 
 }
 

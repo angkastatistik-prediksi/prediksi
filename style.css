@@ -57,7 +57,7 @@ position:relative;
 
 width:100%;
 
-height:430px;
+height:220px;
 
 overflow:hidden;
 
@@ -138,6 +138,52 @@ border-radius:50%;
 border:2px solid rgba(255,255,255,.6);
 
 background:#fff;
+
+}
+
+.logo-mini{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+text-decoration:none;
+
+}
+
+.logo-text{
+
+display:flex;
+
+flex-direction:column;
+
+line-height:1.05;
+
+}
+
+.logo-angka{
+
+font-size:22px;
+
+font-weight:800;
+
+color:#ffffff;
+
+letter-spacing:1px;
+
+}
+
+.logo-statistik{
+
+font-size:22px;
+
+font-weight:800;
+
+color:#38bdf8;
+
+letter-spacing:1px;
 
 }
 
@@ -1066,7 +1112,7 @@ grid-template-columns:1fr 1fr;
 
 .hero{
 
-height:360px;
+height:180px;
 
 }
 

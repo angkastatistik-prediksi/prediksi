@@ -1,5 +1,5 @@
 const DATA_JAPAN = {
-        update: "Jumat 10 Juli 2026 18:16 WIB",
+        update: "Sabtu 11 Juli 2026 18:36 WIB",
 data: {
 prediksi: `
 9489 : 
@@ -35,12 +35,13 @@ prediksi: `
 9390 : 93
 5493 : 42
 2827 : 51
+6414 : 93
 `,
         //Rumus ekor maju wajar - tunggal banding 3
         
-    result2d: "21*81*52*58",
-    bbfs: "51287",
-    cb: "5"
+    result2d: "39*93*33*99",
+    bbfs: "396439",
+    cb: "3"
 }
 
 };

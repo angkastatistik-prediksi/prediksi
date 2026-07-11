@@ -1,5 +1,5 @@
 const DATA_SGP = {
-update: "Jumat 10 Juli 2026 07:15 WIB",
+update: "Sabtu 11 Juli 2026 18:42 WIB",
 data: {
 prediksi: `
 3428 : 78
@@ -10,6 +10,7 @@ prediksi: `
 9668 : 01
 5701 : 54
 8075 : 45
+6452 : 20
 `,
   //Rumus A C  .  bawah mundur
   //3428 : 432
@@ -20,8 +21,9 @@ prediksi: `
   //9668 : 201 01
   //5701 : 654 54
   //8075 : 543 45
-result2d: "56*58*46*47*48",
-bbfs: "45678",
-cb: "5"
+  //6452 : 210 20
+result2d: "92*29*90*09*62*26*60*06",
+bbfs: "026945",
+cb: "0"
 }
 };

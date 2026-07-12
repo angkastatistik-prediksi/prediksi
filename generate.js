@@ -4,15 +4,15 @@ const path = require('path');
 const pasaranList = [
     { id: 'macau', fileJS: 'data-macau.js', fileHTML: 'macau.html', nama: 'Macau' },
     { id: 'cambodia', fileJS: 'data-cambodia.js', fileHTML: 'cambodia.html', nama: 'Cambodia' },
-    { id: 'sdy', fileJS: 'data-sydney.js', fileHTML: 'sdy.html', nama: 'Sydney' },
+    { id: 'sdy', fileJS: 'data-sdy.js', fileHTML: 'sdy.html', nama: 'Sydney' },
     { id: 'china', fileJS: 'data-china.js', fileHTML: 'china.html', nama: 'China' },
     { id: 'japan', fileJS: 'data-japan.js', fileHTML: 'japan.html', nama: 'Japan' },
-    { id: 'sgp', fileJS: 'data-singapore.js', fileHTML: 'sgp.html', nama: 'Singapore' },
+    { id: 'sgp', fileJS: 'data-sgp.js', fileHTML: 'sgp.html', nama: 'Singapore' },
     { id: 'taiwan', fileJS: 'data-taiwan.js', fileHTML: 'taiwan.html', nama: 'Taiwan' },
-    { id: 'hk', fileJS: 'data-hongkong.js', fileHTML: 'hk.html', nama: 'Hongkong' }
+    { id: 'hk', fileJS: 'data-hk.js', fileHTML: 'hk.html', nama: 'Hongkong' }
 ];
 
-// 1. PROSES MEMBUAT FILE HALAMAN BARU BERDASARKAN TANGGAL
+// PROSES 1: MEMBUAT FILE ARSIP HALAMAN BARU BERDASARKAN TANGGAL SEO
 pasaranList.forEach((pasaran) => {
     const jsPath = path.join(__dirname, 'data', pasaran.fileJS);
     const htmlPath = path.join(__dirname, pasaran.fileHTML);
@@ -27,11 +27,13 @@ pasaranList.forEach((pasaran) => {
 
     if (tanggalSeo) {
         const namaHalamanBaru = `${pasaran.id}-${tanggalSeo}.html`;
+        // Gandakan file HTML asli Anda secara utuh (iklan & disqus aman) menjadi file tanggal baru
         fs.writeFileSync(path.join(__dirname, namaHalamanBaru), kontenHTML, 'utf8');
+        console.log(`✨ Sukses menggandakan halaman baru: ${namaHalamanBaru}`);
     }
 });
 
-// 2. PROSES MENAMPILKAN DAFTAR ARSIP DI BAWAH KALIMAT "sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ"
+// PROSES 2: SCAN DIREKTORI DAN SUNTIK DAFTAR LINK SECARA OTOMATIS BERDASARKAN HASIL SCAN FILE
 const semuaFile = fs.readdirSync(__dirname);
 
 pasaranList.forEach((pasaran) => {
@@ -40,15 +42,15 @@ pasaranList.forEach((pasaran) => {
 
     let kontenHTML = fs.readFileSync(htmlPath, 'utf8');
 
-    // Ambil semua file arsip tanggal yang sudah pernah terbuat khusus pasaran ini
+    // Filter mencari semua file arsip harian khusus pasaran ini yang ada di folder GitHub Anda saat ini
     const fileArsipPasaran = semuaFile.filter(f => 
         f.startsWith(`${pasaran.id}-`) && 
         f.endsWith('.html') && 
         f.match(/\d{4}-\d{2}-\d{2}/)
-    ).sort().reverse();
+    ).sort().reverse(); // reverse membuat tanggal terbaru otomatis naik ke posisi paling atas
 
-    // Susun kotak tampilan daftar arsip harian
-    let daftarArsipHTML = '\n        <div style="margin-top:25px; color:#00f0ff; text-shadow:0 0 5px #00f0ff; font-size:1rem; font-weight:bold;">CEK ARSIP PREDIKSI SEBELUMNYA</div>\n         <div style="max-height:150px; overflow-y:auto; padding:10px; background:rgba(12,12,40,0.8); border-radius:6px; margin:10px auto; max-width:400px; border:1px dashed rgba(0, 240, 255, 0.4); text-align:center;">\n';
+    // Buat struktur HTML Kotak Arsip Dinamis
+    let daftarArsipHTML = '\n        <div id="tempat-arsip-otomatis">\n        <div class="nav-quick-title" style="margin-top:25px; color:#00f0ff; text-shadow:0 0 5px #00f0ff; font-size:1rem; font-weight:bold;">CEK ARSIP PREDIKSI SEBELUMNYA</div>\n         <div style="max-height:150px; overflow-y:auto; padding:10px; background:rgba(12,12,40,0.8); border-radius:6px; margin:10px auto; max-width:400px; border:1px dashed rgba(0, 240, 255, 0.4); text-align:center;">\n';
     
     if (fileArsipPasaran.length > 0) {
         fileArsipPasaran.forEach(file => {
@@ -56,23 +58,17 @@ pasaranList.forEach((pasaran) => {
             const thn = bagian[1];
             const bln = bagian[2];
             const tgl = bagian[3];
-            daftarArsipHTML += `            <a href="${file}" style="display:block; color:#ffff00; text-decoration:none; font-size:0.9rem; margin:8px 0; font-weight:bold;"> Prediksi Tanggal ${tgl}-${bln}-${thn}</a>\n`;
+            daftarArsipHTML += `            <a href="${file}" style="display:block; color:#ffff00; text-decoration:none; font-size:0.9rem; margin:8px 0; font-weight:bold;">📊 Prediksi Tanggal ${tgl}-${bln}-${thn}</a>\n`;
         });
     } else {
         daftarArsipHTML += '            <span style="color:#888; font-size:0.85rem;">Belum ada riwayat prediksi harian.</span>\n';
     }
-    daftarArsipHTML += '        </div>\n';
+    daftarArsipHTML += '        </div>\n        </div>\n';
 
-    // Bersihkan teks arsip lama agar tidak menumpuk berulang-ulang
-    kontenHTML = kontenHTML.replace(/<div style="margin-top:25px; color:#00f0ff;"[\s\S]*?<\/div>\s*<\/div>/g, '');
-
-    // Cari letak kalimat salam penutup Anda yang menggunakan huruf kecil unicode "sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ"
-    const targetSalam = '<div class="salam-penutup"> sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ </div>';
-    
-    if (kontenHTML.includes(targetSalam)) {
-        // Masukkan kotak arsip tepat di bawah kalimat semoga beruntung
-        kontenHTML = kontenHTML.replace(targetSalam, `${targetSalam}${daftarArsipHTML}`);
+    // Suntikkan hasil scan file tadi ke wadah tempat-arsip-otomatis di file utama
+    if (kontenHTML.includes('<div id="tempat-arsip-otomatis"></div>')) {
+        kontenHTML = kontenHTML.replace('<div id="tempat-arsip-otomatis"></div>', daftarArsipHTML);
+        fs.writeFileSync(htmlPath, kontenHTML, 'utf8');
+        console.log(`✅ Daftar link arsip dinamis sukses dimasukkan ke: ${pasaran.fileHTML}`);
     }
-
-    fs.writeFileSync(htmlPath, kontenHTML, 'utf8');
 });

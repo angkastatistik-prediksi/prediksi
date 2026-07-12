@@ -37,7 +37,6 @@
         .prediksi-container { background-color: #0c0c28; border-radius: 8px; padding: 25px 15px; margin-top: 20px; text-align: center; }
         .section-title { color: #00f0ff; font-size: 1.1rem; font-weight: bold; text-shadow: 0 0 5px #00f0ff; margin: 25px auto 15px; border-bottom: 1px dashed rgba(0, 240, 255, 0.3); padding-bottom: 5px; max-width: 300px; text-transform: uppercase; letter-spacing: 1px; }
         .section-title:first-child { margin-top: 5px; }
-        .section-title h1 { font-size: 1.4rem; }
         .baris-angka { display: flex; justify-content: center; align-items: center; gap: 5px; margin-bottom: 12px; }
         .bola { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; font-weight: bold; font-size: 1.1rem; font-family: 'Arial Black', sans-serif; box-shadow: inset -3px -3px 6px rgba(0,0,0,0.4), 2px 2px 5px rgba(0,0,0,0.5); }
         .bola-merah { background: radial-gradient(circle at 10px 10px, #ff3366, #990022); color: #ffffff; border: 1px solid #ff0055; }
@@ -51,8 +50,6 @@
         
         /* --- DESAIN NAVIGASI KLIK INSTAN BARU --- */
         .nav-quick-title { font-size: .5rem; font-weight: bold; color: #ff0055; text-shadow: 0 0 5px #ff0055; margin: 25px 0 12px; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Tombol Pasaran */
         .tab-btn { padding: 6px 12px; background-color: #050515; border: 2px solid #ff0055; color: #ff0055; font-size: 0.9rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin: 2px; }
         .tab-btn:hover, .tab-btn.active { background-color: #ff0055; color: #ffffff; box-shadow: 0 0 12px #ff0055; }
         
@@ -71,6 +68,7 @@
         <h1 class="judul-web">PREDIKSI ANGKA STATISTIK</h1>
     </header>
 
+    <!-- IKLAN CPM ATAS -->
     <div style="text-align:center; margin:20px 0;">
         <script async="async" data-cfasync="false" src="https://effectivecpmnetwork.com"></script>
         <div id="container-285abe3dfa3645b0c5001d78494f7ebb"></div>
@@ -82,7 +80,6 @@
 
         <div id="lastUpdate"></div>
                     
-        <!-- Area Wadah Angka yang Akan Diisi Otomatis oleh Robot GitHub -->
         <div class="section-title"><h1>CAMBODIA JITU</h1></div>
         <div class="section-title">PREDIKSI</div>
         <div id="area-prediksi"></div>
@@ -98,16 +95,10 @@
         <div class="section-title">TUNGGAL</div>
         <div id="area-cb"></div>
 
-        <div class="salam-penutup">sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ</div>
-
-        <!-- TEMPATKAN KODE BARU INI DI SINI -->
-        <div id="arsip-otomatis">
-            <!-- Link tanggal khusus pasaran ini akan ditulis otomatis di sini -->
-        </div>
-
-        <!-- ================= SISTEM NAVIGASI TAB PILIHAN HARI INTERAKTIF ================= -->
-        <div style="border-top: 1px dashed rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 10px;">
-
+        <div class="salam-penutup"> sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ </div>
+        
+        <!-- TEMPAT DAFTAR ARSIP TANGGAL OTOMATIS -->
+        <div id="arsip-otomatis"></div>
 
         <!-- ================= SISTEM NAVIGASI TAB PILIHAN HARI INTERAKTIF ================= -->
         <div style="border-top: 1px dashed rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 10px;">
@@ -145,7 +136,7 @@
     &copy; 2026 <span class="neon-text" style="font-weight:bold;">Angka Statistik</span>. All Rights Reserved.
 </footer>
     
-<!-- Histats.com START -->
+<!-- HISTATS COUNTER -->
 <div id="histats_counter"></div>
 <script type="text/javascript">var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.startgif', '1,5037448,4,10036,"div#histatsC {position: absolute;top:0px;left:0px;}body>div#histatsC {position: fixed;}"']);
@@ -154,11 +145,66 @@ _Hasync.push(['Histats.track_hits', '']);
 (function() {
 var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
 hs.src = ('//://histats.com');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+(document.getElementsByTagName('head') || document.getElementsByTagName('body')[0]).appendChild(hs);
 })();</script>
-<!-- Histats.com END -->
 
+<!-- IKLAN CPM BAWAH -->
 <script src="https://effectivecpmnetwork.com"></script>
+
+<!-- KODE ASLI LOGIKA RENDER BOLA ANDA -->
+<script src="data/data-cambodia.js"></script>
+<script>
+const DATA_PREDIKSI = DATA_CAMBODIA.data.prediksi;
+const TEKS_2D = DATA_CAMBODIA.data.result2d;
+const ANGKA_BBFS = DATA_CAMBODIA.data.bbfs;
+const ANGKA_COLOK_BEBAS = DATA_CAMBODIA.data.cb;
+        
+document.addEventListener('DOMContentLoaded', () => {
+    prosesRenderBola(DATA_PREDIKSI, 'area-prediksi');
+    document.getElementById("area-kesimpulan").innerText = TEKS_2D;
+
+    let htmlBBFS = "";
+    for (let angka of ANGKA_BBFS) {
+        htmlBBFS += `<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;margin:3px;">${angka}</span>`;
+    }
+    document.getElementById('area-bbfs').innerHTML = htmlBBFS;
+
+    document.getElementById('area-cb').innerHTML = `<span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${ANGKA_COLOK_BEBAS}</span>`;
+
+    function prosesRenderBola(data, targetId) {
+        if (typeof data === "string") {
+            data = data.trim().split(/\r?\n/);
+        }
+        const penampung = document.getElementById(targetId);
+        if (!penampung) return;
+        penampung.innerHTML = "";
+
+        data.forEach(baris => {
+            const bersih = baris.trim();
+            if (!bersih || bersih.startsWith('//') || !bersih.includes(':')) return;
+
+            const bagian = bersih.split(":");
+            if (bagian.length !== 2) return;
+
+            const kiri = bagian[0].trim();
+            const kanan = bagian[1].trim();
+
+            let htmlBaris = '<div class="baris-angka">';
+            for (let c of kiri) htmlBaris += `<span class="bola bola-merah">${c}</span>`;
+            htmlBaris += '<span class="pembatas-titik-dua">:</span>';
+
+            const dicoret = kanan.startsWith("-");
+            const angka = dicoret ? kanan.substring(1) : kanan;
+            for (let c of angka) htmlBaris += `<span class="bola bola-putih">${dicoret ? `<s>${c}</s>` : c}</span>`;
+            htmlBaris += "</div>";
+
+            penampung.innerHTML += htmlBaris;
+        });
+    }
+});
+
+document.getElementById("lastUpdate").innerHTML = "𝚃𝚎𝚛𝚊𝚔𝚑𝚒𝚛 𝙳𝚒𝚙𝚎𝚛𝚋𝚊𝚛𝚞𝚒 𝙰𝙳𝙼𝙸𝙽 :<br>" + DATA_CAMBODIA.update;
+</script>
 
 </body>
 </html>

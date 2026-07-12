@@ -2,17 +2,17 @@ const fs = require('fs');
 const path = require('path');
 
 const pasaranList = [
-    { id: 'macau', fileJS: 'data-macau.js', fileHTML: 'macau.html', nama: 'Macau' },
-    { id: 'cambodia', fileJS: 'data-cambodia.js', fileHTML: 'cambodia.html', nama: 'Cambodia' },
-    { id: 'sdy', fileJS: 'data-sdy.js', fileHTML: 'sdy.html', nama: 'Sydney' },
-    { id: 'china', fileJS: 'data-china.js', fileHTML: 'china.html', nama: 'China' },
-    { id: 'japan', fileJS: 'data-japan.js', fileHTML: 'japan.html', nama: 'Japan' },
-    { id: 'sgp', fileJS: 'data-sgp.js', fileHTML: 'sgp.html', nama: 'Singapore' },
-    { id: 'taiwan', fileJS: 'data-taiwan.js', fileHTML: 'taiwan.html', nama: 'Taiwan' },
-    { id: 'hk', fileJS: 'data-hk.js', fileHTML: 'hk.html', nama: 'Hongkong' }
+    { id: 'macau', fileJS: 'data-macau.js', fileHTML: 'macau.html', nama: 'Macau', varName: 'DATA_MACAU' },
+    { id: 'cambodia', fileJS: 'data-cambodia.js', fileHTML: 'cambodia.html', nama: 'Cambodia', varName: 'DATA_CAMBODIA' },
+    { id: 'sdy', fileJS: 'data-sdy.js', fileHTML: 'sdy.html', nama: 'Sydney', varName: 'DATA_SYDNEY' },
+    { id: 'china', fileJS: 'data-china.js', fileHTML: 'china.html', nama: 'China', varName: 'DATA_CHINA' },
+    { id: 'japan', fileJS: 'data-japan.js', fileHTML: 'japan.html', nama: 'Japan', varName: 'DATA_JAPAN' },
+    { id: 'sgp', fileJS: 'data-sgp.js', fileHTML: 'sgp.html', nama: 'Singapore', varName: 'DATA_SINGAPORE' },
+    { id: 'taiwan', fileJS: 'data-taiwan.js', fileHTML: 'taiwan.html', nama: 'Taiwan', varName: 'DATA_TAIWAN' },
+    { id: 'hk', fileJS: 'data-hk.js', fileHTML: 'hk.html', nama: 'Hongkong', varName: 'DATA_HONGKONG' }
 ];
 
-// PROSES 1: BACA DATA JS DAN UPDATE ANGKA UTAMA SERTA BUAT FILE TANGGAL BARU
+// PROSES 1: EKSEKUSI DATA JAVASCRIPT ASLI ANDA
 pasaranList.forEach((pasaran) => {
     const jsPath = path.join(__dirname, 'data', pasaran.fileJS);
     const htmlPath = path.join(__dirname, pasaran.fileHTML);
@@ -22,26 +22,25 @@ pasaranList.forEach((pasaran) => {
     const kontenJS = fs.readFileSync(jsPath, 'utf8');
     let kontenHTML = fs.readFileSync(htmlPath, 'utf8');
 
-    // Fungsi pembersih teks super aman untuk mengambil nilai variabel JS
-    function ekstrakNilai(teks, properti) {
-        const regex = new RegExp(`${properti}\\s*:\\s*["'\`]([^"'\`]+)["'\`]`);
-        const match = teks.match(regex);
-        return match ? match[1].trim() : '';
+    let dataObjek = null;
+    try {
+        // Mengeksekusi file .js Anda agar menjadi objek asli di server Node.js
+        // Ini menjamin komentar rumus // Anda diabaikan secara aman oleh sistem
+        eval(kontenJS);
+        dataObjek = eval(pasaran.varName);
+    } catch (e) {
+        console.log(`⚠️ Gagal membaca objek JavaScript pada pasaran ${pasaran.nama}:`, e.message);
+        return;
     }
 
-    // Fungsi khusus untuk mengambil area prediksi multiline backtick
-    function ekstrakPrediksi(teks) {
-        const regex = /prediksi\s*:\s*`([\s\S]*?)`/;
-        const match = teks.match(regex);
-        return match ? match[1].trim() : '';
-    }
+    if (!dataObjek || !dataObjek.data) return;
 
-    const updateTime = ekstrakNilai(kontenJS, 'update');
-    const tanggalSeo = ekstrakNilai(kontenJS, 'tanggal_seo');
-    const result2d = ekstrakNilai(kontenJS, 'result2d');
-    const bbfs = ekstrakNilai(kontenJS, 'bbfs');
-    const cb = ekstrakNilai(kontenJS, 'cb');
-    const prediksiRaw = ekstrakPrediksi(kontenJS);
+    const updateTime = dataObjek.update || '';
+    const tanggalSeo = dataObjek.tanggal_seo || '';
+    const prediksiRaw = dataObjek.data.prediksi || '';
+    const result2d = dataObjek.data.result2d || '';
+    const bbfs = dataObjek.data.bbfs || '';
+    const cb = dataObjek.data.cb || '';
 
     // Pembuatan Baris Angka Prediksi Bola
     let prediksiHTML = '\n';
@@ -49,21 +48,22 @@ pasaranList.forEach((pasaran) => {
         const barisBaris = prediksiRaw.split('\n');
         barisBaris.forEach(baris => {
             const bersih = baris.trim();
-            // Lewati baris kosong atau komentar rumus dengan tanda //
             if (!bersih || bersih.startsWith('//') || !bersih.includes(':')) return;
 
-            const bagian = bersih.split(':');
+            // Memisahkan angka kiri dan kanan sebelum tanda komentar rumus dimulai
+            const bagianSatu = bersih.split('//')[0].trim();
+            if (!bagianSatu.includes(':')) return;
+
+            const bagian = bagianSatu.split(':');
             const kiri = bagian[0].trim();
             const kanan = bagian[1].trim();
 
             prediksiHTML += '            <div class="baris-angka">\n';
-            // Sisi Kiri (Bola Merah)
             for (let c of kiri) {
                 if (c.trim()) prediksiHTML += `                <span class="bola bola-merah">${c}</span>\n`;
             }
-            // Titik Dua
             prediksiHTML += '                <span class="pembatas-titik-dua">:</span>\n';
-            // Sisi Kanan (Bola Putih)
+            
             const dicoret = kanan.startsWith('-');
             const angkaKanan = dicoret ? kanan.substring(1).trim() : kanan;
             for (let c of angkaKanan) {
@@ -81,9 +81,9 @@ pasaranList.forEach((pasaran) => {
     });
 
     // Pembuatan Bola Colok Bebas / Tunggal
-    let cbHTML = `\n    <span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${cb.replace(/[^0-9]/g, '')}</span>\n`;
+    let cbHTML = `\n    <span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${cb.toString().replace(/[^0-9]/g, '')}</span>\n`;
 
-    // SUNTIK DATA KE HTML UTAMA
+    // SUNTIK DATA KE FILE HTML UTAMA
     kontenHTML = kontenHTML.replace(/<div id="lastUpdate">[\s\S]*?<\/div>/, `<div id="lastUpdate">𝚃𝚎𝚛𝚊𝚔𝚑𝚒𝚛 𝙳iprogram 𝙰𝙳𝙼𝙸𝙽 :<br>${updateTime}</div>`);
     kontenHTML = kontenHTML.replace(/<div id="area-prediksi">[\s\S]*?<\/div>/, `<div id="area-prediksi">${prediksiHTML}            </div>`);
     kontenHTML = kontenHTML.replace(/<span class="box-spesial kesimpulan-warna" id="area-kesimpulan">[\s\S]*?<\/span>/, `<span class="box-spesial kesimpulan-warna" id="area-kesimpulan">${result2d}</span>`);
@@ -94,14 +94,14 @@ pasaranList.forEach((pasaran) => {
     // Simpan file utama pasaran (Misal: cambodia.html)
     fs.writeFileSync(htmlPath, kontenHTML, 'utf8');
 
-    // Buat file arsip tanggal baru (Misal: cambodia-2026-07-12.html)
+    // Buat file arsip tanggal baru (Misal: cambodia-2026-07-13.html)
     if (tanggalSeo) {
         const namaFileArsip = `${pasaran.id}-${tanggalSeo}.html`;
         fs.writeFileSync(path.join(__dirname, namaFileArsip), kontenHTML, 'utf8');
     }
 });
 
-// PROSES 2: SCAN STRUKTUR DIREKTORI DAN AMBIL LINK ARSIP BERDASARKAN PASARANNYA MASING-MASING
+// PROSES 2: SCAN STRUKTUR DIREKTORI DAN AMBIL LINK ARSIP
 const semuaFile = fs.readdirSync(__dirname);
 
 pasaranList.forEach((pasaran) => {

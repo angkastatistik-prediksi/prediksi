@@ -1,23 +1,23 @@
 const fs = require('fs');
 const path = require('path');
 
-// Daftar pemetaan file sesuai dengan nama file JS dan HTML asli Anda
+// Daftar pemetaan file yang sudah disesuaikan dengan nama asli Anda (sdy dan hk)
 const pasaranList = [
     { id: 'macau', fileJS: 'data-macau.js', fileHTML: 'macau.html' },
     { id: 'cambodia', fileJS: 'data-cambodia.js', fileHTML: 'cambodia.html' },
-    { id: 'sdy', fileJS: 'data-sydney.js', fileHTML: 'sdy.html' },
+    { id: 'sdy', fileJS: 'data-sdy.js', fileHTML: 'sdy.html' },        // <-- Sudah sdy
     { id: 'china', fileJS: 'data-china.js', fileHTML: 'china.html' },
     { id: 'japan', fileJS: 'data-japan.js', fileHTML: 'japan.html' },
-    { id: 'sgp', fileJS: 'data-singapore.js', fileHTML: 'sgp.html' },
+    { id: 'sgp', fileJS: 'data-sgp.js', fileHTML: 'sgp.html' },        // <-- Sudah sgp
     { id: 'taiwan', fileJS: 'data-taiwan.js', fileHTML: 'taiwan.html' },
-    { id: 'hk', fileJS: 'data-hongkong.js', fileHTML: 'hk.html' }
+    { id: 'hk', fileJS: 'data-hk.js', fileHTML: 'hk.html' }          // <-- Sudah hk
 ];
 
 pasaranList.forEach((pasaran) => {
     const jsPath = path.join(__dirname, 'data', pasaran.fileJS);
     const htmlPath = path.join(__dirname, pasaran.fileHTML);
 
-    // Jika file JS atau HTML tidak ditemukan, lewati ke pasaran berikutnya
+    // Jika file JS atau HTML tidak ditemukan, lewati ke pasaran berikutnya secara aman
     if (!fs.existsSync(jsPath) || !fs.existsSync(htmlPath)) return;
 
     const kontenJS = fs.readFileSync(jsPath, 'utf8');
@@ -93,7 +93,7 @@ pasaranList.forEach((pasaran) => {
     // Ganti area lastUpdate
     kontenHTML = kontenHTML.replace(
         /<div id="lastUpdate">[\s\S]*?<\/div>/, 
-        `<div id="lastUpdate">𝚃𝚎𝚛𝚊𝚔𝚑𝚒𝚛 𝙳𝚒𝚙𝚎𝚛𝚋α𝚛𝚞𝚒 𝙰𝙳𝙼𝙸𝙽 :<br>${updateTime}</div>`
+        `<div id="lastUpdate">𝚃𝚎рак𝚑𝚒𝚛 𝙳𝚒𝚙𝚎𝚛𝚋α𝚛𝚞𝚒 𝙰𝙳𝙼𝙸𝙽 :<br>${updateTime}</div>`
     );
 
     // Ganti area prediksi utama

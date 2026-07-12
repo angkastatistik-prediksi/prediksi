@@ -71,18 +71,13 @@ tbody td{
 </div>
 
 <script>
-fetch("data-result-sdy.txt")
-.then(r => r.text())
-.then(text => {
-
-const tbody = document.getElementById("hasil");
-
-text.trim().split("\n").forEach(line => {
-    tbody.innerHTML += "<tr>" +
-        line.split(" ").map(n => `<td>${n}</td>`).join("") +
-        "</tr>";
-});
-
+fetch("https://angkastatistik.my.id/result-togel/sdy.json")
+.then(r=>r.json())
+.then(data=>{
+    const tbody=document.getElementById("hasil");
+    tbody.innerHTML=data.map(row=>
+        `<tr>${row.map(n=>`<td>${String(n).padStart(4,'0')}</td>`).join("")}</tr>`
+    ).join("");
 });
 </script>
 

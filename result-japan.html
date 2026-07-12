@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Result Sydney 2026</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#edf4ff;
+}
+
+.header{
+    background:linear-gradient(135deg,#0d6efd,#0047b3);
+    color:#fff;
+    text-align:center;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.2);
+}
+
+.header h1{
+    font-size:32px;
+}
+
+.header p{
+    margin-top:8px;
+    opacity:.9;
+}
+
+.container{
+    width:95%;
+    max-width:1100px;
+    margin:25px auto;
+}
+
+.menu{
+    display:inline-block;
+    text-decoration:none;
+    background:#0d6efd;
+    color:#fff;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:bold;
+    margin-bottom:20px;
+    transition:.3s;
+}
+
+.menu:hover{
+    background:#0047b3;
+}
+
+.table-box{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#0d6efd;
+    color:#fff;
+}
+
+th,td{
+    padding:13px;
+    text-align:center;
+    border:1px solid #d7e3ff;
+}
+
+tbody tr:nth-child(even){
+    background:#f4f8ff;
+}
+
+tbody tr:hover{
+    background:#dcebff;
+}
+
+.footer{
+    margin:25px 0;
+    text-align:center;
+    color:#666;
+}
+
+.table-responsive{
+table{
+    width:100%;
+    table-layout:fixed;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:6px 2px;
+    font-size:12px;
+    text-align:center;
+    word-break:break-word;
+    }
+
+@media (max-width:600px){
+
+h1{
+    font-size:22px;
+}
+
+th,td{
+    font-size:11px;
+    padding:5px 1px;
+}
+
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+    <h1>RESULT JAPAN 2026</h1>
+    <p id="update"></p>
+</div>
+
+<div class="container">
+
+<a href="/index.html" class="menu">⬅ Kembali ke Menu Utama</a>
+
+<div class="table-box">
+<div class="table-responsive">
+
+<table>
+
+<thead>
+<tr>
+<th>SNIN</th>
+<th>SLSA</th>
+<th>RABU</th>
+<th>KMIS</th>
+<th>JMAT</th>
+<th>SBTU</th>
+<th>MGGU</th>
+</tr>
+</thead>
+
+<tbody id="hasil"></tbody>
+
+</table>
+</div>
+
+<div class="footer">
+AngkaStatistik.my.id
+</div>
+
+</div>
+
+<script src="result-togel/japan.js"></script>
+
+<script>
+document.getElementById("update").textContent =
+"Update Terakhir : " + RESULT_JAPAN.update;
+
+const tbody=document.getElementById("hasil");
+
+RESULT_SDY.data.trim().split("\n").forEach(row=>{
+
+    const col=row.trim().split(/\s+/);
+
+    tbody.innerHTML+=`
+    <tr>
+        ${col.map(v=>`<td>${v}</td>`).join("")}
+    </tr>`;
+
+});
+</script>
+
+</body>
+</html>

@@ -206,5 +206,50 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById("lastUpdate").innerHTML = "𝚃𝚎𝚛𝚊𝚔𝚑𝚒𝚛 𝙳𝚒𝚙𝚎𝚛𝚋𝚊𝚛𝚞𝚒 𝙰𝙳𝙼𝙸𝙽 :<br>" + DATA_CAMBODIA.update;
 </script>
 
+<script>
+fetch("data/arsip-cambodia.json")
+.then(res => res.json())
+.then(data => {
+
+    // Hilangkan data hari ini
+    const arsip = data.filter(item =>
+        item.tanggal_seo !== DATA_CAMBODIA.tanggal_seo
+    );
+
+    let html = `
+        <div class="section-title">ARSIP</div>
+    `;
+
+    arsip.forEach(item => {
+
+        html += `
+        <div style="
+            border:1px solid #00f0ff;
+            padding:15px;
+            margin:15px 0;
+            border-radius:8px;
+            text-align:left;
+            background:#081020;
+        ">
+            <h3>${item.update}</h3>
+
+            <p><b>2D</b> :
+            ${item.result2d}</p>
+
+            <p><b>BBFS</b> :
+            ${item.bbfs}</p>
+
+            <p><b>CB</b> :
+            ${item.cb}</p>
+
+        </div>
+        `;
+    });
+
+    document.getElementById("arsip-otomatis").innerHTML = html;
+
+});
+</script>
+
 </body>
 </html>

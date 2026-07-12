@@ -71,7 +71,7 @@ tbody td{
 </div>
 
 <script>
-fetch("result-togel/sdy.js")
+fetch("data_sdy.js")
 .then(r=>r.json())
 .then(data=>{
     const tbody=document.getElementById("hasil");

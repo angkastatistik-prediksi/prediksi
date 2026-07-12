@@ -1,5 +1,5 @@
 const DATA_CAMBODIA = {
-    update: "Minggu 12 Juli 2026 21:12 WIB",
+    update: "Minggu 13 Juli 2026 01:48 WIB",
     tanggal_seo: "2026-07-13", // <-- WAJIB TAMBAHKAN BARIS INI UNTUK NAMA FILE BARU
     data: {
         prediksi: `

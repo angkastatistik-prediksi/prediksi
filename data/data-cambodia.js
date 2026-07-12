@@ -1,12 +1,13 @@
 const DATA_CAMBODIA = {
-    update: "Minggu 12 Juli 2026 13:14 WIB",
-    tanggal_seo: "2026-07-12", // <-- WAJIB TAMBAHKAN BARIS INI UNTUK NAMA FILE BARU
+    update: "Minggu 12 Juli 2026 21:12 WIB",
+    tanggal_seo: "2026-07-13", // <-- WAJIB TAMBAHKAN BARIS INI UNTUK NAMA FILE BARU
     data: {
         prediksi: `
 2065 : 37
 1207 : 64
 6126 : 85
 6781 : 02
+0925 : 68
 `,
         //Rumus sama ekor mmundu
         //0902 : 
@@ -21,10 +22,11 @@ const DATA_CAMBODIA = {
 //1207 : 8647 864 64
 //6126 : 0285 085 85
 //6781 : 5602 502 02
+//0925 : 6028 608 68
         
-    result2d: "07*27*08*21*22",
-    bbfs: "07281",
-    cb: "0"
+    result2d: "60*06*69*96*80*08*89*98",
+    bbfs: "690872",
+    cb: "6"
 }
 
 };

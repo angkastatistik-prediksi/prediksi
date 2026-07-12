@@ -2,82 +2,153 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data SDY 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Result Sydney 2026</title>
 
 <style>
-body{
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
     font-family:Arial,Helvetica,sans-serif;
-    background:#f5f5f5;
+}
+
+body{
+    background:#edf4ff;
+}
+
+.header{
+    background:linear-gradient(135deg,#0d6efd,#0047b3);
+    color:#fff;
+    text-align:center;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.2);
+}
+
+.header h1{
+    font-size:32px;
+}
+
+.header p{
+    margin-top:8px;
+    opacity:.9;
 }
 
 .container{
-    max-width:980px;
-    margin:30px auto;
+    width:95%;
+    max-width:1100px;
+    margin:25px auto;
 }
 
-h1{
-    text-align:center;
-    font-size:54px;
-    margin-bottom:30px;
-    color:#333;
+.menu{
+    display:inline-block;
+    text-decoration:none;
+    background:#0d6efd;
+    color:#fff;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:bold;
+    margin-bottom:20px;
+    transition:.3s;
+}
+
+.menu:hover{
+    background:#0047b3;
+}
+
+.table-box{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    background:#fff;
 }
 
-thead th{
-    background:#b57a00;
+thead{
+    background:#0d6efd;
     color:#fff;
-    font-size:22px;
-    padding:15px;
-    border:1px solid #d8d8d8;
 }
 
-tbody td{
+th,td{
+    padding:13px;
     text-align:center;
-    font-size:22px;
-    padding:14px;
-    border:1px solid #ddd;
+    border:1px solid #d7e3ff;
+}
+
+tbody tr:nth-child(even){
+    background:#f4f8ff;
+}
+
+tbody tr:hover{
+    background:#dcebff;
+}
+
+.footer{
+    margin:25px 0;
+    text-align:center;
+    color:#666;
 }
 </style>
+
 </head>
 <body>
 
+<div class="header">
+    <h1>RESULT SYDNEY 2026</h1>
+    <p id="update"></p>
+</div>
+
 <div class="container">
 
-<h1>Data SDY 2026</h1>
+<a href="/index.html" class="menu">⬅ Kembali ke Menu Utama</a>
 
+<div class="table-box">
 <table>
+
 <thead>
 <tr>
-    <th>SNIN</th>
-    <th>SLSA</th>
-    <th>RABU</th>
-    <th>KMIS</th>
-    <th>JMAT</th>
-    <th>SBTU</th>
-    <th>MGGU</th>
+<th>SNIN</th>
+<th>SLSA</th>
+<th>RABU</th>
+<th>KMIS</th>
+<th>JMAT</th>
+<th>SBTU</th>
+<th>MGGU</th>
 </tr>
 </thead>
 
 <tbody id="hasil"></tbody>
 
 </table>
+</div>
+
+<div class="footer">
+AngkaStatistik.my.id
+</div>
 
 </div>
 
+<script src="/result-togel/sdy.js"></script>
+
 <script>
-fetch("data_sdy.js")
-.then(r=>r.json())
-.then(data=>{
-    const tbody=document.getElementById("hasil");
-    tbody.innerHTML=data.map(row=>
-        `<tr>${row.map(n=>`<td>${String(n).padStart(4,'0')}</td>`).join("")}</tr>`
-    ).join("");
+document.getElementById("update").textContent =
+"Update Terakhir : " + RESULT_SDY.update;
+
+const tbody=document.getElementById("hasil");
+
+RESULT_SDY.data.trim().split("\n").forEach(row=>{
+
+    const col=row.trim().split(/\s+/);
+
+    tbody.innerHTML+=`
+    <tr>
+        ${col.map(v=>`<td>${v}</td>`).join("")}
+    </tr>`;
+
 });
 </script>
 

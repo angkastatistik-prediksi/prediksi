@@ -56,7 +56,7 @@ pasaranList.forEach((pasaran) => {
             const thn = bagian[1];
             const bln = bagian[2];
             const tgl = bagian[3];
-            daftarArsipHTML += `            <a href="${file}" style="display:block; color:#ffff00; text-decoration:none; font-size:0.9rem; margin:8px 0; font-weight:bold;">📊 Prediksi Tanggal ${tgl}-${bln}-${thn}</a>\n`;
+            daftarArsipHTML += `            <a href="${file}" style="display:block; color:#ffff00; text-decoration:none; font-size:0.9rem; margin:8px 0; font-weight:bold;"> Prediksi Tanggal ${tgl}-${bln}-${thn}</a>\n`;
         });
     } else {
         daftarArsipHTML += '            <span style="color:#888; font-size:0.85rem;">Belum ada riwayat prediksi harian.</span>\n';

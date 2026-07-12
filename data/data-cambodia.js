@@ -1,7 +1,8 @@
 const DATA_CAMBODIA = {
-        update: "Sabtu 11 Juli 2026 13:14 WIB",
-data: {
-    prediksi: `
+    update: "Minggu 12 Juli 2026 13:14 WIB",
+    tanggal_seo: "2026-07-12", // <-- WAJIB TAMBAHKAN BARIS INI UNTUK NAMA FILE BARU
+    data: {
+        prediksi: `
 2065 : 37
 1207 : 64
 6126 : 85

@@ -87,6 +87,83 @@ tbody tr:hover{
     background:#dcebff;
 }
 
+/*==========================
+INPUT WARNA AS KOP KEPALA EKOR
+===========================*/
+
+.filter-box{
+    background:#fff;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.filter-title{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:12px;
+    color:#0d6efd;
+}
+
+.filter-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.filter-item{
+    text-align:center;
+}
+
+.filter-item label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.filter-item input{
+    width:100%;
+    height:42px;
+    border-radius:8px;
+    border:2px solid #d8d8d8;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    outline:none;
+}
+
+#as{
+    border-color:#18a34a;
+}
+
+#kop{
+    border-color:#1976d2;
+}
+
+#kepala{
+    border-color:#ff9800;
+}
+
+#ekor{
+    border-color:#f44336;
+}
+
+@media(max-width:600px){
+
+.filter-grid{
+    grid-template-columns:repeat(4,1fr);
+    gap:5px;
+}
+
+.filter-item input{
+    font-size:18px;
+    height:38px;
+}
+
+}
+
 .footer{
     margin:25px 0;
     text-align:center;
@@ -107,6 +184,30 @@ th,td{
     word-break:break-word;
     }
 
+.as{
+    background:#16a34a;
+    color:#fff;
+    font-weight:bold;
+}
+
+.kop{
+    background:#3b82f6;
+    color:#fff;
+    font-weight:bold;
+}
+
+.kepala{
+    background:#f59e0b;
+    color:#fff;
+    font-weight:bold;
+}
+
+.ekor{
+    background:#ef4444;
+    color:#fff;
+    font-weight:bold;
+}
+
 @media (max-width:600px){
 
 h1{
@@ -117,6 +218,124 @@ th,td{
     font-size:11px;
     padding:5px 1px;
 }
+
+}
+
+/*==========================
+ANGKA 4D
+===========================*/
+
+.angka4d{
+    white-space:nowrap;
+}
+
+.digit{
+
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+
+    width:18px;
+    height:22px;
+
+    margin:1px;
+
+    border:1px solid #d9d9d9;
+    border-radius:3px;
+
+    background:#fff;
+
+    font-weight:bold;
+    font-size:13px;
+
+    color:#111;
+
+    transition:.25s;
+
+    }
+
+/*==========================
+WARNA DIGIT
+===========================*/
+
+.warna-as{
+    background:#28a745;
+    border-color:#28a745;
+    color:#fff;
+}
+
+.warna-kop{
+    background:#0d6efd;
+    border-color:#0d6efd;
+    color:#fff;
+}
+
+.warna-kepala{
+    background:#ff9800;
+    border-color:#ff9800;
+    color:#fff;
+}
+
+.warna-ekor{
+    background:#dc3545;
+    border-color:#dc3545;
+    color:#fff;
+    }
+
+.hasil4d{
+
+    display:inline-flex;
+    padding:2px;
+    border-radius:6px;
+    transition:.25s;
+
+}
+
+.hasil-cocok{
+
+    background:#dff7df;
+
+}
+
+.hasil4d{
+
+    display:inline-flex;
+    padding:2px 3px;
+    border-radius:6px;
+    transition:.25s;
+
+}
+
+.hasil-cocok{
+
+    background:#dff6df;
+    box-shadow:0 0 0 1px #3cb371;
+
+}
+
+#resetFilter{
+
+    margin-top:10px;
+
+    padding:10px 18px;
+
+    background:#dc3545;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+}
+
+#resetFilter:hover{
+
+    background:#bb2d3b;
 
 }
 </style>
@@ -133,6 +352,69 @@ th,td{
 
 <a href="/index.html" class="menu">⬅ Kembali ke Menu Utama</a>
 
+<div class="filter-box">
+
+<div class="filter-title">
+Filter Warna Angka
+</div>
+
+<div class="filter-grid">
+
+<div class="filter-item">
+<label>AS</label>
+<input
+type="text"
+id="as"
+pattern="[0-9]*"
+maxlength="1"
+inputmode="numeric">
+</div>
+
+<div class="filter-item">
+<label>KOP</label>
+<input
+type="text"
+id="kop"
+pattern="[0-9]*"
+maxlength="1"
+inputmode="numeric">
+</div>
+
+<div class="filter-item">
+<label>KEPALA</label>
+<input
+type="text"
+id="kepala"
+pattern="[0-9]*"
+maxlength="1"
+inputmode="numeric">
+</div>
+
+<div class="filter-item">
+<label>EKOR</label>
+<input
+type="text"
+id="ekor"
+pattern="[0-9]*"
+maxlength="1"
+inputmode="numeric">
+</div>
+
+</div>
+
+</div>
+<div style="margin-top:12px;text-align:center">
+
+<button id="resetFilter">
+
+Reset Filter
+
+</button>
+</div>
+
+<div id="infoHasil" style="margin:12px 0;font-weight:bold;color:#0d6efd">
+Total Cocok : 0
+</div>
 <div class="table-box">
 <div class="table-responsive">
 
@@ -169,16 +451,139 @@ document.getElementById("update").textContent =
 
 const tbody=document.getElementById("hasil");
 
-RESULT_SDY.data.trim().split("\n").forEach(row=>{
+//=============================
+// Render Angka 4D
+//=============================
 
-    const col=row.trim().split(/\s+/);
+function renderAngka(angka){
 
-    tbody.innerHTML+=`
-    <tr>
-        ${col.map(v=>`<td>${v}</td>`).join("")}
-    </tr>`;
+    if(angka=="-"){
+        return "-";
+    }
+
+    angka=angka.padStart(4,"0");
+
+    return `
+    <div class="hasil4d" data-angka="${angka}">
+        <span class="digit as-digit">${angka[0]}</span>
+        <span class="digit kop-digit">${angka[1]}</span>
+        <span class="digit kepala-digit">${angka[2]}</span>
+        <span class="digit ekor-digit">${angka[3]}</span>
+    </div>
+    `;
+
+    }
+
+function renderTable(){
+
+    tbody.innerHTML="";
+
+    RESULT_SDY.data.trim().split("\n").forEach(row=>{
+
+        const col=row.trim().split(/\s+/);
+
+        tbody.innerHTML+=`
+        <tr>
+
+        ${col.map(v=>`
+        <td class="angka4d">
+            ${renderAngka(v)}
+        </td>
+        `).join("")}
+
+        </tr>`;
+
+    });
+
+}
+
+renderTable();
+updateWarna();
+
+//=============================
+// WARNA OTOMATIS
+//=============================
+
+function updateWarna(){
+
+    const asInput=document.getElementById("as").value;
+    const kopInput=document.getElementById("kop").value;
+    const kepalaInput=document.getElementById("kepala").value;
+    const ekorInput=document.getElementById("ekor").value;
+
+    document.querySelectorAll(".hasil4d").forEach(box=>{
+
+        const angka=box.dataset.angka;
+
+        const span=box.querySelectorAll("span");
+
+        span.forEach(s=>{
+
+            s.classList.remove(
+                "warna-as",
+                "warna-kop",
+                "warna-kepala",
+                "warna-ekor"
+            );
+
+        });
+
+        if(asInput.includes(angka[0]))
+            span[0].classList.add("warna-as");
+
+        if(kopInput.includes(angka[1]))
+            span[1].classList.add("warna-kop");
+
+        if(kepalaInput.includes(angka[2]))
+            span[2].classList.add("warna-kepala");
+
+        if(ekorInput.includes(angka[3]))
+            span[3].classList.add("warna-ekor");
+
+        const cocok=
+            (asInput==""||asInput.includes(angka[0])) &&
+            (kopInput==""||kopInput.includes(angka[1])) &&
+            (kepalaInput==""||kepalaInput.includes(angka[2])) &&
+            (ekorInput==""||ekorInput.includes(angka[3]));
+
+        box.classList.toggle("hasil-cocok",cocok);
+
+    });
+
+    }
+
+//=============================
+// EVENT INPUT
+//=============================
+
+["as","kop","kepala","ekor"].forEach(id=>{
+
+    document.getElementById(id).addEventListener("input",updateWarna);
 
 });
+
+["as","kop","kepala","ekor"].forEach(id=>{
+
+    document.getElementById(id).addEventListener("input",function(){
+
+        this.value=this.value.replace(/[^0-9]/g,"");
+
+    });
+
+});
+
+document
+.getElementById("resetFilter")
+.onclick=function(){
+
+    as.value="";
+    kop.value="";
+    kepala.value="";
+    ekor.value="";
+
+    updateWarna();
+
+}
 </script>
 
 </body>

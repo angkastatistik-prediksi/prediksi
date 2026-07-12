@@ -1,0 +1,37 @@
+name: Update Arsip Cambodia
+
+on:
+  push:
+    paths:
+      - 'data/data-cambodia.js'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Update arsip
+        run: node scripts/update-cambodia.js
+
+      - name: Commit perubahan
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add data/arsip-cambodia.json
+
+          git diff --cached --quiet || (
+            git commit -m "Update arsip Cambodia"
+            git push
+          )

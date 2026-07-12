@@ -231,10 +231,12 @@ ANGKA 4D
 
 .hasil4d{
     display:inline-flex;
-    align-items:center;
     justify-content:center;
-    gap:2px;
-    padding:3px;
+    gap:0;
+    padding:2px;
+    border:2px solid lime;
+    border-radius:6px;
+    background:#fff;
 }
 
 .digit{
@@ -254,6 +256,13 @@ ANGKA 4D
     flex-shrink:0;
     }
 
+.hasil4d .digit{
+    border-right:2px solid lime;
+}
+
+.hasil4d .digit:last-child{
+    border-right:none;
+}
 /*==========================
 WARNA DIGIT
 ===========================*/
@@ -442,7 +451,21 @@ th{
 
 }
 
+#downloadGambar{
+    margin-top:10px;
+    margin-left:8px;
+    padding:10px 18px;
+    background:#16a34a;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
 
+#downloadGambar:hover{
+    background:#15803d;
+}
 </style>
 
 </head>
@@ -516,6 +539,10 @@ Reset Filter
 
 </button>
 </div>
+
+<button id="downloadGambar">
+    📷 Download Gambar
+</button>
 
 <div id="infoHasil" style="margin:12px 0;font-weight:bold;color:#0d6efd">
 Total Cocok : 0
@@ -689,7 +716,25 @@ document
     updateWarna();
 
 }
+
+document.getElementById("downloadGambar").onclick=function(){
+
+    html2canvas(document.querySelector(".table-box"),{
+        backgroundColor:"#ffffff",
+        scale:3
+    }).then(function(canvas){
+
+        const link=document.createElement("a");
+        link.download="Result-Sydney.png";
+        link.href=canvas.toDataURL("image/png");
+        link.click();
+
+    });
+
+};
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 </body>
 </html>

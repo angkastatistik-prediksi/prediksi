@@ -170,19 +170,41 @@ INPUT WARNA AS KOP KEPALA EKOR
     color:#666;
 }
 
+.table-box{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
 .table-responsive{
-table{
     width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+.table-responsive table{
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
     table-layout:fixed;
+}
+
+.table-responsive th,
+.table-responsive td{
+    padding:8px 4px;
+    text-align:center;
+    white-space:nowrap;
+    }
+
+table{
     border-collapse:collapse;
 }
 
-th,td{
-    padding:6px 2px;
-    font-size:12px;
-    text-align:center;
-    word-break:break-word;
-    }
+th,
+td{
+    min-width:90px;
+}
 
 .as{
     background:#16a34a;
@@ -226,32 +248,33 @@ ANGKA 4D
 ===========================*/
 
 .angka4d{
+    text-align:center;
     white-space:nowrap;
 }
 
-.digit{
-
+.hasil4d{
     display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    padding:3px;
+}
+
+.digit{
+    display:flex;
     justify-content:center;
     align-items:center;
 
-    width:18px;
-    height:22px;
+    width:22px;
+    height:28px;
 
-    margin:1px;
+    border-radius:4px;
+    border:1px solid #ddd;
 
-    border:1px solid #d9d9d9;
-    border-radius:3px;
-
-    background:#fff;
-
+    font-size:15px;
     font-weight:bold;
-    font-size:13px;
 
-    color:#111;
-
-    transition:.25s;
-
+    flex-shrink:0;
     }
 
 /*==========================
@@ -336,6 +359,106 @@ WARNA DIGIT
 #resetFilter:hover{
 
     background:#bb2d3b;
+
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media (max-width:992px){
+
+.table-responsive table{
+    min-width:650px;
+}
+
+th,
+td{
+    padding:7px 3px;
+    font-size:12px;
+}
+
+.digit{
+    width:20px;
+    height:26px;
+    font-size:14px;
+}
+
+}
+
+/* ==========================
+   HP
+========================== */
+
+@media (max-width:600px){
+
+.header h1{
+    font-size:24px;
+}
+
+.header p{
+    font-size:13px;
+}
+
+.container{
+    width:100%;
+    padding:10px;
+}
+
+.menu{
+    width:100%;
+    display:block;
+    text-align:center;
+}
+
+.table-responsive table{
+    min-width:620px;
+}
+
+th,
+td{
+    padding:6px 2px;
+    font-size:11px;
+}
+
+.digit{
+    width:18px;
+    height:24px;
+    font-size:13px;
+}
+
+.filter-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.filter-item input{
+    height:40px;
+    font-size:18px;
+}
+
+}
+
+/* ==========================
+   HP KECIL
+========================== */
+
+@media (max-width:380px){
+
+.table-responsive table{
+    min-width:600px;
+}
+
+.digit{
+    width:16px;
+    height:22px;
+    font-size:12px;
+}
+
+th,
+td{
+    font-size:10px;
+}
 
 }
 </style>

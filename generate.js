@@ -22,50 +22,68 @@ pasaranList.forEach((pasaran) => {
     const kontenJS = fs.readFileSync(jsPath, 'utf8');
     let kontenHTML = fs.readFileSync(htmlPath, 'utf8');
 
-    const matchUpdate = kontenJS.match(/update\s*:\s*["']([^"']+)["']/);
-    const updateTime = matchUpdate ? matchUpdate[1] : '';
+    // Fungsi pembersih teks super aman untuk mengambil nilai variabel JS
+    function ekstrakNilai(teks, properti) {
+        const regex = new RegExp(`${properti}\\s*:\\s*["'\`]([^"'\`]+)["'\`]`);
+        const match = teks.match(regex);
+        return match ? match[1].trim() : '';
+    }
 
-    const matchTglSeo = kontenJS.match(/tanggal_seo\s*:\s*["']([^"']+)["']/);
-    const tanggalSeo = matchTglSeo ? matchTglSeo[1].trim() : '';
+    // Fungsi khusus untuk mengambil area prediksi multiline backtick
+    function ekstrakPrediksi(teks) {
+        const regex = /prediksi\s*:\s*`([\s\S]*?)`/;
+        const match = teks.match(regex);
+        return match ? match[1].trim() : '';
+    }
 
-    const match2d = kontenJS.match(/result2d\s*:\s*["']([^"']+)["']/);
-    const result2d = match2d ? match2d[1] : '';
+    const updateTime = ekstrakNilai(kontenJS, 'update');
+    const tanggalSeo = ekstrakNilai(kontenJS, 'tanggal_seo');
+    const result2d = ekstrakNilai(kontenJS, 'result2d');
+    const bbfs = ekstrakNilai(kontenJS, 'bbfs');
+    const cb = ekstrakNilai(kontenJS, 'cb');
+    const prediksiRaw = ekstrakPrediksi(kontenJS);
 
-    const matchBbfs = kontenJS.match(/bbfs\s*:\s*["']([^"']+)["']/);
-    const bbfs = matchBbfs ? matchBbfs[1] : '';
-
-    const matchCb = kontenJS.match(/cb\s*:\s*["']([^"']+)["']/);
-    const cb = matchCb ? matchCb[1] : '';
-
-    const matchPrediksi = kontenJS.match(/prediksi\s*:\s*`([\s\S]*?)`/);
-    const prediksiRaw = matchPrediksi ? matchPrediksi[1].trim() : '';
-
-    // Generate Baris Angka Prediksi
+    // Pembuatan Baris Angka Prediksi Bola
     let prediksiHTML = '\n';
     if (prediksiRaw) {
-        prediksiRaw.split('\n').forEach(baris => {
+        const barisBaris = prediksiRaw.split('\n');
+        barisBaris.forEach(baris => {
             const bersih = baris.trim();
+            // Lewati baris kosong atau komentar rumus dengan tanda //
             if (!bersih || bersih.startsWith('//') || !bersih.includes(':')) return;
+
             const bagian = bersih.split(':');
             const kiri = bagian[0].trim();
             const kanan = bagian[1].trim();
+
             prediksiHTML += '            <div class="baris-angka">\n';
-            for (let c of kiri) prediksiHTML += `                <span class="bola bola-merah">${c}</span>\n`;
+            // Sisi Kiri (Bola Merah)
+            for (let c of kiri) {
+                if (c.trim()) prediksiHTML += `                <span class="bola bola-merah">${c}</span>\n`;
+            }
+            // Titik Dua
             prediksiHTML += '                <span class="pembatas-titik-dua">:</span>\n';
+            // Sisi Kanan (Bola Putih)
             const dicoret = kanan.startsWith('-');
-            const angkaKanan = dicoret ? kanan.substring(1) : kanan;
-            for (let c of angkaKanan) prediksiHTML += `                <span class="bola bola-putih">${dicoret ? `<s>${c}</s>` : c}</span>\n`;
+            const angkaKanan = dicoret ? kanan.substring(1).trim() : kanan;
+            for (let c of angkaKanan) {
+                if (c.trim()) prediksiHTML += `                <span class="bola bola-putih">${dicoret ? `<s>${c}</s>` : c}</span>\n`;
+            }
             prediksiHTML += '            </div>\n';
         });
     }
 
+    // Pembuatan Bola BBFS besar (45px)
     let bbfsHTML = '\n';
-    bbfs.replace(/[^0-9]/g, '').split('').forEach(angka => {
+    const angkaBBFS = bbfs.replace(/[^0-9]/g, '').split('');
+    angkaBBFS.forEach(angka => {
         bbfsHTML += `    <span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;margin:3px;">${angka}</span>\n`;
     });
 
-    let cbHTML = `\n    <span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${cb}</span>\n`;
+    // Pembuatan Bola Colok Bebas / Tunggal
+    let cbHTML = `\n    <span class="bola bola-merah" style="width:45px;height:45px;font-size:1.4rem;">${cb.replace(/[^0-9]/g, '')}</span>\n`;
 
+    // SUNTIK DATA KE HTML UTAMA
     kontenHTML = kontenHTML.replace(/<div id="lastUpdate">[\s\S]*?<\/div>/, `<div id="lastUpdate">𝚃𝚎𝚛𝚊𝚔𝚑𝚒𝚛 𝙳iprogram 𝙰𝙳𝙼𝙸𝙽 :<br>${updateTime}</div>`);
     kontenHTML = kontenHTML.replace(/<div id="area-prediksi">[\s\S]*?<\/div>/, `<div id="area-prediksi">${prediksiHTML}            </div>`);
     kontenHTML = kontenHTML.replace(/<span class="box-spesial kesimpulan-warna" id="area-kesimpulan">[\s\S]*?<\/span>/, `<span class="box-spesial kesimpulan-warna" id="area-kesimpulan">${result2d}</span>`);
@@ -92,12 +110,11 @@ pasaranList.forEach((pasaran) => {
 
     let kontenHTML = fs.readFileSync(htmlPath, 'utf8');
 
-    // Cari file HTML yang berformat nama 'idpasaran-tahun-bulan-tanggal.html'
     const fileArsipPasaran = semuaFile.filter(f => {
         return f.startsWith(`${pasaran.id}-`) && f.endsWith('.html') && f.match(/\d{4}-\d{2}-\d{2}/);
-    }).sort().reverse(); // Tanggal terbaru berada di susunan paling atas
+    }).sort().reverse();
 
-    let daftarArsipHTML = '\n        <div class="nav-quick-title" style="margin-top:25px; color:#00f0ff; text-shadow:0 0 5px #00f0ff;">CEK ARSIP PREDIKSI LAINNYA</div>\n        <div style="max-height:150px; overflow-y:auto; padding:5px; background:rgba(0,0,0,0.3); border-radius:6px; margin:10px auto; max-width:400px; border:1px dashed rgba(0, 240, 255, 0.2);">\n';
+    let daftarArsipHTML = '\n        <div class="nav-quick-title" style="margin-top:25px; color:#00f0ff; text-shadow:0 0 5px #00f0ff;">CEK ARSIP PREDIKSI LAINNYA</div>\n         <div style="max-height:150px; overflow-y:auto; padding:5px; background:rgba(0,0,0,0.5); border-radius:6px; margin:10px auto; max-width:400px; border:1px dashed rgba(0, 240, 255, 0.2); text-align:center;">\n';
 
     if (fileArsipPasaran.length > 0) {
         fileArsipPasaran.forEach(file => {
@@ -113,13 +130,10 @@ pasaranList.forEach((pasaran) => {
     }
     daftarArsipHTML += '        </div>\n';
 
-    // Suntikkan data link arsip ke id="arsip-otomatis" di dalam file HTML utama pasaran
     kontenHTML = kontenHTML.replace(
         /<div id="arsip-otomatis">[\s\S]*?<\/div>/,
         `<div id="arsip-otomatis">${daftarArsipHTML}        </div>`
     );
 
-    // Tulis ulang hasil suntikan arsip
     fs.writeFileSync(htmlPath, kontenHTML, 'utf8');
-    console.log(`✅ Sukses menyuntikkan daftar arsip harian khusus ke file: ${pasaran.fileHTML}`);
 });

@@ -1,9 +1,9 @@
-name: Auto Build HTML Statis Pasaran
+name: Auto Build Halaman Baru Pasaran SEO
 
 on:
   push:
     paths:
-      - 'data/data-*.js' # Robot berjalan otomatis jika file .js di folder data diedit
+      - 'data/data-*.js'
 
 jobs:
   build:
@@ -20,10 +20,10 @@ jobs:
     - name: Run Generator
       run: node generate.js
 
-    - name: Push HTML Baru ke GitHub Pages
+    - name: Push HTML ke GitHub Pages
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
-        git diff --quiet && git diff --staged --quiet || git commit -m "Update otomatis isi angka halaman HTML prediksi"
+        git diff --quiet && git diff --staged --quiet || git commit -m "Otomatisasi pembuatan halaman arsip prediksi baru"
         git push

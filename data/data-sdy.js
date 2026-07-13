@@ -1,6 +1,6 @@
 const DATA_SDY = {
-    update: "Senin 13 Juli 2026 14:23 WIB",
-    tanggal_seo: "2026-07-14",
+    update: "Minggu 12 Juli 2026 14:23 WIB",
+    tanggal_seo: "2026-07-13",
     data: {
     prediksi: `
 7683 : 61
@@ -11,7 +11,6 @@ const DATA_SDY = {
 7985 : 02
 9408 : 59
 4205 : 90
-5694 : 30
 `,
   //Rumus JUMLAH 2D TURUN 2 . sama ekor maju langsung sama gpp
 //0376 : 32
@@ -30,8 +29,8 @@ const DATA_SDY = {
 //4205 : 4390 490 90
 //5694 : 3205 305 30
 
-result2d: "39*93*34*43*09*90*04*40",
-bbfs: "034989",
-cb: "0"
+result2d: "94*49*96*69*04*40*06*60",
+bbfs: "946085",
+cb: "9"
 }
 };

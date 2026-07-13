@@ -22,38 +22,53 @@ pasaranList.forEach((pasaran) => {
     let kontenJS = fs.readFileSync(jsPath, 'utf8');
     const kontenHTML = fs.readFileSync(htmlPath, 'utf8');
 
-    // Ekstraksi Objek Data secara Aman
+    // 1. EKSTRAKSI DATA JS KE JSON SECARA AKURAT
     let dataEkstraksi;
     try {
+        // Buang baris komentar // agar tidak merusak format text
         kontenJS = kontenJS.replace(/\/\/.*$/gm, '');
+
+        // Tangkap isi di dalam kurung kurawal pertama { ... }
         const matchObjek = kontenJS.match(/=\s*\{([\s\S]*)\}/);
-        if (!matchObjek) return;
-        let jsonString = `{${matchObjek[1]}}`.replace(/(\w+)\s*:/g, '"$1":').replace(/'/g, '"').replace(/,\s*([\]}])/g, '$1');
+        if (!matchObjek || !matchObjek[1]) return;
+        
+        // Ambil grup indeks ke-1 (string isi objeknya murni)
+        let jsonString = `{${matchObjek[1]}}`
+            .replace(/(\w+)\s*:/g, '"$1":') // Beri petik dua pada key
+            .replace(/'/g, '"')              // Setel semua petik satu ke petik dua
+            .replace(/,\s*([\]}])/g, '$1');  // Bersihkan koma menggantung di akhir
+
         dataEkstraksi = JSON.parse(jsonString);
-    } catch (error) { return; }
+    } catch (error) {
+        console.error(`❌ Gagal membaca objek data pasaran ${pasaran.nama}:`, error.message);
+        return;
+    }
 
     const tanggalSeo = dataEkstraksi.tanggal_seo ? dataEkstraksi.tanggal_seo.trim() : '';
     if (!tanggalSeo) return;
 
-    // Masukkan data hari ini ke arsip JSON database
+    // 2. MASUKKAN DATA BARU KE GUDANG DATA JSON ARSIP
     let arsipJSON = [];
     if (fs.existsSync(fileArsipJSON)) {
         try { arsipJSON = JSON.parse(fs.readFileSync(fileArsipJSON, 'utf8')); } catch (e) { arsipJSON = []; }
     }
+    
     if (!arsipJSON.some(x => x.tanggal_seo === tanggalSeo)) {
         arsipJSON.unshift({
             tanggal_seo: tanggalSeo,
             update: dataEkstraksi.update || ''
         });
         fs.writeFileSync(fileArsipJSON, JSON.stringify(arsipJSON, null, 2), 'utf8');
+        console.log(`🗄️ Tanggal baru ${tanggalSeo} dicatat ke database JSON ${pasaran.nama}`);
     }
 
-    // Ciptakan file arsip harian baru jika belum ada
+    // 3. CETAK HALAMAN ARSIP HARIAN BARU OTOMATIS BERDASARKAN TANGGAL
     const namaHalamanBaru = `${pasaran.id}-${tanggalSeo}.html`;
     const pathHalamanBaru = path.join(__dirname, namaHalamanBaru);
 
     if (!fs.existsSync(pathHalamanBaru)) {
+        // Salin isi file utama menjadi file arsip bertanggal baru secara utuh
         fs.writeFileSync(pathHalamanBaru, kontenHTML, 'utf8');
-        console.log(`✨ File baru sukses dicetak: ${namaHalamanBaru}`);
+        console.log(`✨ Sukses menciptakan halaman arsip otomatis: ${namaHalamanBaru}`);
     }
 });

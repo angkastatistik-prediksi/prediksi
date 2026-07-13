@@ -15,7 +15,7 @@ const DATA_CHINA= {
 4504 : -39
 4272 : 19
 `,
-        //Rumas selisih A C +2/-2
+     //   //Rumas selisih A C +2/-2
         //5242 : 1298 pangkas sudah result 2d ke atas
         //0729 : 3410 310 bawah kanan
         //2206 : 5632 532 25
@@ -26,7 +26,7 @@ const DATA_CHINA= {
         //7756 : 2309 309 30
         //4708 : 2309 239 39
         //4504 : 2309 239 23
-        //4272 : 1298 198 19
+        //4272 : 1298 198 19 //
     result2d: "14*41*17*71*94*49*97*79",
     bbfs: "147950",
     cb: "9"

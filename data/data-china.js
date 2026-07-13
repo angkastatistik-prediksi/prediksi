@@ -1,6 +1,7 @@
-const DATA_CHINA = {
-        update: "Sabtu 11 Juli 2026 16:00 WIB",
-data: {
+const DATA_CHINA= {
+    update: "Senin 13 Juli 2026 16:44 WIB",
+    tanggal_seo: "2026-07-14",
+    data: {
     prediksi: `
 5242 : 98
 0729 : 10
@@ -11,9 +12,10 @@ data: {
 8682 : 56
 7756 : 30
 4708 : -39
-4504 : 39
+4504 : -39
+4272 : 19
 `,
-        //Rumas A C -2/+2
+        //Rumas selisih A C +2/-2
         //5242 : 1298 pangkas sudah result 2d ke atas
         //0729 : 3410 310 bawah kanan
         //2206 : 5632 532 25
@@ -23,10 +25,11 @@ data: {
         //8682 : 5632 563 56
         //7756 : 2309 309 30
         //4708 : 2309 239 39
-        //4504 : 2309 239 39
-    result2d: "37*32*92*79",
-    bbfs: "372956",
-    cb: "3"
+        //4504 : 2309 239 23
+        //4272 : 1298 198 19
+    result2d: "14*41*17*71*94*49*97*79",
+    bbfs: "147950",
+    cb: "9"
 }
 
 };

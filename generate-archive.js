@@ -17,7 +17,43 @@ function generateSitemap(){}
 function generateArchive(){}
 function generateRSS(){}
 function updateHistory(){}
-generateArchive();
+function generateArchive(){
+
+    const files = getDataFiles();
+
+    files.forEach(file=>{
+
+        const market = getMarketName(file);
+
+        const html = `
+<!DOCTYPE html>
+<html>
+<head>
+<title>${market.toUpperCase()} ${today}</title>
+</head>
+
+<body>
+
+<h1>${market.toUpperCase()}</h1>
+
+<p>Arsip otomatis ${today}</p>
+
+</body>
+
+</html>
+`;
+
+        fs.writeFileSync(
+            path.join(
+                OUTPUT_FOLDER,
+                archiveFileName(market)
+            ),
+            html
+        );
+
+    });
+
+                  }
 generateSitemap();
 generateRSS();
 updateHistory();
@@ -30,3 +66,19 @@ if (!fs.existsSync(OUTPUT_FOLDER)){
 const today = new Date().toISOString().slice(0,10);
 console.log("Tanggal :",today);
 console.log("Mulai Generate...");
+
+function getDataFiles() {
+    return fs.readdirSync(DATA_FOLDER)
+        .filter(file => file.startsWith("data-") && file.endsWith(".js"));
+}
+
+function getMarketName(filename) {
+    return filename
+        .replace("data-", "")
+        .replace(".js", "");
+    }
+
+function archiveFileName(market) {
+    return `${market}-${today}.html`;
+            }
+

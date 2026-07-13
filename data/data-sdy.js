@@ -1,8 +1,8 @@
 const DATA_SDY = {
-    update: "Senin 13 Juli 2026 14:23 WIB",
-    tanggal_seo: "2026-07-14",
+   update: "Senin 13 Juli 2026 14:23 WIB",
+   tanggal_seo: "2026-07-14",
     data: {
-    prediksi: `
+prediksi: `
 7683 : 61
 5206 : 65
 8652 : 60

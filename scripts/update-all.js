@@ -20,7 +20,6 @@ pasaranList.forEach((pasaran) => {
 
     let isi = fs.readFileSync(fileData, "utf8");
 
-    // METODE BARU: Ekstrak data menggunakan Regex aman (Kebal terhadap komentar //)
     let tanggal_seo = "";
     let update = "";
     let prediksi = "";
@@ -29,42 +28,35 @@ pasaranList.forEach((pasaran) => {
     let cb = "";
 
     try {
-        // 1. Ambil Tanggal SEO
+        // PERBAIKAN UTAMA: Mengunci indeks grup [1] sebelum memanggil fungsi .trim()
         const matchTgl = isi.match(/tanggal_seo\s*:\s*["']([^"']+)["']/);
-        if (matchTgl) tanggal_seo = matchTgl[1].trim();
+        if (matchTgl && matchTgl[1]) tanggal_seo = matchTgl[1].trim();
 
-        // 2. Ambil Waktu Update
         const matchUpdate = isi.match(/update\s*:\s*["']([^"']+)["']/);
-        if (matchUpdate) update = matchUpdate[1].trim();
+        if (matchUpdate && matchUpdate[1]) update = matchUpdate[1].trim();
 
-        // 3. Ambil Prediksi (Teks di dalam Backtick ``)
         const matchPrediksi = isi.match(/prediksi\s*:\s*`([\s\S]*?)`/);
-        if (matchPrediksi) prediksi = matchPrediksi[1].trim();
+        if (matchPrediksi && matchPrediksi[1]) prediksi = matchPrediksi[1].trim();
 
-        // 4. Ambil Result 2D
         const match2d = isi.match(/result2d\s*:\s*["']([^"']+)["']/);
-        if (match2d) result2d = match2d[1].trim();
+        if (match2d && match2d[1]) result2d = match2d[1].trim();
 
-        // 5. Ambil BBFS
         const matchBbfs = isi.match(/bbfs\s*:\s*["']([^"']+)["']/);
-        if (matchBbfs) bbfs = matchBbfs[1].trim();
+        if (matchBbfs && matchBbfs[1]) bbfs = matchBbfs[1].trim();
 
-        // 6. Ambil Colok Bebas
         const matchCb = isi.match(/cb\s*:\s*["']([^"']+)["']/);
-        if (matchCb) cb = matchCb[1].trim();
+        if (matchCb && matchCb[1]) cb = matchCb[1].trim();
 
     } catch (e) {
         console.log(`❌ Gagal membaca pola teks pada file ${pasaran.fileJS}`);
         return;
     }
 
-    // Validasi mutlak: Jika tanggal_seo gagal ditangkap, lewati agar tidak error
     if (!tanggal_seo) {
         console.log(`⚠️ Tanggal SEO tidak ditemukan pada file ${pasaran.fileJS}. Lewati.`);
         return;
     }
 
-    // Ambil arsip lama database JSON
     let arsip = [];
     if (fs.existsSync(fileArsip)) {
         try {
@@ -74,11 +66,9 @@ pasaranList.forEach((pasaran) => {
         }
     }
 
-    // Cek apakah tanggal sudah terdaftar
     const sudahAda = arsip.some(x => x.tanggal_seo === tanggal_seo);
 
     if (!sudahAda) {
-        // 1. UPDATE DATABASE JSON PASARAN TERKAIT
         arsip.unshift({
             tanggal_seo: tanggal_seo,
             update: update,
@@ -91,7 +81,6 @@ pasaranList.forEach((pasaran) => {
         fs.writeFileSync(fileArsip, JSON.stringify(arsip, null, 2), "utf8");
         console.log(`✅ Database JSON ${pasaran.id.toUpperCase()} sukses diperbarui.`);
 
-        // 2. OTOMATIS MENCIPTAKAN HALAMAN ARSIP HTML HARIAN BARU DI ROOT
         const kontenHTMLUtama = fs.readFileSync(fileHTMLUtama, "utf8");
         const namaHalamanBaru = `${pasaran.id}-${tanggal_seo}.html`;
         const pathHalamanBaru = path.join(__dirname, "../", namaHalamanBaru);

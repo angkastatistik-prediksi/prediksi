@@ -13,7 +13,7 @@ prediksi: `
 4205 : 90
 5694 : 30
 `,
-  //Rumus JUMLAH 2D TURUN 2 . sama ekor maju langsung sama gpp
+//Rumus JUMLAH 2D TURUN 2 . sama ekor maju langsung sama gpp
 //0376 : 32
 //6934 : 65
 //9606 : 54
@@ -28,7 +28,7 @@ prediksi: `
 //7985 : 3202 302 02
 //9408 : 7659 759 59
 //4205 : 4390 490 90
-//5694 : 3205 305 30
+//5694 : 3205 305 30 //
 
 result2d: "39*93*34*43*09*90*04*40",
 bbfs: "034989",

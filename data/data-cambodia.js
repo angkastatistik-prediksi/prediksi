@@ -1,6 +1,6 @@
 const DATA_CAMBODIA = {
-    update: "Minggu 12 Juli 2026 13:31 WIB",
-    tanggal_seo: "2026-07-12", // <-- WAJIB TAMBAHKAN BARIS INI UNTUK NAMA FILE BARU
+    update: "Senin 13 Juli 2026 13:31 WIB",
+    tanggal_seo: "2026-07-13", // <-- WAJIB TAMBAHKAN BARIS INI UNTUK NAMA FILE BARU
     data: {
         prediksi: `
 2065 : 37
@@ -8,6 +8,7 @@ const DATA_CAMBODIA = {
 6126 : 85
 6781 : 02
 0925 : 68
+2665 : 02
 `,
         //Rumus sama ekor mmundu
         //0902 : 

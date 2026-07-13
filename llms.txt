@@ -1,0 +1,15 @@
+Website: https://angkastatistik.my.id
+
+Title: Prediksi Angka Statistik
+
+Markets:
+HK
+SDY
+SGP
+CHINA
+JAPAN
+TAIWAN
+CAMBODIA
+MACAU
+
+Updated: Daily

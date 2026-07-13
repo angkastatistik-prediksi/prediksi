@@ -21,8 +21,8 @@ prediksi: `
 //8178 : 1593 159 15 
 //8961 : 3914 914 14 
 //5054 : 4293 429 42 
-//4152 : 2931 231 21
-//0161 : 9315 931 93
+//4152 : 2931 231 21 tunggal ai 2,3 di ai 3 digit yg dluan itu lemah
+//0161 : 9315 931 93 contoh 93 top 9 vs 4d yg tdk ada angka 3, 2 dan 1 krn 2 dan 1 ada bersama angka 3 di ai 3digit krn 3 sdh lemah
 //5490 : 6987 987 87
 //Sama ekor atas mundur jgn sama ekor atas
 result2d: "84*48*85*58*74*47*75*57",

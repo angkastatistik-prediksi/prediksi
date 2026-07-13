@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://angkastatistik.my.id/sitemap.xml

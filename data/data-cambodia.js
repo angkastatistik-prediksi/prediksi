@@ -1,5 +1,5 @@
 const DATA_CAMBODIA = {
-    update: "Minggu 13 Juli 2026 13:31 WIB",
+    update: "Senin 13 Juli 2026 13:31 WIB",
     tanggal_seo: "2026-07-13", // <-- WAJIB TAMBAHKAN BARIS INI UNTUK NAMA FILE BARU
     data: {
         prediksi: `
@@ -24,7 +24,7 @@ const DATA_CAMBODIA = {
 //6126 : 0285 085 85
 //6781 : 5602 502 02
 //0925 : 6028 608 68
-//2665 : 6028 028 02 nice
+//2665 : 6028 028 02 nice top
        
     result2d: "06*60*08*80*26*62*28*82",
     bbfs: "026815",

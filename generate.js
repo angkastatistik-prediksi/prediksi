@@ -24,21 +24,16 @@ pasaranList.forEach((pasaran) => {
     let kontenJS = fs.readFileSync(jsPath, 'utf8');
     let kontenHTML = fs.readFileSync(htmlPath, 'utf8');
 
-    // 1. BERSIHKAN KOMENTAR DAN PARSE STRUKTUR DATA JS
+    // 1. Ambil data JS
     let dataEkstraksi;
     try {
         kontenJS = kontenJS.replace(/\/\/.*$/gm, '');
         const matchObjek = kontenJS.match(/=\s*\{([\s\S]*)\}/);
-        if (!matchObjek) throw new Error("Struktur objek data tidak ditemukan");
-        
-        let jsonString = `{${matchObjek[1]}}`
-            .replace(/(\w+)\s*:/g, '"$1":') 
-            .replace(/'/g, '"')              
-            .replace(/,\s*([\]}])/g, '$1');  
-
+        if (!matchObjek) throw new Error("Struktur data salah");
+        let jsonString = `{${matchObjek[1]}}`.replace(/(\w+)\s*:/g, '"$1":').replace(/'/g, '"').replace(/,\s*([\]}])/g, '$1');
         dataEkstraksi = JSON.parse(jsonString);
     } catch (error) {
-        console.error(`❌ Gagal membaca atau parse file JS ${pasaran.nama}:`, error.message);
+        console.error(`❌ Gagal parse data ${pasaran.nama}:`, error.message);
         return;
     }
 
@@ -48,24 +43,7 @@ pasaranList.forEach((pasaran) => {
     const splitTgl = tanggalSeo.split('-');
     const tglFormatIndo = splitTgl.length === 3 ? `${splitTgl[2]}-${splitTgl[1]}-${splitTgl[0]}` : tanggalSeo;
 
-    // 2. SIMPAN / UPDATE DATABASE ARSIP JSON
-    let arsipJSON = [];
-    if (fs.existsSync(fileArsipJSON)) {
-        try { arsipJSON = JSON.parse(fs.readFileSync(fileArsipJSON, 'utf8')); } catch (e) { arsipJSON = []; }
-    }
-    if (!arsipJSON.some(x => x.tanggal_seo === tanggalSeo)) {
-        arsipJSON.unshift({
-            tanggal_seo: tanggalSeo,
-            update: dataEkstraksi.update || '',
-            prediksi: dataEkstraksi.data?.prediksi || '',
-            result2d: dataEkstraksi.data?.result2d || '',
-            bbfs: dataEkstraksi.data?.bbfs || '',
-            cb: dataEkstraksi.data?.cb || ''
-        });
-        fs.writeFileSync(fileArsipJSON, JSON.stringify(arsipJSON, null, 2), 'utf8');
-    }
-
-    // 3. DAFTARKAN FILE REALTIME & SIMULASI FILE BARU
+    // 2. Kumpulkan file arsip untuk link kotak navigasi
     const semuaFileSekarang = fs.readdirSync(__dirname);
     let fileArsipPasaran = semuaFileSekarang.filter(f => 
         f.startsWith(`${pasaran.id}-`) && f.endsWith('.html') && f.match(/\d{4}-\d{2}-\d{2}/)
@@ -76,32 +54,35 @@ pasaranList.forEach((pasaran) => {
         fileArsipPasaran.push(namaHalamanBaru); 
     }
 
-    // Urutkan dari tanggal terbaru ke terlama
     fileArsipPasaran.sort().reverse();
 
-    // BANGUN STRUKTUR KOTAK ARSIP (PERBAIKAN INDEKS ARRAY FATAL)
+    // 3. Buat template HTML Arsip dinamis harian
     let daftarArsipHTML = '\n        <div class="nav-quick-title" style="margin-top:25px; color:#00f0ff; text-shadow:0 0 5px #00f0ff; font-size:1rem; font-weight:bold;">CEK ARSIP PREDIKSI SEBELUMNYA</div>\n         <div style="max-height:150px; overflow-y:auto; padding:10px; background:rgba(12,12,40,0.8); border-radius:6px; margin:10px auto; max-width:400px; border:1px dashed rgba(0, 240, 255, 0.4); text-align:center;">\n';
     
     fileArsipPasaran.forEach(file => {
         const bagian = file.replace('.html', '').split('-');
         if(bagian.length >= 4) {
-            // bagian[1] = Tahun, bagian[2] = Bulan, bagian[3] = Tanggal
             daftarArsipHTML += `            <a href="${file}" style="display:block; color:#ffff00; text-decoration:none; font-size:0.9rem; margin:8px 0; font-weight:bold;">⭕ Prediksi Tanggal ${bagian[3]}-${bagian[2]}-${bagian[1]}</a>\n`;
         }
     });
-    daftarArsipHTML += '        </div>\n';
+    daftarArsipHTML += '        </div>\n    ';
 
-    // 4. SUNTIK KOTAK TAUTAN LINK KE FILE INDUK UTAMA (cambodia.html)
-    const regexPembersihWadah = /(<div\s+id=["']arsip-otomatis["']>)[\s\S]*?(<\/div>)/i;
-    if (regexPembersihWadah.test(kontenHTML)) {
-        kontenHTML = kontenHTML.replace(regexPembersihWadah, `$1\n        <!-- MULAI ARSIP -->${daftarArsipHTML}        <!-- SELESAI ARSIP -->\n    $2`);
+    // 4. LOGIKA BARU JITU: Reset isi wadah tanpa merusak tag pembuka/penutup HTML asli Anda
+    // Bersihkan isi di dalam wadah lama jika sebelumnya sudah pernah terisi
+    kontenHTML = kontenHTML.replace(/(<div\s+id=["']arsip-otomatis["']>)([\s\S]*?)(<\/div>)/i, '$1$3');
+
+    // Suntikkan kode link tepat di tengah-tengah wadah secara aman
+    const targetTargetInjeksi = /(<div\s+id=["']arsip-otomatis["']>)(<\/div>)/i;
+    if (targetTargetInjeksi.test(kontenHTML)) {
+        kontenHTML = kontenHTML.replace(targetTargetInjeksi, `$1\n        <!-- MULAI ARSIP -->${daftarArsipHTML}<!-- SELESAI ARSIP -->\n$2`);
         fs.writeFileSync(htmlPath, kontenHTML, 'utf8');
-        console.log(`✅ Tautan arsip sukses disuntik ke induk: ${pasaran.fileHTML}`);
+        console.log(`✅ Sukses menyuntik tautan arsip ke file utama: ${pasaran.fileHTML}`);
+    } else {
+        console.log(`⚠️ Wadah id="arsip-otomatis" tidak utuh atau tidak ditemukan di file ${pasaran.fileHTML}`);
     }
 
-    // 5. CETAK FILE ARSIP HARIAN BARU DENGAN DATA TERKUNCI AMAN
+    // 5. Cetak File Arsip Baru untuk Hari Ini
     const pathHalamanBaru = path.join(__dirname, namaHalamanBaru);
-
     if (!fs.existsSync(pathHalamanBaru)) {
         let kontenArsipHTML = kontenHTML;
 
@@ -124,6 +105,6 @@ const ${pasaran.varName} = {
         kontenArsipHTML = kontenArsipHTML.replace(penandaScriptAwal, dataSuntikanStatis);
 
         fs.writeFileSync(pathHalamanBaru, kontenArsipHTML, 'utf8');
-        console.log(`✨ Sukses mengunci arsip ber-link lengkap: ${namaHalamanBaru}`);
+        console.log(`✨ Sukses mengunci arsip harian: ${namaHalamanBaru}`);
     }
 });

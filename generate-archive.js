@@ -1,8 +1,16 @@
 const fs = require("fs");
 const path = require("path");
-const DOMAIN = "https://angkastatistik.my.id";
 
-const PASARAN = [
+const DOMAIN="https://angkastatistik.my.id";
+
+const DATA_FOLDER="./data";
+const OUTPUT_FOLDER="./arsip";
+
+if(!fs.existsSync(OUTPUT_FOLDER)){
+fs.mkdirSync(OUTPUT_FOLDER,{recursive:true});
+}
+
+const PASARAN=[
 "hk",
 "sdy",
 "sgp",
@@ -13,72 +21,125 @@ const PASARAN = [
 "macau"
 ];
 
-function generateSitemap(){}
-function generateArchive(){}
-function generateRSS(){}
-function updateHistory(){}
-function generateArchive(){
+function getToday(){
 
-    const files = getDataFiles();
+const d=new Date();
 
-    files.forEach(file=>{
+const y=d.getFullYear();
 
-        const market = getMarketName(file);
+const m=String(d.getMonth()+1).padStart(2,"0");
 
-        const html = `
-<!DOCTYPE html>
-<html>
+const day=String(d.getDate()).padStart(2,"0");
+
+return `${y}-${m}-${day}`;
+
+}
+
+const TODAY=getToday();
+
+function readData(file){
+
+let txt=fs.readFileSync(file,"utf8");
+
+txt=txt.replace(/const\s+/,"");
+
+txt=txt.replace("=","=");
+
+const sandbox={};
+
+try{
+
+eval(txt);
+
+}catch(e){
+
+console.log("ERROR :",file);
+
+console.log(e);
+
+return null;
+
+}
+
+const key=Object.keys(global).find(k=>k.startsWith("DATA_"));
+
+if(global[key]) return global[key];
+
+return null;
+
+}
+
+function buildHTML(nama,data){
+
+return `<!DOCTYPE html>
+
+<html lang="id">
+
 <head>
-<title>${market.toUpperCase()} ${today}</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>${nama.toUpperCase()} ${TODAY}</title>
+
+<meta name="description" content="Prediksi ${nama.toUpperCase()} ${TODAY}">
+
+<link rel="canonical" href="${DOMAIN}/${nama}.html">
+
 </head>
 
 <body>
 
-<h1>${market.toUpperCase()}</h1>
+<h1>${nama.toUpperCase()}</h1>
 
-<p>Arsip otomatis ${today}</p>
+<h3>${data.update}</h3>
+
+<pre>${data.data.prediksi}</pre>
+
+<h2>2D</h2>
+
+<p>${data.data.result2d}</p>
+
+<h2>BBFS</h2>
+
+<p>${data.data.bbfs}</p>
+
+<h2>TUNGGAL</h2>
+
+<p>${data.data.cb}</p>
 
 </body>
 
-</html>
-`;
+</html>`;
 
-        fs.writeFileSync(
-            path.join(
-                OUTPUT_FOLDER,
-                archiveFileName(market)
-            ),
-            html
-        );
-
-    });
-
-                  }
-generateSitemap();
-generateRSS();
-updateHistory();
-
-const DATA_FOLDER = "./data";
-const OUTPUT_FOLDER = "./arsip";
-if (!fs.existsSync(OUTPUT_FOLDER)){
-    fs.mkdirSync(OUTPUT_FOLDER);
-}
-const today = new Date().toISOString().slice(0,10);
-console.log("Tanggal :",today);
-console.log("Mulai Generate...");
-
-function getDataFiles() {
-    return fs.readdirSync(DATA_FOLDER)
-        .filter(file => file.startsWith("data-") && file.endsWith(".js"));
 }
 
-function getMarketName(filename) {
-    return filename
-        .replace("data-", "")
-        .replace(".js", "");
-    }
+function generateArchive(){
 
-function archiveFileName(market) {
-    return `${market}-${today}.html`;
-            }
+PASARAN.forEach(nama=>{
 
+const file=path.join(DATA_FOLDER,`data-${nama}.js`);
+
+if(!fs.existsSync(file)) return;
+
+const DATA=readData(file);
+
+if(!DATA) return;
+
+const html=buildHTML(nama,DATA);
+
+const output=path.join(
+OUTPUT_FOLDER,
+`${nama}-${TODAY}.html`
+);
+
+fs.writeFileSync(output,html);
+
+console.log("Berhasil :",output);
+
+});
+
+}
+
+generateArchive();

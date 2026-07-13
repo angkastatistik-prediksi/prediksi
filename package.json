@@ -1,9 +1,5 @@
 {
-  "name": "cambodia-archive",
-  "version": "1.0.0",
-  "description": "Auto archive Cambodia prediction",
   "scripts": {
-    "update": "node scripts/update-cambodia.js"
+    "build": "node generate-archive.js"
   }
 }
-

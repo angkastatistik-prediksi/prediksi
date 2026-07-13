@@ -1,5 +1,5 @@
 const DATA_SDY = {
-update: "Sabtu 11 Juli 2026 14:07 WIB",
+update: "Senin 13 Juli 2026 12:51 WIB",
 data: {
 prediksi: `
 7683 : 61
@@ -9,6 +9,7 @@ prediksi: `
 8502 : 15
 7985 : 02
 9408 : 59
+4205 : 90
 `,
   //Rumus JUMLAH 2D TURUN 2 . sama ekor maju
 //0376 : 32
@@ -24,9 +25,10 @@ prediksi: `
 //8502 : 1051 151 15
 //7985 : 3202 302 02
 //9408 : 7659 759 59
+//4205 : 4390 490 90
 
-result2d: "65*69*75*79",
-bbfs: "657902",
+result2d: "94*49*92*29*04*40*02*20",
+bbfs: "024985",
 cb: "9"
 }
 };

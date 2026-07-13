@@ -1,37 +1,39 @@
-name: Update Arsip Cambodia
+name: Auto Build Halaman Baru Pasaran SEO
 
 on:
   push:
     paths:
-      - 'data/data-cambodia.js'
+      - 'data/data-*.js' # Robot otomatis jalan jika Anda mengedit file data pasaran apa saja di HP
 
+# MEMBERIKAN IZIN TULIS AGAR ROBOT BISA MEMBUAT HALAMAN DAN DATABASE BARU DI GITHUB
 permissions:
   contents: write
 
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4 # Menggunakan versi terbaru v4 yang lebih cepat dan stabil
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+    - name: Setup Node.js
+      uses: actions/setup-node@v4 # Menggunakan versi Node terbaru v4
+      with:
+        node-version: '18'
 
-      - name: Update arsip
-        run: node scripts/update-cambodia.js
+    - name: Run Generator Induk
+      run: node scripts/update-all.js # Menjalankan script satu untuk semua pasaran
 
-      - name: Commit perubahan
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-
-          git add data/arsip-cambodia.json
-
-          git diff --cached --quiet || (
-            git commit -m "Update arsip Cambodia"
-            git push
-          )
+    - name: Push HTML dan JSON ke GitHub Pages (Anti-Mogok)
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Menyuruh robot memeriksa dan menangkap semua file baru (.html & .json)
+        git add .
+        
+        # Trik jitu: Jika tidak ada perubahan tanggal, robot melompat dengan aman [skip ci] agar tidak putar-putar terus
+        git diff --quiet && git diff --staged --quiet || git commit -m "Otomatisasi pembuatan halaman arsip prediksi baru [skip ci]"
+        
+        # Push hasil cetakan halaman harian baru ke GitHub Pages Anda
+        git push origin HEAD

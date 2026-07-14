@@ -148,95 +148,36 @@
             <div class="salam-penutup">
                 sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ
             </div>
+<script src="data/arsip-hk.js"></script>
 
- <!-- === AWAL KODE DAFTAR RIWAYAT OTOMATIS === -->
-<div style="margin: 20px 0; font-family: sans-serif;">
-    <!-- Teks lihat prediksi sebelumnya warna merah -->
-    <h3 style="margin: 0 0 10px 0; color: #ff0000; font-size: 16px; font-weight: bold;">🔘 ᴘʀᴇᴅɪᴋsɪ sᴇʙᴇʟᴜᴍɴʏᴀ</h3>
-    <ul id="daftar-arsip" style="padding-left: 0; margin: 0; font-size: 14px;">Memuat riwayat...</ul>
-</div>
+ ᴘʀᴇᴅɪᴋsɪ sᴇʙᴇʟᴜᴍɴʏᴀ
+
+<div id="list"></div>
+
 
 <script>
-const USERNAME = "angkastatistik-prediksi"; 
-const REPO = "prediksi";
-const NAMA_HALAMAN = "hk"; 
 
-// FUNGSI PINTAR: Otomatis membaca nama file robot (hk-YYYY-MM-DD-HHMMSS) & merapikannya
-function formatTanggalIndo(namaFile) {
-    const bersih = namaFile.replace(`${NAMA_HALAMAN}-`, '').replace('.html', '');
-    const bagian = bersih.split('-'); 
-    
-    // Jika formatnya pas (hk-Tahun-Bulan-Hari-JamMenitDetik)
-    if (bagian.length >= 4) {
-        const tahun = bagian[0];
-        const bulan = bagian[1];
-        const hari = bagian[2];
-        const waktu = bagian[3]; // Contoh: 045422
-        
-        // Mengambil Jam dan Menit saja (Detik diabaikan agar rapi)
-        const jam = waktu.substring(0, 2);
-        const menit = waktu.substring(2, 4);
-        
-        return `${hari}-${bulan}-${tahun} Jam ${jam}:${menit} WIB`;
-    }
-    return bersih; 
-}
+let html="";
 
-async function ambilArsip() {
-    // Membaca langsung isi folder archive di GitHub menggunakan API resmi
-    const url = `https://github.com{USERNAME}/${REPO}/contents/archive`;
-    const listElement = document.getElementById('daftar-arsip');
-    
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Gagal memuat API');
-        
-        const files = await response.json();
-        listElement.innerHTML = ''; 
-        
-        // Balik urutan agar file buatan robot yang paling baru muncul di atas
-        files.reverse(); 
 
-        let adaArsip = false;
-        files.forEach(file => {
-            // Otomatis mengenali file yang diawali 'hk-' meskipun jam & detiknya acak
-            if (file.name.startsWith(`${NAMA_HALAMAN}-`) && file.name.endsWith('.html')) {
-                adaArsip = true;
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                const tanggalRapi = formatTanggalIndo(file.name);
-                
-                // OTOMATIS: Menggunakan jalur file asli langsung dari database GitHub Pages
-                a.href = `https://${USERNAME}.github.io/${REPO}/${file.path}`;
-                a.target = "_blank";
-                
-                a.textContent = `🔘 ᴘʀᴇᴅɪᴋsɪ: ${tanggalRapi}`;
-                a.style.color = "#ffcc00"; 
-                a.style.textDecoration = "none";
-                a.style.fontWeight = "bold";
-                
-                li.appendChild(a);
-                li.style.listStyleType = "none"; 
-                li.style.marginBottom = "10px";
-                listElement.appendChild(li);
-            }
-        });
+ARSIP_HK.forEach(x=>{
 
-        if (!adaArsip) {
-            listElement.innerHTML = `<li style="list-style-type: none; color: #888;">Belum ada arsip otomatis untuk pasaran ini.</li>`;
-        }
-    } catch (error) {
-        console.error("Detail log:", error);
-        listElement.innerHTML = '<li style="list-style-type: none; color: #888;">Gagal memuat riwayat otomatis. Pastikan repositori GitHub Anda berstatus Publik.</li>';
-    }
-}
+html += `
+<a href="arsip-view.html?tanggal=${x.tanggal}">
+${x.tanggal}
+</a>
+<br>
+`;
 
-// Jalankan pencarian otomatis setelah halaman terbuka
-document.addEventListener("DOMContentLoaded", ambilArsip);
+});
+
+
+document.getElementById("list").innerHTML=html;
+
 </script>
-<!-- === AKHIR KODE DAFTAR RIWAYAT OTOMATIS === -->
 
-            <!-- ================= SISTEM NAVIGASI TAB PILIHAN HARI INTERAKTIF ================= -->
+
+<!-- ================= SISTEM NAVIGASI TAB PILIHAN HARI INTERAKTIF ================= -->
 <div style="border-top: 1px dashed rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 10px;">
                 
 <div class="nav-quick-title">PILIH PREDIKSI LAINNYA</div>
@@ -307,11 +248,9 @@ const DATA_PREDIKSI = DATA_HK.data.prediksi;
 const TEKS_2D = DATA_HK.data.result2d;
 const ANGKA_BBFS = DATA_HK.data.bbfs;
 const ANGKA_COLOK_BEBAS = DATA_HK.data.cb;
-        
-        // =================================================================
-        // SISTEM ENGINE OTOMATIS TAB SWITCHER & RENDER BOLA
-        // =================================================================
-        document.addEventListener('DOMContentLoaded', () => {
+
+
+document.addEventListener('DOMContentLoaded', () => {
             prosesRenderBola(DATA_PREDIKSI, 'area-prediksi');
             
             document.getElementById("area-kesimpulan").innerText = TEKS_2D;

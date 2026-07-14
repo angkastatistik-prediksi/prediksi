@@ -1,0 +1,41 @@
+const fs = require('fs');
+const path = require('path');
+
+const sourceFile = 'data.js';
+const archiveDir = 'archive';
+const archiveJson = 'archive.json';
+
+if (!fs.existsSync(archiveDir)) {
+  fs.mkdirSync(archiveDir);
+}
+
+const timestamp = new Date()
+  .toISOString()
+  .replace(/[:.]/g, '-');
+
+const archiveFile = `data-${timestamp}.js`;
+
+fs.copyFileSync(
+  sourceFile,
+  path.join(archiveDir, archiveFile)
+);
+
+let archives = [];
+
+if (fs.existsSync(archiveJson)) {
+  archives = JSON.parse(
+    fs.readFileSync(archiveJson, 'utf8')
+  );
+}
+
+archives.unshift({
+  file: archiveFile,
+  created: new Date().toISOString()
+});
+
+fs.writeFileSync(
+  archiveJson,
+  JSON.stringify(archives, null, 2)
+);
+
+console.log('archive.json diperbarui');

@@ -1,5 +1,7 @@
-const DATA_MACAU = {update: "Senin 13 Juli 2026 12:34 WIB",
-    data: {
+const DATA_MACAU = {
+tanggal: "2026-07-14", 
+update: "Selasa 14 Juli 2026 10:20 WIB",
+data: {
 prediksi1: `
 1970 : 89
 1194 : 81
@@ -13,6 +15,7 @@ prediksi1: `
 1354 : 16
 0213 : 64
 0470 : 47
+7463 : 74
 `,
         //Rumus ekor ada twin
         
@@ -28,6 +31,7 @@ prediksi2: `
 2943 : 59
 5907 : 69
 7095 : 24
+9354 : 25
 `,
         //Rumus ekor ada twin
         
@@ -37,14 +41,16 @@ prediksi3: `
 7216 : 12
 1351 : 23
 5953 : 80
-0448 : 31
-7751 : 69
-7695 : 51
-7515 : -49
-3078 : 51
-6570 : 51
+0448 : 27
+7751 : 35
+7695 : 71
+7515 : 71
+3078 : 04
+6570 : 48
+8036 : 79
+9228 : 04
 `,
-        //Rumus kepala twin
+        //Rumus ekor twin
         
 prediksi4: `
 3807 : 16
@@ -57,7 +63,8 @@ prediksi4: `
 3161 : 19
 4621 : 75
 6980 : 35
-8036 : 05
+5979 : 53
+5598 : 76
 `,
         //Rumus cop ada twin
 
@@ -73,6 +80,7 @@ prediksi5: `
 8024 : 78
 2577 : 53
 4587 : 85
+6597 : 53
 `,
         //Rumus C E   bawah mundur
         //2231 : 1205 
@@ -86,6 +94,7 @@ prediksi5: `
         //8024 : 4873 78
         //2577 : 2358 53
         //4587 : 2358 85
+        //6597 : 2358 53
 
         
 prediksi6: `
@@ -101,6 +110,7 @@ prediksi6: `
 2548 : 57
 4526 : -91
 0226 : 05
+4006 : 02
 `
         //Rumus ekor ada twin
 }

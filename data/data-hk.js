@@ -26,7 +26,7 @@ prediksi: `
 //4152 : 2931 231 21 tunggal ai 2,3 di ai 3 digit yg dluan itu lemah
 //0161 : 9315 931 93 contoh 93 top 9 vs 4d yg tdk ada angka 3, 2 dan 1 krn 2 dan 1 ada bersama angka 3 di ai 3digit krn 3 sdh lemah
 //5490 : 6987 987 87
-//9392 : 5169 569 69 
+//9392 : 5169 569 69 top
 //Sama ekor atas mundur jgn sama ekor atas
 result2d: "64*46*61*16*65*56",
 bbfs: "64159",

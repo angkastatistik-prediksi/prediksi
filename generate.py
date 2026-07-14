@@ -10,6 +10,7 @@ MARKETS = [
     "japan",
     "taiwan",
     "cambodia"
+    "macau"
 ]
 
 MONTH = {

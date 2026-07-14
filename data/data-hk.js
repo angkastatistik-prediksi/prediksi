@@ -1,4 +1,5 @@
 const DATA_HK = {
+tanggal: "2026-07-11",
 update: "Sabtu 11 Juli 2026 23:35 WIB",
 data: {
 prediksi: `

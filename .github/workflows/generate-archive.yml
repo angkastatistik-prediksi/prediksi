@@ -3,6 +3,7 @@ name: Auto Archive and Deploy All Pages
 on:
   push:
     paths:
+      - 'data/data-macau.js'
       - 'data/data-cambodia.js'
       - 'data/data-sdy.js'
       - 'data/data-china.js'
@@ -27,6 +28,7 @@ jobs:
           mkdir -p archive
           TIMESTAMP=$(date +'%Y-%m-%d-%H%M%S')
           
+          cp cambodia.html archive/macau-$TIMESTAMP.html 2>/dev/null || true
           cp cambodia.html archive/cambodia-$TIMESTAMP.html 2>/dev/null || true
           cp sdy.html archive/sdy-$TIMESTAMP.html 2>/dev/null || true
           cp china.html archive/china-$TIMESTAMP.html 2>/dev/null || true

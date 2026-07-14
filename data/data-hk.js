@@ -1,11 +1,15 @@
 const DATA_HK = {
-tanggal: "2026-07-10",
-update: "Sabtu 10 Juli 2026 08:08 WIB",
+tanggal: "2026-07-14",
+update: "Selasa 14 Juli 2026 08:08 WIB",
 data: {
 prediksi: `
 8178 : 15
 8961 : 14
 5054 : 42
+4152 : 21
+0161 : 93
+5490 : -87
+9392 : 69
 `,
 //2066 : 7649 jgn sama
 //8172 : 4956 956 jgn sama
@@ -28,4 +32,11 @@ result2d: "64*46*61*16*65*56",
 bbfs: "64159",
 cb: "6"
 }
+};
+
+riwayat: [
+    { tanggal: "14-07-2026 Jam 08:08 WIB", link: "archive/hk-2026-07-14-0808.html" },
+    { tanggal: "13-07-2026 Jam 22:30 WIB", link: "archive/hk-2026-07-13-2230.html" },
+    { tanggal: "12-07-2026 Jam 22:30 WIB", link: "archive/hk-2026-07-12-2230.html" }
+  ]
 };

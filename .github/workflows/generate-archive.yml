@@ -17,45 +17,35 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2 # Ditambahkan agar robot bisa membaca riwayat editan sebelumnya dengan aman
 
       - name: Generate Archive Page
         run: |
+          # 1. Membuat folder archive jika belum ada
           mkdir -p archive
+          
+          # 2. Mengambil waktu Jakarta saat ini untuk penamaan file
           TIMESTAMP=$(date +'%Y-%m-%d-%H%M%S')
           
-          # Robot akan memeriksa file apa saja yang Anda ubah di HP pada commit terakhir
-          PERUBAHAN=$(git diff --name-only HEAD^ HEAD)
+          # 3. MENYALIN SEMUA HALAMAN LANGSUNG (Metode Anti-Gagal Browser HP)
+          # Sistem akan otomatis menyalin halaman ke arsip tanpa memicu error git diff
+          cp cambodia.html archive/cambodia-$TIMESTAMP.html 2>/dev/null || true
+          cp sdy.html archive/sdy-$TIMESTAMP.html 2>/dev/null || true
+          cp china.html archive/china-$TIMESTAMP.html 2>/dev/null || true
+          cp japan.html archive/japan-$TIMESTAMP.html 2>/dev/null || true
+          cp sgp.html archive/sgp-$TIMESTAMP.html 2>/dev/null || true
+          cp taiwan.html archive/taiwan-$TIMESTAMP.html 2>/dev/null || true
+          cp hk.html archive/hk-$TIMESTAMP.html 2>/dev/null || true
           
-          echo "File yang Anda update di HP: $PERUBAHAN"
-          
-          if echo "$PERUBAHAN" | grep -q "data/data-cambodia.js"; then
-            cp cambodia.html archive/cambodia-$TIMESTAMP.html
-          fi
-          if echo "$PERUBAHAN" | grep -q "data/data-sdy.js"; then
-            cp sdy.html archive/sdy-$TIMESTAMP.html
-          fi
-          if echo "$PERUBAHAN" | grep -q "data/data-china.js"; then
-            cp china.html archive/china-$TIMESTAMP.html
-          fi
-          if echo "$PERUBAHAN" | grep -q "data/data-japan.js"; then
-            cp japan.html archive/japan-$TIMESTAMP.html
-          fi
-          if echo "$PERUBAHAN" | grep -q "data/data-sgp.js"; then
-            cp sgp.html archive/sgp-$TIMESTAMP.html
-          fi
-          if echo "$PERUBAHAN" | grep -q "data/data-taiwan.js"; then
-            cp taiwan.html archive/taiwan-$TIMESTAMP.html
-          fi
-          if echo "$PERUBAHAN" | grep -q "data/data-hk.js"; then
-            cp hk.html archive/hk-$TIMESTAMP.html
-          fi
+          echo "Proses penggandaan halaman riwayat selesai!"
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Mendaftarkan folder archive baru ke git sistem
           git add archive/
-          git commit -m "Otomatis: Mengarsipkan pasaran yang diperbarui" || echo "Tidak ada perubahan untuk diarsip"
+          
+          # Melakukan simpan permanen ke dalam repositori GitHub Anda
+          git commit -m "Otomatis: Menyimpan perubahan prediksi terbaru" || echo "Tidak ada perubahan"
           git push origin main

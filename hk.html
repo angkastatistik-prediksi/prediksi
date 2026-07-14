@@ -149,119 +149,48 @@
                 sᴇᴍᴏɢᴀ ʙᴇʀᴜɴᴛᴜɴɢ
             </div>
 
-<!-- ================================================================== -->
-<!-- === AWAL KODE OTOMATISASI, WARNA, DAN DAFTAR RIWAYAT PREDIKSI === -->
-<!-- ================================================================== -->
+<!-- Panggil file JS Anda di bagian atas jika belum ada -->
+<script src="data/data-hk.js"></script>
+
+<!-- TAMPILAN DAFTAR RIWAYAT WARNA WARNI -->
+<div style="margin: 20px 0; font-family: sans-serif;">
+    <!-- Teks lihat prediksi sebelumnya warna merah -->
+    <h3 style="margin: 0 0 10px 0; color: #ff0000; font-size: 16px; font-weight: bold;">🔘 ᴘʀᴇᴅɪᴋsɪ sᴇʙᴇʟᴜᴍɴʏᴀ</h3>
+    <ul id="daftar-arsip" style="padding-left: 0; margin: 0; font-size: 14px;"></ul>
+</div>
 
 <script>
-// 1. OTOMATIS MEMBUAT TEKS PREDIKSI BARU DI ATAS MENJADI WARNA HIJAU
 document.addEventListener("DOMContentLoaded", function() {
-    // Mencari elemen tabel atau konten utama prediksi harian Anda
-    const tabelPrediksi = document.querySelector('table, .content, .prediksi-baru');
-    if (tabelPrediksi) {
-        tabelPrediksi.style.color = "#00ff00"; // Mewarnai teks utama menjadi hijau terang
+    const listElement = document.getElementById('daftar-arsip');
+    
+    // Memeriksa apakah data riwayat di file data-hk.js ada dan memiliki isi
+    if (typeof DATA_HK !== 'undefined' && DATA_HK.riwayat && DATA_HK.riwayat.length > 0) {
+        listElement.innerHTML = ''; // Bersihkan teks lama
         
-        // Mewarnai semua teks di dalam elemen pendukung menjadi hijau
-        const selTabel = tabelPrediksi.querySelectorAll('td, th, p, span');
-        selTabel.forEach(sel => sel.style.color = "#00ff00");
+        DATA_HK.riwayat.forEach(item => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            
+            a.href = item.link; // Mengambil link dari data-hk.js
+            a.target = "_blank";
+            a.textContent = `🔘 ᴘʀᴇᴅɪᴋsɪ: ${item.tanggal}`;
+            
+            // Teks prediksi sebelumnya warna kuning sesuai permintaan
+            a.style.color = "#ffcc00"; 
+            a.style.textDecoration = "none";
+            a.style.fontWeight = "bold";
+            
+            li.appendChild(a);
+            li.style.listStyleType = "none"; 
+            li.style.marginBottom = "10px";
+            listElement.appendChild(li);
+        });
+    } else {
+        listElement.innerHTML = '<li style="list-style-type: none; color: #888;">Belum ada riwayat prediksi yang tersimpan.</li>';
     }
 });
 </script>
 
-<!-- 2. TAMPILAN DAFTAR RIWAYAT DENGAN WARNA WARNI -->
-<div style="margin: 20px 0; font-family: sans-serif;">
-    <!-- Teks lihat prediksi sebelumnya warna merah -->
-    <h3 style="margin: 0 0 10px 0; color: #ff0000; font-size: 16px; font-weight: bold;">🔘 ᴘʀᴇᴅɪᴋsɪ sᴇʙᴇʟᴜᴍɴʏᴀ</h3>
-    
-    <!-- Tempat otomatis memuat daftar link arsip -->
-    <ul id="daftar-arsip" style="padding-left: 0; margin: 0; font-size: 14px;">Memuat riwayat...</ul>
-</div>
-
-<script>
-// Konfigurasi Repositori GitHub Anda
-const USERNAME = "angkastatistik-prediksi"; 
-const REPO = "prediksi";
-const NAMA_HALAMAN = "hk"; // Dikunci ke pasaran 'hk' agar sesuai dengan nama file robot
-
-// Fungsi memotong dan merapikan TIMESTAMP robot (%Y-%m-%d-%H%M%S) menjadi Tanggal Indonesia
-function formatTanggalIndo(namaFile) {
-    const bersih = namaFile.replace(`${NAMA_HALAMAN}-`, '').replace('.html', '');
-    const bagian = bersih.split('-'); // Memecah berdasarkan tanda strip (-)
-    
-    // Format buatan robot: hk-YYYY-MM-DD-HHMMSS.html (Minimal menghasilkan 4 bagian)
-    if (bagian.length >= 4) {
-        const tahun = bagian[0];
-        const bulan = bagian[1];
-        const hari = bagian[2];
-        const waktu = bagian[3]; // Berisi string jam-menit-detik (Contoh: 080830)
-        
-        // Memotong Jam dan Menit secara aman dari text waktu robot
-        const jam = waktu.substring(0, 2);
-        const menit = waktu.substring(2, 4);
-        
-        return `${hari}-${bulan}-${tahun} Jam ${jam}:${menit} WIB`;
-    }
-    return bersih; // Kembali ke nama asli jika format nama file di luar standar
-}
-
-async function ambilArsip() {
-    // URL REST API Resmi GitHub untuk membaca daftar file di dalam folder archive
-    const url = `https://github.com{USERNAME}/${REPO}/contents/archive`;
-    const listElement = document.getElementById('daftar-arsip');
-    
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Gagal memuat API GitHub');
-        
-        const files = await response.json();
-        listElement.innerHTML = ''; // Membersihkan teks "Memuat riwayat..."
-        
-        // Membalik urutan file (reverse) agar prediksi waktu terbaru muncul di paling atas
-        files.reverse(); 
-
-        let adaArsip = false;
-        files.forEach(file => {
-            // Hanya mengambil file yang diawali 'hk-' dan berakhiran '.html'
-            if (file.name.startsWith(`${NAMA_HALAMAN}-`) && file.name.endsWith('.html')) {
-                adaArsip = true;
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                const tanggalRapi = formatTanggalIndo(file.name);
-                
-                // Menuju ke tautan URL halaman web GitHub Pages yang valid
-                a.href = `https://${USERNAME}.github.io/${REPO}/${file.path}`;
-                a.target = "_blank"; // Membuka di tab baru saat diklik
-                
-                a.textContent = `🔘 ᴘʀᴇᴅɪᴋsɪ: ${tanggalRapi}`;
-                // Teks link daftar prediksi sebelumnya diatur warna kuning sesuai permintaan
-                a.style.color = "#ffcc00"; 
-                a.style.textDecoration = "none";
-                a.style.fontWeight = "bold";
-                
-                li.appendChild(a);
-                li.style.listStyleType = "none"; 
-                li.style.marginBottom = "10px";
-                listElement.appendChild(li);
-            }
-        });
-
-        // Jika folder archive ada tapi tidak ada file awalan hk-
-        if (!adaArsip) {
-            listElement.innerHTML = `<li style="list-style-type: none; color: #888;">Belum ada berkas riwayat "${NAMA_HALAMAN}-" di dalam folder archive.</li>`;
-        }
-    } catch (error) {
-        console.error("Detail Log Kendala:", error);
-        listElement.innerHTML = '<li style="list-style-type: none; color: #888;">Belum ada riwayat prediksi atau robot GitHub Actions Anda masih X Merah.</li>';
-    }
-}
-
-// Menjalankan fungsi pembacaan arsip secara otomatis
-ambilArsip();
-</script>
-
-<!-- ================================================================== -->
-<!-- === AKHIR KODE OTOMATISASI, WARNA, DAN DAFTAR RIWAYAT PREDIKSI === -->
-<!-- ================================================================== -->
 
             <!-- ================= SISTEM NAVIGASI TAB PILIHAN HARI INTERAKTIF ================= -->
 <div style="border-top: 1px dashed rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 10px;">

@@ -71,7 +71,37 @@
         .traffic-section { text-align: center; margin-top: 40px; padding: 15px; background: rgba(12, 12, 40, 0.5); border-radius: 6px; font-size: 0.9rem; color: #8888aa; }
         .traffic-counter { font-weight: bold; color: #00f0ff; }
         footer { text-align: center; padding: 30px; margin-top: 40px; border-top: 1px solid #141440; font-size: 0.9rem; color: #666688; }
-    </style>
+    
+    body{
+margin:0;
+padding:15px;
+font-family:Arial,sans-serif;
+background:#050505;
+color:#fff;
+text-align:center;
+}
+
+.card{
+max-width:500px;
+margin:auto;
+
+background:#111;
+
+border:2px solid #ff0000;
+border-radius:20px;
+
+padding:20px;
+
+box-shadow:
+0 0 10px #ff0000,
+0 0 25px rgba(255,0,0,.5);
+}
+
+.copy{
+background:lime;
+color:#000;
+}
+</style>
 </head>
 <body>
 
@@ -184,8 +214,23 @@
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 
+<button class="btn copy" onclick="copyDana()">
+<h1>☎☜</h1>
+</button>
+
+<script>
+
+function copyDana(){
+
+navigator.clipboard.writeText("088970383940");
+
+alert("Nomor WA berhasil disalin");
+
+}
+
+</script>
     <footer>
-        &copy; 2026 <span class="neon-text" style="font-weight:bold;">Angka Statistik</span>. All Rights Reserved.
+        &copy;<span class="text" style="font-weight:bold;"> ᴀɴɢᴋᴀ sᴛᴀᴛɪsᴛɪᴋ</span>
     </footer>
     
     <script src="data/data-hk.js"></script>

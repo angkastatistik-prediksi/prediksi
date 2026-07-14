@@ -1,15 +1,16 @@
 const DATA_CAMBODIA = {
-    update: "Minggu 12 Juli 2026 13:31 WIB",
-    tanggal_seo: "2026-07-13",
-    data: {
-        prediksi: `
+tanggal: "2026-07-14",
+update: "Selasa 14 Juli 2026 10:28 WIB",
+data: {
+prediksi: `
 2065 : 37
 1207 : 64
 6126 : 85
 6781 : 02
 0925 : 68
+2665 : 02
 `,
-        //Rumus sama ekor mmundu
+        //Rumus sama ekor mmundu, jgn langsung
         //0902 : 
 //6358 : 
 //4753 : 
@@ -25,9 +26,9 @@ const DATA_CAMBODIA = {
 //0925 : 6028 608 68
 //2665 : 6028 028 02 nice top
        
-    result2d: "06*60*08*80*26*62*28*82",
-    bbfs: "026815",
-    cb: "2"
+    result2d: "00*09*90*08*80*01*10",
+    bbfs: "01892",
+    cb: "0"
 }
 
 };

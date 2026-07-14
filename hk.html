@@ -194,34 +194,81 @@ function formatTanggalIndo(namaFile) {
         return `${hari}-${bulan}-${tahun} Jam ${jam}:${menit} WIB`;
     }
     return bersih;
+<!-- === AWAL KODE OTOMATISASI DAN WARNA === -->
+<script>
+// 1. OTOMATIS MEMBUAT TEKS PREDIKSI BARU DI ATAS MENJADI WARNA HIJAU
+document.addEventListener("DOMContentLoaded", function() {
+    const tabelPrediksi = document.querySelector('table, .content, .prediksi-baru');
+    if (tabelPrediksi) {
+        tabelPrediksi.style.color = "#00ff00"; 
+        const selTabel = tabelPrediksi.querySelectorAll('td, th, p, span');
+        selTabel.forEach(sel => sel.style.color = "#00ff00");
+    }
+});
+</script>
+
+<!-- 2. TAMPILAN DAFTAR RIWAYAT DENGAN WARNA WARNI SESUAI PERMINTAAN -->
+<div style="margin: 20px 0; font-family: sans-serif;">
+    <!-- Teks lihat prediksi sebelumnya warna merah -->
+    <h3 style="margin: 0 0 10px 0; color: #ff0000; font-size: 16px; font-weight: bold;">🔘 ᴘʀᴇᴅɪᴋsɪ sᴇʙᴇʟᴜᴍɴʏᴀ</h3>
+    <ul id="daftar-arsip" style="padding-left: 0; margin: 0; font-size: 14px;">Memuat riwayat...</ul>
+</div>
+
+<script>
+const USERNAME = "angkastatistik-prediksi"; 
+const REPO = "prediksi";
+const NAMA_HALAMAN = "hk"; // Dikunci langsung ke 'hk' agar sesuai dengan pasaran Anda
+
+// PERBAIKAN: Fungsi pemotong nama file menjadi tanggal Indonesia yang valid
+function formatTanggalIndo(namaFile) {
+    const bersih = namaFile.replace(`${NAMA_HALAMAN}-`, '').replace('.html', '');
+    const bagian = bersih.split('-');
+    
+    // Memastikan format nama file adalah hk-YYYY-MM-DD-HHMM.html (minimal ada 4 bagian setelah dipisah '-')
+    if (bagian.length >= 4) {
+        const tahun = bagian[0];
+        const bulan = bagian[1];
+        const hari = bagian[2];
+        const waktu = bagian[3]; 
+        
+        const jam = waktu.substring(0, 2);
+        const menit = waktu.substring(2, 4);
+        
+        return `${hari}-${bulan}-${tahun} Jam ${jam}:${menit} WIB`;
+    }
+    return bersih; // Kembalikan nama asli jika format tidak sesuai
 }
 
 async function ambilArsip() {
+    // PERBAIKAN UTAMA: Menggunakan URL REST API GitHub resmi untuk membaca folder archive
     const url = `https://github.com{USERNAME}/${REPO}/contents/archive`;
     const listElement = document.getElementById('daftar-arsip');
     
     try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error('Belum ada arsip.');
+        if (!response.ok) throw new Error('Gagal mengambil data dari GitHub API');
         
         const files = await response.json();
         listElement.innerHTML = ''; 
         
+        // Membalik urutan agar file prediksi terbaru berada di atas
         files.reverse(); 
 
         let adaArsip = false;
         files.forEach(file => {
+            // Menyaring file di folder archive yang diawali 'hk-' dan berakhiran '.html'
             if (file.name.startsWith(`${NAMA_HALAMAN}-`) && file.name.endsWith('.html')) {
                 adaArsip = true;
                 const li = document.createElement('li');
                 const a = document.createElement('a');
                 const tanggalRapi = formatTanggalIndo(file.name);
                 
+                // Menuju ke URL tautan GitHub Pages yang benar
                 a.href = `https://${USERNAME}.github.io/${REPO}/${file.path}`;
                 a.target = "_blank";
                 
                 a.textContent = `🔘 ᴘʀᴇᴅɪᴋsɪ: ${tanggalRapi}`;
-                // Teks prediksi sebelumnya warna kuning
+                // Teks link riwayat warna kuning
                 a.style.color = "#ffcc00"; 
                 a.style.textDecoration = "none";
                 a.style.fontWeight = "bold";
@@ -234,16 +281,19 @@ async function ambilArsip() {
         });
 
         if (!adaArsip) {
-            listElement.innerHTML = '<li style="list-style-type: none; color: #888;">Belum ada riwayat prediksi untuk pasaran ini.</li>';
+            listElement.innerHTML = `<li style="list-style-type: none; color: #888;">Belum ada file riwayat dengan awalan "hk-" di dalam folder archive.</li>`;
         }
     } catch (error) {
-        listElement.innerHTML = '<li style="list-style-type: none; color: #888;">Belum ada riwayat prediksi yang tersimpan.</li>';
+        console.error("Detail Error:", error);
+        listElement.innerHTML = '<li style="list-style-type: none; color: #888;">Belum ada riwayat prediksi yang tersimpan atau repositori Anda masih Private.</li>';
     }
 }
 
+// Jalankan fungsi pencarian arsip
 ambilArsip();
 </script>
 <!-- === AKHIR KODE === -->
+
 
             <!-- ================= SISTEM NAVIGASI TAB PILIHAN HARI INTERAKTIF ================= -->
 <div style="border-top: 1px dashed rgba(255, 255, 255, 0.1); margin-top: 30px; padding-top: 10px;">

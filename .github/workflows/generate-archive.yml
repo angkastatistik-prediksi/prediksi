@@ -42,7 +42,13 @@ jobs:
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.email "github-actions[bot]@://github.com"
+          
+          # Memastikan perubahan terdeteksi
           git add archive/
-          git commit -m "Otomatis: Menyimpan perubahan prediksi terbaru" || echo "Tidak ada perubahan"
+          
+          # Jika tidak ada perubahan, robot tidak akan mogok (eror)
+          git diff-index --quiet HEAD || git commit -m "Otomatis: Menyimpan perubahan prediksi terbaru"
+          
+          # Melakukan push dengan aman
           git push origin main

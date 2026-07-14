@@ -167,6 +167,55 @@ function formatTanggalIndo(namaFile) {
 }
 
 async function ambilArsip() {
+<!-- === AWAL KODE OTOMATISASI DAN WARNA === -->
+<script>
+// 1. OTOMATIS MEMBUAT TEKS PREDIKSI BARU DI ATAS MENJADI WARNA HIJAU
+// Skrip ini akan mencari tabel atau konten prediksi Anda secara otomatis dan mewarnainya jadi hijau
+document.addEventListener("DOMContentLoaded", function() {
+    // Cari elemen tabel atau teks yang berisi data prediksi baru Anda
+    const tabelPrediksi = document.querySelector('table, .content, .prediksi-baru');
+    if (tabelPrediksi) {
+        tabelPrediksi.style.color = "#00ff00"; // Mewarnai teks prediksi baru menjadi hijau terang
+        
+        // Mewarnai semua teks di dalam sel tabel menjadi hijau jika ada tabel
+        const selTabel = tabelPrediksi.querySelectorAll('td, th, p, span');
+        selTabel.forEach(sel => sel.style.color = "#00ff00");
+    }
+});
+</script>
+
+<!-- 2. TAMPILAN DAFTAR RIWAYAT DENGAN WARNA WARNI SESUAI PERMINTAAN -->
+<div style="margin: 20px 0; font-family: sans-serif;">
+    <!-- Teks lihat prediksi sebelumnya warna merah -->
+    <h3 style="margin: 0 0 10px 0; color: #ff0000; font-size: 16px; font-weight: bold;">🔘 ᴘʀᴇᴅɪᴋsɪ sᴇʙᴇʟᴜᴍɴʏᴀ</h3>
+    <ul id="daftar-arsip" style="padding-left: 0; margin: 0; font-size: 14px;">Memuat riwayat...</ul>
+</div>
+
+<script>
+const USERNAME = "angkastatistik-prediksi"; 
+const REPO = "prediksi";
+
+const NAMA_HALAMAN = window.location.pathname.split('/').pop().replace('.html', '') || 'hk';
+
+function formatTanggalIndo(namaFile) {
+    const bersih = namaFile.replace(`${NAMA_HALAMAN}-`, '').replace('.html', '');
+    const bagian = bersih.split('-');
+    
+    if (bagian.length >= 4) {
+        const tahun = bagian[0];
+        const bulan = bagian[1];
+        const hari = bagian[2];
+        const waktu = bagian[3]; 
+        
+        const jam = waktu.substring(0, 2);
+        const menit = waktu.substring(2, 4);
+        
+        return `${hari}-${bulan}-${tahun} Jam ${jam}:${menit} WIB`;
+    }
+    return bersih;
+}
+
+async function ambilArsip() {
     const url = `https://github.com{USERNAME}/${REPO}/contents/archive`;
     const listElement = document.getElementById('daftar-arsip');
     

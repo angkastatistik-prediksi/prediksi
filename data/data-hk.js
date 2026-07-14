@@ -32,10 +32,4 @@ result2d: "64*46*61*16*65*56",
 bbfs: "64159",
 cb: "6"
 }, 
-
-riwayat: [
-    { tanggal: "14-07-2026 Jam 08:08 WIB", link: "archive/hk-2026-07-14-0808.html" },
-    { tanggal: "13-07-2026 Jam 22:30 WIB", link: "archive/hk-2026-07-13-2230.html" },
-    { tanggal: "12-07-2026 Jam 22:30 WIB", link: "archive/hk-2026-07-12-2230.html" }
-  ]
 };

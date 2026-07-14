@@ -1,0 +1,69 @@
+name: Auto Archive and Deploy All Pages
+
+on:
+  push:
+    paths:
+      - 'data/data-cambodia.js'
+      - 'data/data-sdy.js'
+      - 'data/data-china.js'
+      - 'data/data-japan.js'
+      - 'data/data-sgp.js'
+      - 'data/data-taiwan.js'
+      - 'data/data-hk.js'
+
+jobs:
+  archive-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate Archive Page
+        run: |
+          mkdir -p archive
+          TIMESTAMP=$(date +'%Y-%m-%d-%H%M%S')
+          
+          # Cek perubahan data Cambodia
+          if git diff --name-only HEAD~1 | grep -q "data/data-cambodia.js"; then
+            cp cambodia.html archive/cambodia-$TIMESTAMP.html
+          fi
+          
+          # Cek perubahan data SDY
+          if git diff --name-only HEAD~1 | grep -q "data/data-sdy.js"; then
+            cp sdy.html archive/sdy-$TIMESTAMP.html
+          fi
+          
+          # Cek perubahan data China
+          if git diff --name-only HEAD~1 | grep -q "data/data-china.js"; then
+            cp china.html archive/china-$TIMESTAMP.html
+          fi
+          
+          # Cek perubahan data Japan
+          if git diff --name-only HEAD~1 | grep -q "data/data-japan.js"; then
+            cp japan.html archive/japan-$TIMESTAMP.html
+          fi
+          
+          # Cek perubahan data SGP
+          if git diff --name-only HEAD~1 | grep -q "data/data-sgp.js"; then
+            cp sgp.html archive/sgp-$TIMESTAMP.html
+          fi
+          
+          # Cek perubahan data Taiwan
+          if git diff --name-only HEAD~1 | grep -q "data/data-taiwan.js"; then
+            cp taiwan.html archive/taiwan-$TIMESTAMP.html
+          fi
+          
+          # Cek perubahan data HK
+          if git diff --name-only HEAD~1 | grep -q "data/data-hk.js"; then
+            cp hk.html archive/hk-$TIMESTAMP.html
+          fi
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@://github.com"
+          git add archive/
+          git commit -m "Otomatis: Mengarsipkan pasaran yang diperbarui" || echo "Tidak ada perubahan"
+          git push origin main

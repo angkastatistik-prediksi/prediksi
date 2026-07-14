@@ -1,15 +1,11 @@
 const DATA_HK = {
-tanggal: "2026-07-14",
-update: "Selasa 14 Juli 2026 08:08 WIB",
+tanggal: "2026-07-10",
+update: "Sabtu 10 Juli 2026 08:08 WIB",
 data: {
 prediksi: `
 8178 : 15
 8961 : 14
 5054 : 42
-4152 : 21
-0161 : 93
-5490 : -87
-9392 : 69
 `,
 //2066 : 7649 jgn sama
 //8172 : 4956 956 jgn sama

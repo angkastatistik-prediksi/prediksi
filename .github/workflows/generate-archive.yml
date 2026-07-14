@@ -3,7 +3,6 @@ name: Auto Archive and Deploy All Pages
 on:
   push:
     paths:
-      - 'data/data-macau.js'
       - 'data/data-cambodia.js'
       - 'data/data-sdy.js'
       - 'data/data-china.js'
@@ -12,7 +11,6 @@ on:
       - 'data/data-taiwan.js'
       - 'data/data-hk.js'
 
-# KUNCI JAWABAN: Memberikan izin resmi kepada robot untuk menulis file baru di repositori
 permissions:
   contents: write
 
@@ -22,13 +20,15 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          # Mengambil data riwayat git secara penuh untuk menghindari tabrakan push
+          fetch-depth: 0 
 
       - name: Generate Archive Page
         run: |
           mkdir -p archive
           TIMESTAMP=$(date +'%Y-%m-%d-%H%M%S')
           
-          cp cambodia.html archive/macau-$TIMESTAMP.html 2>/dev/null || true
           cp cambodia.html archive/cambodia-$TIMESTAMP.html 2>/dev/null || true
           cp sdy.html archive/sdy-$TIMESTAMP.html 2>/dev/null || true
           cp china.html archive/china-$TIMESTAMP.html 2>/dev/null || true
@@ -44,11 +44,20 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@://github.com"
           
-          # Memastikan perubahan terdeteksi
+          # 1. Daftarkan folder archive ke sistem git
           git add archive/
           
-          # Jika tidak ada perubahan, robot tidak akan mogok (eror)
-          git diff-index --quiet HEAD || git commit -m "Otomatis: Menyimpan perubahan prediksi terbaru"
+          # 2. Cek apakah ada file baru. Jika tidak ada, hentikan robot dengan aman tanpa memicu X Merah
+          if git diff-index --quiet HEAD; then
+            echo "Tidak ada perubahan file baru di folder archive. Proses dihentikan dengan aman."
+            exit 0
+          fi
           
-          # Melakukan push dengan aman
+          # 3. Buat catatan perubahan (commit)
+          git commit -m "Otomatis: Menyimpan perubahan prediksi terbaru"
+          
+          # 4. Ambil data terbaru dari server dengan metode rebase (Anti-Tabrakan & Anti-Macet)
+          git pull origin main --rebase
+          
+          # 5. Kirim data kembali ke GitHub main branch
           git push origin main

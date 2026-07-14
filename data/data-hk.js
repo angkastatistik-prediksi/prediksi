@@ -31,8 +31,7 @@ prediksi: `
 result2d: "64*46*61*16*65*56",
 bbfs: "64159",
 cb: "6"
-}
-};
+}, 
 
 riwayat: [
     { tanggal: "14-07-2026 Jam 08:08 WIB", link: "archive/hk-2026-07-14-0808.html" },

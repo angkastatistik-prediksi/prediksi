@@ -11,6 +11,10 @@ on:
       - 'data/data-taiwan.js'
       - 'data/data-hk.js'
 
+# KUNCI JAWABAN: Memberikan izin resmi kepada robot untuk menulis file baru di repositori
+permissions:
+  contents: write
+
 jobs:
   archive-and-deploy:
     runs-on: ubuntu-latest
@@ -20,14 +24,9 @@ jobs:
 
       - name: Generate Archive Page
         run: |
-          # 1. Membuat folder archive jika belum ada
           mkdir -p archive
-          
-          # 2. Mengambil waktu Jakarta saat ini untuk penamaan file
           TIMESTAMP=$(date +'%Y-%m-%d-%H%M%S')
           
-          # 3. MENYALIN SEMUA HALAMAN LANGSUNG (Metode Anti-Gagal Browser HP)
-          # Sistem akan otomatis menyalin halaman ke arsip tanpa memicu error git diff
           cp cambodia.html archive/cambodia-$TIMESTAMP.html 2>/dev/null || true
           cp sdy.html archive/sdy-$TIMESTAMP.html 2>/dev/null || true
           cp china.html archive/china-$TIMESTAMP.html 2>/dev/null || true
@@ -36,16 +35,12 @@ jobs:
           cp taiwan.html archive/taiwan-$TIMESTAMP.html 2>/dev/null || true
           cp hk.html archive/hk-$TIMESTAMP.html 2>/dev/null || true
           
-          echo "Proses penggandaan halaman riwayat selesai!"
+          echo "Proses penggandaan selesai!"
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Mendaftarkan folder archive baru ke git sistem
           git add archive/
-          
-          # Melakukan simpan permanen ke dalam repositori GitHub Anda
           git commit -m "Otomatis: Menyimpan perubahan prediksi terbaru" || echo "Tidak ada perubahan"
           git push origin main
